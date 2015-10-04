@@ -87,7 +87,7 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
         self.currentLanguagePairSetting?.title = self.titleField.text!
         // There should be at least one lesson for each language pair section
         
-        var lesson = Lesson(title: "Untitled", lessonDescription: nil)
+        let lesson = Lesson(title: "Untitled", lessonDescription: nil)
         lesson.lessonToLanguage = self.currentLanguagePairSetting!
         
         CoreDataStack.sharedObject().saveContext()

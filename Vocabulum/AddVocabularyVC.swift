@@ -145,7 +145,7 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject?, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
             self.vocabularyTableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
@@ -156,8 +156,6 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         case .Move:
             self.vocabularyTableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
             self.vocabularyTableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-        default:
-            return
         }
     }
     

@@ -25,7 +25,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         
         // Edit the sort key as appropriate.
         let sortDescriptor = NSSortDescriptor(key: "dateAdded", ascending: false)
-        let sortDescriptors = [sortDescriptor]
+        _ = [sortDescriptor]
         
         fetchRequest.sortDescriptors = [sortDescriptor]
         
@@ -39,7 +39,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         } catch let error1 as NSError {
             error = error1
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //println("Unresolved error \(error), \(error.userInfo)")
+            print(error)
             abort()
         }
         
@@ -116,6 +116,8 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
                 // Replace this implementation with code to handle the error appropriately.
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 //println("Unresolved error \(error), \(error.userInfo)")
+                
+                print(error)
                 abort()
             }
         }
@@ -175,7 +177,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         }
     }
 
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject?, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
             case .Insert:
                 tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
@@ -186,8 +188,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
             case .Move:
                 tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
                 tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-            default:
-                return
+
         }
     }
 

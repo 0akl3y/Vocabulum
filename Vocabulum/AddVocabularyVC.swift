@@ -120,6 +120,7 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     //MARK:- Controller Delegate Methoden
+    //test
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.vocabularyTableView.beginUpdates()

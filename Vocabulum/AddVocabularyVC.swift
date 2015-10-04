@@ -17,11 +17,11 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         let request = NSFetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "word", ascending: false)
-        var sortDescriptors = [sortDescriptor]
+        let sortDescriptors = [sortDescriptor]
         
         //Show only the words related to the current lesson
         
-        var predicate:NSPredicate = NSPredicate(format: "wordToLesson.title like %@", self.relatedLesson!.title)
+        let predicate:NSPredicate = NSPredicate(format: "wordToLesson.title like %@", self.relatedLesson!.title)
         
         let entity = NSEntityDescription.entityForName("Word", inManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
         
@@ -32,11 +32,15 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.sharedObject().managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
         
         var error:NSError? = nil
-        fetchedResultsController.performFetch(&error)
+        do {
+            try fetchedResultsController.performFetch()
+        } catch let error1 as NSError {
+            error = error1
+        }
         
         if(error != nil){
             
-            println(error)
+            print(error)
             abort()
         }
         
@@ -69,11 +73,15 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         super.viewWillDisappear(animated)
         
         var error: NSError? = nil
-        CoreDataStack.sharedObject().managedObjectContext?.save(&error)
+        do {
+            try CoreDataStack.sharedObject().managedObjectContext?.save()
+        } catch let error1 as NSError {
+            error = error1
+        }
 
         if(error != nil){
             
-            println(error)
+            print(error)
         
         }        
     }
@@ -104,7 +112,7 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell")!
         configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -137,7 +145,7 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject?, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
             self.vocabularyTableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)

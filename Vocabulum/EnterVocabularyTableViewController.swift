@@ -52,7 +52,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         self.updateButtonStatus()
         
-        self.displayedWord = Word(word: self.nativeWord.text, translation: self.translation.text, difficulty: WordDifficulty(rawValue: self.difficultySetting.selectedSegmentIndex)!)
+        self.displayedWord = Word(word: self.nativeWord.text!, translation: self.translation.text!, difficulty: WordDifficulty(rawValue: self.difficultySetting.selectedSegmentIndex)!)
         
         self.displayedWord?.wordToLesson = self.lesson!
         

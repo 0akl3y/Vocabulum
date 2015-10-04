@@ -25,13 +25,14 @@ class AddLessonTableVC: UITableViewController {
     //MARK:- Actions
     
     @IBAction func addLesson(sender: UIBarButtonItem) {
-        self.currentLesson = Lesson(title: lessonTitle.text, lessonDescription: lessonDescription.text)
+        self.currentLesson = Lesson(title: lessonTitle.text!, lessonDescription: lessonDescription.text)
         self.currentLesson!.lessonToLanguage = self.assignedLanguagePair
         self.performSegueWithIdentifier("addLesson", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationVC = segue.destinationViewController.topViewController as! AddVocabularyVC
+        let destination = segue.destinationViewController as! UINavigationController
+        let destinationVC = destination.topViewController as! AddVocabularyVC
         destinationVC.relatedLesson = self.currentLesson           
     }
     

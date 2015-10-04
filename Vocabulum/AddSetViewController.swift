@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddSetViewController: UITableViewController, UITableViewDelegate, UITextFieldDelegate {
+class AddSetViewController: UITableViewController, UITextFieldDelegate {
     
     var selectedIndx: Int?
     var currentLanguagePairSetting:LanguagePair?
@@ -84,7 +84,7 @@ class AddSetViewController: UITableViewController, UITableViewDelegate, UITextFi
 
     @IBAction func save(sender: AnyObject) {
         
-        self.currentLanguagePairSetting?.title = self.titleField.text
+        self.currentLanguagePairSetting?.title = self.titleField.text!
         // There should be at least one lesson for each language pair section
         
         var lesson = Lesson(title: "Untitled", lessonDescription: nil)

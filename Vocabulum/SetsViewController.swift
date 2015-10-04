@@ -34,7 +34,10 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         _fetchedResultsController = aFetchedResultsController
         
         var error: NSError? = nil
-        if !_fetchedResultsController!.performFetch(&error) {
+        do {
+            try _fetchedResultsController!.performFetch()
+        } catch let error1 as NSError {
+            error = error1
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             //println("Unresolved error \(error), \(error.userInfo)")
             abort()
@@ -85,12 +88,12 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
+        let sectionInfo = self.fetchedResultsController.sections![section] 
         return sectionInfo.numberOfObjects
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -106,7 +109,10 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
             context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
                 
             var error: NSError? = nil
-            if !context.save(&error) {
+            do {
+                try context.save()
+            } catch let error1 as NSError {
+                error = error1
                 // Replace this implementation with code to handle the error appropriately.
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 //println("Unresolved error \(error), \(error.userInfo)")
@@ -124,7 +130,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         
         let indexPath = NSIndexPath(forRow: 0, inSection: section)
         let lesson = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Lesson
-        let button = AddLessonButton.buttonWithType(UIButtonType.ContactAdd) as! AddLessonButton
+        let button = AddLessonButton(type: UIButtonType.ContactAdd)
         button.frame.origin.x = tableView.frame.width - (button.frame.width + 10)
         button.frame.origin.y = 10.0
 
@@ -169,7 +175,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         }
     }
 
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject?, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
             case .Insert:
                 tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)

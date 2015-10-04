@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectLangTableViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class SelectLangTableViewController: UITableViewController {
     
     weak var currentLanguagePairSetting: LanguagePair?
     @IBOutlet var selectLangTableView: UITableView!
@@ -17,7 +17,7 @@ class SelectLangTableViewController: UITableViewController, UITableViewDelegate,
     var selectedIndx: Int?
     var allLanguageCodes: [String] {
         
-        return NSLocale.preferredLanguages() as! [String]
+        return NSLocale.preferredLanguages() 
     
     }
     
@@ -52,7 +52,7 @@ class SelectLangTableViewController: UITableViewController, UITableViewDelegate,
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("languageCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("languageCell", forIndexPath: indexPath) 
         
         cell.textLabel?.text = self.allLanguageStrings[indexPath.row]
 

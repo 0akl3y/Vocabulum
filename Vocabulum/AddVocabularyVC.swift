@@ -112,7 +112,9 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell")!
+        tableView.registerNib(UINib(nibName: "VocabularyOverviewCell", bundle: nil), forCellReuseIdentifier: "customCell")
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("customCell") as! VocabularyOverviewCell
         configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -124,7 +126,11 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         
         let currentObject = self.vocabularyController.objectAtIndexPath(indexPath) as! NSManagedObject
-        cell.textLabel!.text = (currentObject.valueForKey("word")!.description)
+        
+        let vocabularyCell = cell as! VocabularyOverviewCell
+        
+        vocabularyCell.nativeWord!.text = (currentObject.valueForKey("word")!.description)
+        vocabularyCell.translation!.text = (currentObject.valueForKey("translation")!.description)
     }
     
     //MARK:- Controller Delegate Methoden

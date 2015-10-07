@@ -10,20 +10,7 @@ import UIKit
 
 class VocabularyOverviewCell: UITableViewCell {
     
-
     @IBOutlet var nativeWord: UILabel!
     @IBOutlet var translation: UILabel!
-
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
 }

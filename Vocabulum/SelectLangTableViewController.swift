@@ -17,7 +17,7 @@ class SelectLangTableViewController: UITableViewController {
     var selectedIndx: Int?
     var allLanguageCodes: [String] {
         
-        return NSLocale.preferredLanguages() 
+        return NSLocale.availableLocaleIdentifiers().sort()
     
     }
     

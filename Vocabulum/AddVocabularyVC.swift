@@ -9,8 +9,9 @@
 import UIKit
 import CoreData
 
-class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate {
+class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
     
+    @IBOutlet var searchBar: UISearchBar!
     var relatedLesson:Lesson?
     @IBOutlet var vocabularyTableView: UITableView!
     var vocabularyController: NSFetchedResultsController {
@@ -61,6 +62,7 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         self.navigationItem.rightBarButtonItem = addVocButton
         self.navigationItem.leftBarButtonItem = cancelButton
+        self.searchBar.delegate = self
         
     }
     
@@ -112,9 +114,8 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        tableView.registerNib(UINib(nibName: "VocabularyOverviewCell", bundle: nil), forCellReuseIdentifier: "customCell")
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("customCell") as! VocabularyOverviewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! VocabularyOverviewCell
         configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -131,6 +132,13 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         vocabularyCell.nativeWord!.text = (currentObject.valueForKey("word")!.description)
         vocabularyCell.translation!.text = (currentObject.valueForKey("translation")!.description)
+        
+        if(indexPath.row % 2 == 0){
+            
+            cell.contentView.backgroundColor = UIColor(red: 0.697, green: 0.887, blue: 0.955, alpha: 1.000)
+
+        }
+
     }
     
     //MARK:- Controller Delegate Methoden
@@ -167,6 +175,12 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.vocabularyTableView.endUpdates()
+    }
+    
+    //MARK:- Searchbar Delegate Methoden
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+
     }
 
 }

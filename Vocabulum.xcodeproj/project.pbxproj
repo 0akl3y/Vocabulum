@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F03FB1E1BD3D9FB00DA4B96 /* BookOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F03FB1D1BD3D9FB00DA4B96 /* BookOverviewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		8F1D067A1BA6757E000A8575 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1D06791BA6757E000A8575 /* AppDelegate.swift */; };
 		8F1D067D1BA6757E000A8575 /* Vocabulum.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F1D067B1BA6757E000A8575 /* Vocabulum.xcdatamodeld */; };
 		8F1D067F1BA6757E000A8575 /* SetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1D067E1BA6757E000A8575 /* SetsViewController.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8F03FB1D1BD3D9FB00DA4B96 /* BookOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookOverviewCell.swift; sourceTree = "<group>"; };
 		8F1D06741BA6757E000A8575 /* Vocabulum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vocabulum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F1D06781BA6757E000A8575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F1D06791BA6757E000A8575 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				8F1D06791BA6757E000A8575 /* AppDelegate.swift */,
+				8F03FB1D1BD3D9FB00DA4B96 /* BookOverviewCell.swift */,
 				8F1D067E1BA6757E000A8575 /* SetsViewController.swift */,
 				8FF1AAE31BB89E6A0056B077 /* AddLessonButton.swift */,
 				8FEC6FFE1BAF3D5900C50A91 /* AddSetViewController.swift */,
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F1D069F1BA676CC000A8575 /* CoreDataStack.swift in Sources */,
+				8F03FB1E1BD3D9FB00DA4B96 /* BookOverviewCell.swift in Sources */,
 				8FEE0C021BB96D0D00B211FC /* AddLessonTableVC.swift in Sources */,
 				8F1D067D1BA6757E000A8575 /* Vocabulum.xcdatamodeld in Sources */,
 				8FED75501BBD07D900843A1D /* AddVocabularyVC.swift in Sources */,

@@ -156,8 +156,10 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         
+        let bookCell = cell as! BookOverviewCell
+        
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
-        cell.textLabel!.text = object.valueForKey("title")!.description
+        bookCell.title!.text = object.valueForKey("title")!.description
     }
 
     // MARK: - Fetched results controller
@@ -195,4 +197,6 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
     }
+    
+    
 }

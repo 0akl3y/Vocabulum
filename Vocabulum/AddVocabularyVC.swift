@@ -22,7 +22,7 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         //Show only the words related to the current lesson
         
-        let predicate:NSPredicate = NSPredicate(format: "wordToLesson.title like %@", self.relatedLesson!.title)
+        let predicate:NSPredicate = NSPredicate(format: ("(wordToLesson.title like %@) AND (wordToLesson.dateAdded == %@)"), self.relatedLesson!.title, self.relatedLesson!.dateAdded )
         
         let entity = NSEntityDescription.entityForName("Word", inManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
         

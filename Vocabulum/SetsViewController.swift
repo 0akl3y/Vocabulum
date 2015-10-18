@@ -10,9 +10,11 @@ import UIKit
 import CoreData
 
 
-class SetsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class SetsViewController: UITableViewController, NSFetchedResultsControllerDelegate, BookOverviewCellDelegate {
 
     var managedObjectContext: NSManagedObjectContext? = CoreDataStack.sharedObject().managedObjectContext
+    
+    var tappedCellIndexPath: NSIndexPath? // keeps track of the cells tapped index path. this is done (instead of the ususal didSelectRow..) because there are mutliple button within each cell that are handled via the BookOberviewCellDelegate methods.
     
     var fetchedResultsController: NSFetchedResultsController {
         if _fetchedResultsController != nil {
@@ -54,6 +56,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
         self.navigationItem.rightBarButtonItem = addButton
+        
     }
 
     func insertNewObject(sender: AnyObject) {
@@ -65,15 +68,22 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
+        let targetNavigationVC = segue.destinationViewController as? UINavigationController
+        
         switch(segue.identifier!){
             
             case "addLesson":
-            
-                let targetNavigationVC = segue.destinationViewController as! UINavigationController
+                
                 let senderButton = sender as! AddLessonButton
-                let targetVC = targetNavigationVC.topViewController as! AddLessonTableVC
+                let targetVC = targetNavigationVC!.topViewController as! AddLessonTableVC
                 
                 targetVC.assignedLanguagePair = senderButton.languagePair
+            
+            case "addVocabulary":
+            
+                let targetVC = targetNavigationVC!.topViewController as! AddVocabularyVC
+                targetVC.relatedLesson = (self.fetchedResultsController.objectAtIndexPath(self.tappedCellIndexPath!) as! Lesson)
+            
             
             default:
                 break        
@@ -160,6 +170,9 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         
         let object = self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject
         bookCell.title!.text = object.valueForKey("title")!.description
+        bookCell.cellIndexPath = indexPath
+        bookCell.delegate = self
+        
     }
 
     // MARK: - Fetched results controller
@@ -196,6 +209,17 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
 
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
+    }
+    
+    //MARK:- Book Overview Cell Delegate Methods
+    
+    func didTapEdit(cellIndexPath: NSIndexPath?) {
+        self.tappedCellIndexPath = cellIndexPath
+        self.performSegueWithIdentifier("addVocabulary", sender: self)
+    }
+    
+    func didTapStartLearning(cellIndexPath: NSIndexPath?) {
+        //perform segue to learning
     }
     
     

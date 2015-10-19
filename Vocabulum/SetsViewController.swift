@@ -74,10 +74,26 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
             
             case "addLesson":
                 
-                let senderButton = sender as! AddLessonButton
                 let targetVC = targetNavigationVC!.topViewController as! AddLessonTableVC
+            
+                if let senderButton = sender as? AddLessonButton{
+                    
+                    // A new Lesson is added
+                    
+                    targetVC.assignedLanguagePair = senderButton.languagePair
+                    
+                }
+            
+                else {
+                    
+                    //An existing Lesson is edited
+                    
+                    targetVC.assignedLanguagePair = self.fetchedResultsController.objectAtIndexPath(self.tappedCellIndexPath) as! LanguagePair
+                    
+            
+                }
                 
-                targetVC.assignedLanguagePair = senderButton.languagePair
+            
             
             case "addVocabulary":
             
@@ -211,6 +227,11 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         self.tableView.endUpdates()
     }
     
+    
+    //MARK:- Set edit mode behavior
+    
+
+    
     //MARK:- Book Overview Cell Delegate Methods
     
     func didTapEdit(cellIndexPath: NSIndexPath?) {
@@ -220,6 +241,11 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     
     func didTapStartLearning(cellIndexPath: NSIndexPath?) {
         //perform segue to learning
+    }
+    
+    func didTapEditLesson(cellIndexPath: NSIndexPath?) {
+        self.tappedCellIndexPath = cellIndexPath
+        self.performSegueWithIdentifier("addLesson", sender: self)
     }
     
     

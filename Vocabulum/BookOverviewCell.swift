@@ -39,7 +39,7 @@ class BookOverviewCell: UITableViewCell {
     @IBAction func editBookContent(sender: UIButton) {
         
         self.delegate?.didTapEdit(self.cellIndexPath)
-    }
+    }    
     
     //MARK:- Manage the cells editing accessory type
     
@@ -59,8 +59,6 @@ class BookOverviewCell: UITableViewCell {
             let editingButton = UIButton(type: UIButtonType.InfoDark)
             
             self.editingAccessoryView = editingButton
-            //editingButton.titleLabel!.text = "Edit"
-            //editingButton.backgroundColor = UIColor.blueColor()
             editingButton.addTarget(self, action: "editLesson:", forControlEvents: UIControlEvents.TouchUpInside)
         
         }

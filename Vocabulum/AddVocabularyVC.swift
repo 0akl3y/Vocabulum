@@ -182,5 +182,4 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
 
     }
-
 }

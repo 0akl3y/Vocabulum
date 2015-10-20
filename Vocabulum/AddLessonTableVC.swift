@@ -10,7 +10,7 @@ import UIKit
 
 class AddLessonTableVC: UITableViewController {
     
-    var assignedLanguagePair: LanguagePair!
+    var assignedLanguagePair: LanguagePair?
     var currentLesson: Lesson? // the selected lesson is passed from set view controller
     
     @IBOutlet var lessonTitle: UITextField!
@@ -19,18 +19,28 @@ class AddLessonTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
- 
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        self.lessonTitle.text = self.currentLesson?.title
+        self.lessonDescription.text = self.currentLesson?.lessonDescription
+        self.assignedLanguagePair = self.currentLesson?.lessonToLanguage
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destination = segue.destinationViewController as! UINavigationController
-        let destinationVC = destination.topViewController as! AddVocabularyVC
-        destinationVC.relatedLesson = self.currentLesson           
+        
+        if(segue.identifier == "addVocabulary"){
+            
+            let destination = segue.destinationViewController as! UINavigationController
+            let destinationVC = destination.topViewController as! AddVocabularyVC
+            destinationVC.relatedLesson = self.currentLesson
+        }
     }
     
     func saveLesson(){
         
         self.currentLesson = Lesson(title: lessonTitle.text!, lessonDescription: lessonDescription.text)
-        self.currentLesson!.lessonToLanguage = self.assignedLanguagePair
+        self.currentLesson!.lessonToLanguage = self.assignedLanguagePair!
     }
     
     @IBAction func cancel(sender: AnyObject) {
@@ -41,10 +51,7 @@ class AddLessonTableVC: UITableViewController {
     @IBAction func editVocabulary(sender: AnyObject) {
         
         self.saveLesson()
-        let vocabularyVC = self.storyboard?.instantiateViewControllerWithIdentifier("VocabularyVC") as! AddVocabularyVC
-        
-        vocabularyVC.relatedLesson = self.currentLesson
-        self.presentViewController(vocabularyVC, animated: true, completion: nil)
+        self.performSegueWithIdentifier("addVocabulary", sender: self)
     }
     
     @IBAction func saveLesson(sender: AnyObject) {
@@ -55,7 +62,5 @@ class AddLessonTableVC: UITableViewController {
             CoreDataStack.sharedObject().saveContext()
         
         })
-        
     }
-    
 }

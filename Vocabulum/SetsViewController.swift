@@ -81,6 +81,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
                     // A new Lesson is added
                     
                     targetVC.assignedLanguagePair = senderButton.languagePair
+                    targetVC.navigationItem.title = "Add Lesson"
                     
                 }
             
@@ -88,14 +89,14 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
                     
                     //An existing Lesson is edited
                     
-                    targetVC.assignedLanguagePair = self.fetchedResultsController.objectAtIndexPath(self.tappedCellIndexPath) as! LanguagePair
-                    
+                    targetVC.currentLesson = (self.fetchedResultsController.objectAtIndexPath(self.tappedCellIndexPath!) as! Lesson)
+                    targetVC.navigationItem.title = "Edit Lesson"
             
                 }
                 
             
             
-            case "addVocabulary":
+            case "editVocabulary":
             
                 let targetVC = targetNavigationVC!.topViewController as! AddVocabularyVC
                 targetVC.relatedLesson = (self.fetchedResultsController.objectAtIndexPath(self.tappedCellIndexPath!) as! Lesson)
@@ -228,7 +229,6 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     }
     
     
-    //MARK:- Set edit mode behavior
     
 
     
@@ -236,7 +236,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     
     func didTapEdit(cellIndexPath: NSIndexPath?) {
         self.tappedCellIndexPath = cellIndexPath
-        self.performSegueWithIdentifier("addVocabulary", sender: self)
+        self.performSegueWithIdentifier("editVocabulary", sender: self)
     }
     
     func didTapStartLearning(cellIndexPath: NSIndexPath?) {

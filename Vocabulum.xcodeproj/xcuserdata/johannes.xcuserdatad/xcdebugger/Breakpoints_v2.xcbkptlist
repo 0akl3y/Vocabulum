@@ -100,12 +100,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vocabulum/SetsViewController.swift"
-            timestampString = "466980725.790319"
+            timestampString = "467011147.225823"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "prepareForSegue(_:sender:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Vocabulum.SetsViewController.prepareForSegue (Vocabulum.SetsViewController)(ObjectiveC.UIStoryboardSegue, sender : Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ()"
+                  moduleName = "Vocabulum"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/johannes/Developer/Vocabulum/Vocabulum/SetsViewController.swift"
+                  timestampString = "467012361.035203"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95"
+                  offsetFromSymbolStart = "2174">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Vocabulum.SetsViewController.prepareForSegue (Vocabulum.SetsViewController)(ObjectiveC.UIStoryboardSegue, sender : Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ()"
+                  moduleName = "Vocabulum"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/johannes/Developer/Vocabulum/Vocabulum/SetsViewController.swift"
+                  timestampString = "467012361.035336"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "95"
+                  endingLineNumber = "95"
+                  offsetFromSymbolStart = "2210">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vocabulum/AddLessonTableVC.swift"
+            timestampString = "467012361.017433"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "saveLesson()"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vocabulum/SetsViewController.swift"
+            timestampString = "467012589.244604"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
+            landmarkName = "tableView(_:viewForHeaderInSection:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

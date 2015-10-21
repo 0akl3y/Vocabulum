@@ -47,10 +47,19 @@ class BookOverviewCell: UITableViewCell {
         
         self.indentationWidth = 20.0;
         
-        let switchToState:Bool = !self.editing
-
-        self.learnButton.hidden = !self.editing
-        self.editButton.hidden = !self.editing
+        let switchToState:Bool = !self.editing        
+        
+        if(!self.editing){
+            
+            AnimationKit.fadeOutViews([self.learnButton, self.editButton])
+        
+        }
+        
+        else {
+        
+            AnimationKit.fadeInViews([self.learnButton, self.editButton])
+        
+        }
         
         super.setEditing(switchToState, animated: true)
         

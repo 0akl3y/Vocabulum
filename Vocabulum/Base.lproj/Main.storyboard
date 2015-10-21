@@ -259,6 +259,7 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="editVocButton" destination="CS3-hH-CyL" id="PlG-t1-J6m"/>
                         <outlet property="lessonDescription" destination="785-E7-UpP" id="Ahq-Pr-TWj"/>
                         <outlet property="lessonTitle" destination="ne7-OY-5e1" id="eGC-Vo-Fgr"/>
                         <segue destination="9Q8-6s-5xu" kind="modal" identifier="addVocabluary" id="rel-El-RYR"/>

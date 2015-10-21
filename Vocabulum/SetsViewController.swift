@@ -133,7 +133,12 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let context = self.fetchedResultsController.managedObjectContext
-            context.deleteObject(self.fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
+            
+            let lessonToDelete = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Lesson
+            let wordsToDelete = lessonToDelete.lessonToWord
+
+            context.deleteObject(lessonToDelete)
+            _ = wordsToDelete.map {context.deleteObject($0 as! Word)}
                 
             var error: NSError? = nil
             do {
@@ -159,13 +164,14 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         
         let indexPath = NSIndexPath(forRow: 0, inSection: section)
         let lesson = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Lesson
+        
         let button = AddLessonButton(type: UIButtonType.ContactAdd)
         button.frame.origin.x = tableView.frame.width - (button.frame.width + 10)
         button.frame.origin.y = 10.0
 
         button.assignLanguagePair(lesson.lessonToLanguage)
-        
         button.addTarget(self, action: "addLesson:", forControlEvents: UIControlEvents.TouchUpInside)
+        
         
         let label = UILabel(frame: CGRectMake(10.0, 10.0, 100.0, 40.0))
         label.text = lesson.lessonToLanguage.title
@@ -227,10 +233,6 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
     }
-    
-    
-    
-
     
     //MARK:- Book Overview Cell Delegate Methods
     

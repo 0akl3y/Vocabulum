@@ -105,5 +105,4 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(textField: UITextField) {
         textField.resignFirstResponder()
     }
-
 }

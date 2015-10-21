@@ -16,25 +16,27 @@ protocol RemoveSetButtonDelegate {
 
 class RemoveSetButton: UIButton {
     
-    var referencedSet: LanguagePair?
+    var referencedSet: LanguagePair!
     var delegate: RemoveSetButtonDelegate?
     
-    override init(frame:CGRect){
-        super.init(frame: frame)
-        self.targetForAction("handleTap:", withSender: self)
-    
-    }
-
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override init(frame:CGRect){
+        super.init(frame: frame)
+        self.targetForAction("handleTap:", withSender: self)
+    }
+
+    
     func handleTap(sender:UIButton){
+                        
+        CoreDataStack.sharedObject().delete(self.referencedSet)
+        CoreDataStack.sharedObject().saveContext()
+        
+        delegate?.didTapRemoveSet()
     
     }
-    
-    
-    
 
     
 

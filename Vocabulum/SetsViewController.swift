@@ -10,8 +10,9 @@ import UIKit
 import CoreData
 
 
-class SetsViewController: UITableViewController, NSFetchedResultsControllerDelegate, BookOverviewCellDelegate {
+class SetsViewController: UITableViewController, NSFetchedResultsControllerDelegate, BookOverviewCellDelegate, RemoveSetButtonDelegate {
 
+    @IBOutlet var setTableView: UITableView!
     var managedObjectContext: NSManagedObjectContext? = CoreDataStack.sharedObject().managedObjectContext
     
     var tappedCellIndexPath: NSIndexPath? // keeps track of the cells tapped index path. this is done (instead of the ususal didSelectRow..) because there are mutliple button within each cell that are handled via the BookOberviewCellDelegate methods.
@@ -172,12 +173,22 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         button.assignLanguagePair(lesson.lessonToLanguage)
         button.addTarget(self, action: "addLesson:", forControlEvents: UIControlEvents.TouchUpInside)
         
+        let removeButton = RemoveSetButton(frame: button.frame)
+
+        removeButton.referencedSet = lesson.lessonToLanguage
+        removeButton.frame.origin.x = tableView.frame.width - (2 * button.frame.width + 20)
+        removeButton.frame.origin.y = 10.0
+        removeButton.backgroundColor = UIColor.redColor()
+        
+        removeButton.delegate = self
+        
         
         let label = UILabel(frame: CGRectMake(10.0, 10.0, 100.0, 40.0))
         label.text = lesson.lessonToLanguage.title
         
         contentView.addSubview(label)
         contentView.addSubview(button)
+        contentView.addSubview(removeButton)
 
         return contentView
     }
@@ -248,6 +259,13 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     func didTapEditLesson(cellIndexPath: NSIndexPath?) {
         self.tappedCellIndexPath = cellIndexPath
         self.performSegueWithIdentifier("addLesson", sender: self)
+    }
+    
+    //MARK:- Remove Set button delegate method
+    
+    func didTapRemoveSet() {
+        
+        self.setTableView.reloadData()
     }
     
     

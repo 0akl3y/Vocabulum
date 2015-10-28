@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 
-class SetsViewController: UITableViewController, NSFetchedResultsControllerDelegate, BookOverviewCellDelegate, RemoveSetButtonDelegate {
+class SetsViewController: UITableViewController, NSFetchedResultsControllerDelegate, BookOverviewCellDelegate {
 
     @IBOutlet var setTableView: UITableView!
     var managedObjectContext: NSManagedObjectContext? = CoreDataStack.sharedObject().managedObjectContext
@@ -77,7 +77,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
                 
                 let targetVC = targetNavigationVC!.topViewController as! AddLessonTableVC
             
-                if let senderButton = sender as? AddLessonButton{
+                if let senderButton = sender as? AttributedButton{
                     
                     // A new Lesson is added
                     
@@ -166,21 +166,21 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         let indexPath = NSIndexPath(forRow: 0, inSection: section)
         let lesson = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Lesson
         
-        let button = AddLessonButton(type: UIButtonType.ContactAdd)
+        let button = AttributedButton(type: UIButtonType.ContactAdd)
         button.frame.origin.x = tableView.frame.width - (button.frame.width + 10)
         button.frame.origin.y = 10.0
 
         button.assignLanguagePair(lesson.lessonToLanguage)
         button.addTarget(self, action: "addLesson:", forControlEvents: UIControlEvents.TouchUpInside)
         
-        let removeButton = RemoveSetButton(frame: button.frame)
-
-        removeButton.referencedSet = lesson.lessonToLanguage
+        let removeButton = AttributedButton(frame: button.frame)
+        
         removeButton.frame.origin.x = tableView.frame.width - (2 * button.frame.width + 20)
         removeButton.frame.origin.y = 10.0
         removeButton.backgroundColor = UIColor.redColor()
         
-        removeButton.delegate = self
+        removeButton.addTarget(self, action: "removeSet:", forControlEvents: UIControlEvents.TouchUpInside)
+        removeButton.assignLanguagePair(lesson.lessonToLanguage)
         
         
         let label = UILabel(frame: CGRectMake(10.0, 10.0, 100.0, 40.0))
@@ -193,7 +193,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         return contentView
     }
     
-    func addLesson(sender:AddLessonButton){
+    func addLesson(sender:AttributedButton){
         performSegueWithIdentifier("addLesson", sender: sender)
     
     }
@@ -261,12 +261,15 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         self.performSegueWithIdentifier("addLesson", sender: self)
     }
     
-    //MARK:- Remove Set button delegate method
+    //MARK:- Remove Set button target
     
-    func didTapRemoveSet() {
+    func removeSet(sender:AttributedButton){
+
+        self.managedObjectContext?.deleteObject(sender.languagePair!)
+        CoreDataStack.sharedObject().saveContext()
         
-        self.setTableView.reloadData()
-    }
+        self.setTableView.setNeedsLayout()
     
+    }    
     
 }

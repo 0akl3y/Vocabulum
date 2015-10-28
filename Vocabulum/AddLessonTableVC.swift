@@ -56,6 +56,10 @@ class AddLessonTableVC: UITableViewController, UITextFieldDelegate {
             self.currentLesson!.lessonToLanguage = self.assignedLanguagePair!
             
         }
+        
+        self.currentLesson?.title = self.lessonTitle.text!
+        self.currentLesson?.lessonDescription = self.lessonDescription.text
+        self.currentLesson?.lessonToLanguage = self.assignedLanguagePair!
     }
     
     @IBAction func cancel(sender: AnyObject) {

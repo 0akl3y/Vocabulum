@@ -1,6 +1,6 @@
 
 //
-//  AddLessonButton.swift
+//  AttributedButton.swift
 //  Vocabulum
 //
 //  Created by Johannes Eichler on 28.09.15.
@@ -9,7 +9,7 @@
 
 import UIKit
 
-class AddLessonButton: UIButton {
+class AttributedButton: UIButton {
     
     var languagePair:LanguagePair?
     

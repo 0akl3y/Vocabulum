@@ -9,9 +9,11 @@
 import UIKit
 import CoreData
 
-class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
+class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
     
-    @IBOutlet var searchBar: UISearchBar!
+    var searchBar: UISearchBar!
+    var searchController:UISearchController!
+    
     var relatedLesson:Lesson?
     @IBOutlet var vocabularyTableView: UITableView!
     var vocabularyController: NSFetchedResultsController {
@@ -62,8 +64,16 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         self.navigationItem.rightBarButtonItem = addVocButton
         self.navigationItem.leftBarButtonItem = cancelButton
-        self.searchBar.delegate = self
         
+        let resultDisplay = searchResultsDisplayVC(nibName:"searchResultsDisplayVC", bundle: nil)
+        self.searchController = UISearchController(searchResultsController: resultDisplay)
+        
+        self.searchController.searchResultsUpdater = self
+        
+        self.searchBar = searchController.searchBar
+        vocabularyTableView.tableHeaderView = self.searchBar
+        vocabularyTableView.tableHeaderView?.hidden = false
+
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -181,5 +191,9 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
 
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        searchController.navigationItem.title = "I am searching"
     }
 }

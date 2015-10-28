@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UISearchResultsUpdating {
+class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate /*UISearchResultsUpdating*/ {
     
     var searchBar: UISearchBar!
     var searchController:UISearchController!
@@ -65,10 +65,13 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         self.navigationItem.rightBarButtonItem = addVocButton
         self.navigationItem.leftBarButtonItem = cancelButton
         
-        let resultDisplay = searchResultsDisplayVC(nibName:"searchResultsDisplayVC", bundle: nil)
-        self.searchController = UISearchController(searchResultsController: resultDisplay)
+        //let resultDisplay = searchResultsDisplayVC(nibName:"searchResultsDisplayVC", bundle: nil)
         
-        self.searchController.searchResultsUpdater = self
+        let result = self.storyboard?.instantiateViewControllerWithIdentifier("VocabularySearch") as! SearchResultsTableVC
+        
+        
+        self.searchController = UISearchController(searchResultsController: result)
+        //self.searchController.searchResultsUpdater = self
         
         self.searchBar = searchController.searchBar
         vocabularyTableView.tableHeaderView = self.searchBar
@@ -125,6 +128,9 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        let nib = UINib(nibName: "VocabularyOverviewCell", bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: "Cell")
+
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! VocabularyOverviewCell
         configureCell(cell, atIndexPath: indexPath)
         return cell
@@ -189,11 +195,11 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     //MARK:- Searchbar Delegate Methoden
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-
-    }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        searchController.navigationItem.title = "I am searching"
+        
+        var searchVC = searchController.searchResultsController as! SearchResultsTableVC
+        searchVC.navigationItem.title = "cool"
+
     }
 }

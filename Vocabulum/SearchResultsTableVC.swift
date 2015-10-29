@@ -42,8 +42,8 @@ class SearchResultsTableVC: UITableViewController {
         
         let content = searchResult![indexPath.row]
         
-        cell.nativeWord.text = content.word
-        cell.translation.text = content.translation        
+        cell.nativeWord!.text = content.word
+        cell.translation!.text = content.translation
 
         return cell
     }

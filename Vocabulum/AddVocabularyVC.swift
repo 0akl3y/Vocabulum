@@ -65,7 +65,6 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         self.navigationItem.rightBarButtonItem = addVocButton
         self.navigationItem.leftBarButtonItem = cancelButton
         
-        //let resultDisplay = searchResultsDisplayVC(nibName:"searchResultsDisplayVC", bundle: nil)
         
         let result = self.storyboard?.instantiateViewControllerWithIdentifier("VocabularySearch") as! SearchResultsTableVC
         
@@ -129,9 +128,8 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let nib = UINib(nibName: "VocabularyOverviewCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: "Cell")
-
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! VocabularyOverviewCell
+        tableView.registerNib(nib, forCellReuseIdentifier: "vocCell") 
+        let cell = tableView.dequeueReusableCellWithIdentifier("vocCell") as! VocabularyOverviewCell
         configureCell(cell, atIndexPath: indexPath)
         return cell
     }

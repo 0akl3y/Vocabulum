@@ -270,29 +270,6 @@
             </objects>
             <point key="canvasLocation" x="1287" y="89"/>
         </scene>
-        <!--Search Results TableVC-->
-        <scene sceneID="FIo-Zv-dqa">
-            <objects>
-                <tableViewController storyboardIdentifier="VocabularySearch" id="LIe-3t-joZ" customClass="SearchResultsTableVC" customModule="Vocabulum" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="uPY-ys-ZVE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="LIe-3t-joZ" id="rxl-MF-XVE"/>
-                            <outlet property="delegate" destination="LIe-3t-joZ" id="C28-T2-ITf"/>
-                        </connections>
-                    </tableView>
-                    <connections>
-                        <outlet property="searchTableView" destination="uPY-ys-ZVE" id="qL9-Fj-esF"/>
-                        <outlet property="tableView" destination="uPY-ys-ZVE" id="igd-pm-IFb"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Afz-A2-yJf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1776" y="212"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="5tj-y5-AxQ">
             <objects>
@@ -323,8 +300,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <searchBar contentMode="redraw" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DzI-Mx-ahO">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="fbZ-o5-D5i"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardAppearance="light" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CuE-VP-2Sm">
-                                <rect key="frame" x="0.0" y="46" width="320" height="476"/>
+                                <rect key="frame" x="0.0" y="108" width="320" height="460"/>
                                 <animations/>
                                 <color key="separatorColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -334,15 +323,19 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerY" secondItem="CuE-VP-2Sm" secondAttribute="centerY" id="MZm-4v-xZB"/>
+                            <constraint firstItem="DzI-Mx-ahO" firstAttribute="centerX" secondItem="F6X-bK-Q6a" secondAttribute="centerX" id="L8J-u0-6ag"/>
+                            <constraint firstItem="Hvp-mh-WK9" firstAttribute="top" secondItem="CuE-VP-2Sm" secondAttribute="bottom" id="N0O-nA-xQ8"/>
                             <constraint firstAttribute="centerX" secondItem="CuE-VP-2Sm" secondAttribute="centerX" id="RUK-sM-OO3"/>
-                            <constraint firstItem="CuE-VP-2Sm" firstAttribute="height" secondItem="F6X-bK-Q6a" secondAttribute="height" constant="-92" id="wUA-w3-UOd"/>
+                            <constraint firstItem="DzI-Mx-ahO" firstAttribute="top" secondItem="IDS-pK-o2b" secondAttribute="bottom" id="TF6-sO-xba"/>
+                            <constraint firstItem="DzI-Mx-ahO" firstAttribute="width" secondItem="F6X-bK-Q6a" secondAttribute="width" id="cd3-kP-AFR"/>
+                            <constraint firstItem="CuE-VP-2Sm" firstAttribute="top" secondItem="DzI-Mx-ahO" secondAttribute="bottom" id="suv-wu-dQ9"/>
                             <constraint firstItem="CuE-VP-2Sm" firstAttribute="width" secondItem="F6X-bK-Q6a" secondAttribute="width" id="wbd-rH-u8n"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Vocabulary Manager" id="sTG-Eq-fej"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="searchBar" destination="DzI-Mx-ahO" id="VgB-u7-j9r"/>
                         <outlet property="vocabularyTableView" destination="CuE-VP-2Sm" id="3RA-pb-fY4"/>
                         <segue destination="Pmc-SL-XgP" kind="push" identifier="enterVocabulary" id="wT3-VO-gwL"/>
                     </connections>

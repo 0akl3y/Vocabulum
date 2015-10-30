@@ -9,10 +9,12 @@
 import UIKit
 import CoreData
 
-class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate /*UISearchResultsUpdating*/ {
+class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
     
-    var searchBar: UISearchBar!
-    var searchController:UISearchController!
+    
+    @IBOutlet var searchBar: UISearchBar!
+    var isSearchMode = false
+    var standardPredicate:NSPredicate?
     
     var relatedLesson:Lesson?
     @IBOutlet var vocabularyTableView: UITableView!
@@ -24,13 +26,23 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         //Show only the words related to the current lesson
         
-        let predicate:NSPredicate = NSPredicate(format: ("(wordToLesson.title like %@) AND (wordToLesson.dateAdded == %@)"), self.relatedLesson!.title, self.relatedLesson!.dateAdded )
+        if(!isSearchMode){
+            
+            standardPredicate = NSPredicate(format: ("(wordToLesson.title like %@) AND (wordToLesson.dateAdded == %@)"), self.relatedLesson!.title, self.relatedLesson!.dateAdded )
+        
+        }
+        
+        else{
+            
+            standardPredicate = NSPredicate(format: "(wordToLesson.title like %@) AND (wordToLesson.dateAdded == %@) AND ((word contains %@) OR (translation contains %@))", self.relatedLesson!.title, self.relatedLesson!.dateAdded, self.searchBar.text!, self.searchBar.text!)
+            
+        }
         
         let entity = NSEntityDescription.entityForName("Word", inManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
         
         request.sortDescriptors = sortDescriptors
         request.entity = entity
-        request.predicate = predicate
+        request.predicate = standardPredicate
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.sharedObject().managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
         
@@ -65,16 +77,7 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         self.navigationItem.rightBarButtonItem = addVocButton
         self.navigationItem.leftBarButtonItem = cancelButton
         
-        
-        let result = self.storyboard?.instantiateViewControllerWithIdentifier("VocabularySearch") as! SearchResultsTableVC
-        
-        
-        self.searchController = UISearchController(searchResultsController: result)
-        //self.searchController.searchResultsUpdater = self
-        
-        self.searchBar = searchController.searchBar
-        vocabularyTableView.tableHeaderView = self.searchBar
-        vocabularyTableView.tableHeaderView?.hidden = false
+        self.searchBar.delegate = self
 
     }
     
@@ -193,11 +196,27 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     //MARK:- Searchbar Delegate Methoden
     
-    
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
-        
-        var searchVC = searchController.searchResultsController as! SearchResultsTableVC
-        searchVC.navigationItem.title = "cool"
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
 
+        self.isSearchMode = true
+        self.vocabularyTableView.reloadData()
+        self.vocabularyTableView.setNeedsDisplay()
+        
     }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        self.searchBar.endEditing(true)
+        self.searchBar.text = ""
+        
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        
+        self.isSearchMode = false
+        self.vocabularyTableView.reloadData()
+        self.vocabularyTableView.setNeedsDisplay()
+        
+        
+    }
+ 
 }

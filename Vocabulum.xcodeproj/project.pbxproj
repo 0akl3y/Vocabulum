@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		8F03FB1E1BD3D9FB00DA4B96 /* BookOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F03FB1D1BD3D9FB00DA4B96 /* BookOverviewCell.swift */; };
+		8F0618071BE5657F00E7F868 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0618051BE5657F00E7F868 /* Language.swift */; settings = {ASSET_TAGS = (); }; };
+		8F06180D1BE56E7800E7F868 /* YandexClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F06180C1BE56E7800E7F868 /* YandexClient.swift */; settings = {ASSET_TAGS = (); }; };
+		8F06180F1BE56E8800E7F868 /* SimpleNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F06180E1BE56E8800E7F868 /* SimpleNetworking.swift */; settings = {ASSET_TAGS = (); }; };
+		8F0618111BE59C9B00E7F868 /* Language+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0618101BE59C9B00E7F868 /* Language+CoreData.swift */; settings = {ASSET_TAGS = (); }; };
 		8F1AECB31BE1788700C04F64 /* VocabularyOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1AECB21BE1788700C04F64 /* VocabularyOverviewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		8F1AECB51BE17B9100C04F64 /* SearchResultsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1AECB41BE17B9100C04F64 /* SearchResultsTableVC.swift */; settings = {ASSET_TAGS = (); }; };
 		8F1D067A1BA6757E000A8575 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1D06791BA6757E000A8575 /* AppDelegate.swift */; };
@@ -44,6 +48,10 @@
 
 /* Begin PBXFileReference section */
 		8F03FB1D1BD3D9FB00DA4B96 /* BookOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookOverviewCell.swift; sourceTree = "<group>"; };
+		8F0618051BE5657F00E7F868 /* Language.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		8F06180C1BE56E7800E7F868 /* YandexClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YandexClient.swift; sourceTree = "<group>"; };
+		8F06180E1BE56E8800E7F868 /* SimpleNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleNetworking.swift; sourceTree = "<group>"; };
+		8F0618101BE59C9B00E7F868 /* Language+CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Language+CoreData.swift"; path = "Vocabulum/Language+CoreData.swift"; sourceTree = "<group>"; };
 		8F1AECB21BE1788700C04F64 /* VocabularyOverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VocabularyOverviewCell.xib; sourceTree = "<group>"; };
 		8F1AECB41BE17B9100C04F64 /* SearchResultsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableVC.swift; sourceTree = "<group>"; };
 		8F1D06741BA6757E000A8575 /* Vocabulum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vocabulum.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +98,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8F0618091BE56D7A00E7F868 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				8F06180C1BE56E7800E7F868 /* YandexClient.swift */,
+				8F06180E1BE56E8800E7F868 /* SimpleNetworking.swift */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
 		8F1D066B1BA6757E000A8575 = {
 			isa = PBXGroup;
 			children = (
@@ -125,6 +142,7 @@
 				8FF7A2331BBE51AC00B85A50 /* EnterVocabularyTableViewController.swift */,
 				8FED754F1BBD07D900843A1D /* AddVocabularyVC.swift */,
 				8FEC37411BD69446006CA772 /* AnimationKit.swift */,
+				8F0618091BE56D7A00E7F868 /* Networking */,
 				8FF33EA41BA95B390072B3F8 /* Model */,
 				8F1D06821BA6757E000A8575 /* Main.storyboard */,
 				8F1D06851BA6757E000A8575 /* Images.xcassets */,
@@ -163,10 +181,12 @@
 		8FF33EA41BA95B390072B3F8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8F1D069E1BA676CC000A8575 /* CoreDataStack.swift */,
+				8F0618051BE5657F00E7F868 /* Language.swift */,
+				8F0618101BE59C9B00E7F868 /* Language+CoreData.swift */,
 				8FF33EA21BA95B2A0072B3F8 /* Lesson.swift */,
 				8FF33EA01BA95B2A0072B3F8 /* LanguagePair.swift */,
 				8FF33E9E1BA95B2A0072B3F8 /* Word.swift */,
+				8F1D069E1BA676CC000A8575 /* CoreDataStack.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -276,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F1AECB51BE17B9100C04F64 /* SearchResultsTableVC.swift in Sources */,
+				8F0618071BE5657F00E7F868 /* Language.swift in Sources */,
 				8F1D069F1BA676CC000A8575 /* CoreDataStack.swift in Sources */,
 				8F03FB1E1BD3D9FB00DA4B96 /* BookOverviewCell.swift in Sources */,
 				8FEE0C021BB96D0D00B211FC /* AddLessonTableVC.swift in Sources */,
@@ -283,15 +304,18 @@
 				8FED75501BBD07D900843A1D /* AddVocabularyVC.swift in Sources */,
 				8F1D067A1BA6757E000A8575 /* AppDelegate.swift in Sources */,
 				8FF33EA31BA95B2A0072B3F8 /* Lesson.swift in Sources */,
+				8F06180D1BE56E7800E7F868 /* YandexClient.swift in Sources */,
 				8FEC6FFF1BAF3D5900C50A91 /* AddSetViewController.swift in Sources */,
 				8FF33EA11BA95B2A0072B3F8 /* LanguagePair.swift in Sources */,
 				8FEC37421BD69446006CA772 /* AnimationKit.swift in Sources */,
 				8F44B1621BC30A6F00E29377 /* VocabularyOverviewCell.swift in Sources */,
+				8F06180F1BE56E8800E7F868 /* SimpleNetworking.swift in Sources */,
 				8FF7A2341BBE51AC00B85A50 /* EnterVocabularyTableViewController.swift in Sources */,
 				8FF1AAE41BB89E6A0056B077 /* AttributedButton.swift in Sources */,
 				8F1D067F1BA6757E000A8575 /* SetsViewController.swift in Sources */,
 				8F1D06811BA6757E000A8575 /* SetDetailViewController.swift in Sources */,
 				8FF33E9F1BA95B2A0072B3F8 /* Word.swift in Sources */,
+				8F0618111BE59C9B00E7F868 /* Language+CoreData.swift in Sources */,
 				8FEC70011BAF49E700C50A91 /* SelectLangTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -36,7 +36,6 @@ class Lesson: NSManagedObject {
             self.lessonDescription = lessonDescription
         
         }
-        
     }
     
     func sectionNameForLesson() -> String {

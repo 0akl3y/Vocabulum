@@ -152,7 +152,7 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         
         if(indexPath.row % 2 == 0){
             
-            cell.contentView.backgroundColor = UIColor(red: 0.697, green: 0.887, blue: 0.955, alpha: 1.000)
+            cell.backgroundColor = UIColor(red: 0.697, green: 0.887, blue: 0.955, alpha: 1.000)
 
         }
 
@@ -215,8 +215,5 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         self.isSearchMode = false
         self.vocabularyTableView.reloadData()
         self.vocabularyTableView.setNeedsDisplay()
-        
-        
     }
- 
 }

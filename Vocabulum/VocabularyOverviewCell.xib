@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="VocabularyOverviewCell" customClass="VocabularyOverviewCell" customModule="Vocabulum" customModuleProvider="target"/>
@@ -12,14 +12,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DO8-Jp-qTj">
-                    <rect key="frame" x="8" y="0.0" width="151" height="48"/>
+                    <rect key="frame" x="16" y="0.0" width="143" height="48"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rik-a9-XMc">
-                    <rect key="frame" x="161" y="0.0" width="151" height="48"/>
+                    <rect key="frame" x="161" y="0.0" width="143" height="48"/>
                     <animations/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -38,9 +38,9 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="DO8-Jp-qTj" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="0XU-oh-5qs"/>
-                <constraint firstAttribute="trailing" secondItem="rik-a9-XMc" secondAttribute="trailing" constant="8" id="2nh-8k-A6U"/>
+                <constraint firstAttribute="trailing" secondItem="rik-a9-XMc" secondAttribute="trailing" constant="16" id="2nh-8k-A6U"/>
                 <constraint firstItem="JAG-6x-eLm" firstAttribute="leading" secondItem="DO8-Jp-qTj" secondAttribute="trailing" id="3GW-4X-ama"/>
-                <constraint firstItem="DO8-Jp-qTj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="6og-eN-cUR"/>
+                <constraint firstItem="DO8-Jp-qTj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="6og-eN-cUR"/>
                 <constraint firstItem="rik-a9-XMc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="B3Z-Ls-Oxu"/>
                 <constraint firstItem="rik-a9-XMc" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="C26-Wm-clm"/>
                 <constraint firstItem="JAG-6x-eLm" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="DFw-xR-Nwe"/>
@@ -60,8 +60,8 @@
                 </mask>
             </variation>
             <connections>
-                <outlet property="nativeWord" destination="DO8-Jp-qTj" id="N1K-uR-uZV"/>
-                <outlet property="translation" destination="rik-a9-XMc" id="LMT-sZ-Ckr"/>
+                <outlet property="nativeWord" destination="DO8-Jp-qTj" id="ecQ-53-Sif"/>
+                <outlet property="translation" destination="rik-a9-XMc" id="ntC-WE-0ny"/>
             </connections>
             <point key="canvasLocation" x="168" y="73"/>
         </view>

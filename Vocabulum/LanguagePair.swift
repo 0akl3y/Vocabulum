@@ -15,6 +15,8 @@ class LanguagePair: NSManagedObject {
     @NSManaged var nativeLanguageID: String
     @NSManaged var trainingLanguageID: String
     @NSManaged var languageToLesson: NSOrderedSet
+    
+    let localeIdentifier = "en"
 
     //the full strings for the languages to display in the user interface
     
@@ -30,7 +32,7 @@ class LanguagePair: NSManagedObject {
     
     func getStringFromLangID(langID:String) -> String{
         
-        return "\(NSLocale(localeIdentifier: langID).displayNameForKey(NSLocaleIdentifier, value: langID)!) (\(langID))"
+        return "\(NSLocale(localeIdentifier: localeIdentifier).displayNameForKey(NSLocaleIdentifier, value: langID)!) (\(langID))"
     }    
     
     //the language pair identifiers to retrieve words from the yandex API

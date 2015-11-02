@@ -9,12 +9,13 @@
 import UIKit
 import CoreData
 
-class SelectLangTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YandexClientDelegate {
+class SelectLangTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YandexClientDelegate, UISearchBarDelegate {
     
     
     weak var currentLanguagePairSetting: LanguagePair?
     @IBOutlet var selectLangTableView: UITableView!
 
+    @IBOutlet var searchBar: UISearchBar!
     //Refers to the indx previously selected in the Table View
     var selectedIndx: Int?
     
@@ -23,17 +24,24 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         return CoreDataStack.sharedObject().managedObjectContext!
     
     }
-
+    
+    var searchMode: Bool = false
     var languageFetchRequest = NSFetchRequest(entityName: "Language")
     
     var allLanguages:[Language]?
+    var searchFilteredLanguages: [Language]?
+
+    var languagesDataSource:[Language] {
+        
+        return self.searchMode == true ? self.searchFilteredLanguages! : self.allLanguages!
+    
+    }
     
     var yandexClient: YandexClient{
         
         return YandexClient.sharedObject()
     
     }
-    
     
     override func viewWillAppear(animated: Bool) {
         
@@ -48,9 +56,7 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
             
             if let languages = try self.context.executeFetchRequest(self.languageFetchRequest) as? [Language]{
                 self.allLanguages = languages
-                
             }
-            
         }
             
         catch {
@@ -64,6 +70,7 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         
         selectLangTableView.delegate = self
         selectLangTableView.dataSource = self
+        self.searchBar.delegate = self
         
     }
     
@@ -74,7 +81,8 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         
-        return self.allLanguages!.count
+        
+        return self.languagesDataSource.count
     }
 
 
@@ -82,7 +90,7 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         
         let cell = tableView.dequeueReusableCellWithIdentifier("LanguageCell", forIndexPath: indexPath)
         
-        let currentLanguage = self.allLanguages![indexPath.row]
+        let currentLanguage = self.languagesDataSource[indexPath.row]
         let currentLanguageTitle = currentLanguage.languageName
         
         cell.textLabel?.text = currentLanguageTitle
@@ -93,23 +101,20 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let selectedLanguage = self.allLanguages![indexPath.row].langCode!
+        let selectedLanguage = self.languagesDataSource[indexPath.row].langCode!
         if(self.selectedIndx == 0){
             
             self.currentLanguagePairSetting?.nativeLanguageID = selectedLanguage
-        
         }
         
         else {
             
-            self.currentLanguagePairSetting?.trainingLanguageID = selectedLanguage
-        
+            self.currentLanguagePairSetting?.trainingLanguageID = selectedLanguage        
         }
         
         self.navigationController!.popToRootViewControllerAnimated(true)
                 
     }
-    
     
     //MARK: - YandexClientDelegate methods
     
@@ -119,4 +124,30 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
     
     }
     
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        self.searchFilteredLanguages = self.allLanguages!.filter({ (element:Language) -> Bool in
+            element.languageName!.containsString(searchText)
+        })
+        
+        self.searchMode = true
+        self.selectLangTableView.reloadData()
+        self.selectLangTableView.setNeedsDisplay()
+        
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        self.searchBar.endEditing(true)
+        self.searchBar.text = ""
+        
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        
+        self.searchMode = false
+        self.selectLangTableView.reloadData()
+        self.selectLangTableView.setNeedsDisplay()
+        
+        
+    }    
 }

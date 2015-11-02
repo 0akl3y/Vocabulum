@@ -3,6 +3,7 @@
     <entity name="Language" representedClassName=".Language" syncable="YES">
         <attribute name="langCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="languageName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="translatedLanguageName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="availableTranslations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Language" inverseName="availableTranslations" inverseEntity="Language" syncable="YES"/>
     </entity>
     <entity name="LanguagePair" representedClassName="Vocabulum.LanguagePair" syncable="YES">
@@ -25,9 +26,9 @@
         <relationship name="wordToLesson" optional="YES" maxCount="1" deletionRule="Nullify" ordered="YES" destinationEntity="Lesson" inverseName="lessonToWord" inverseEntity="Lesson" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Language" positionX="261" positionY="27" width="128" height="103"/>
         <element name="LanguagePair" positionX="261" positionY="171" width="117" height="103"/>
         <element name="Lesson" positionX="432" positionY="171" width="128" height="118"/>
         <element name="Word" positionX="655" positionY="180" width="128" height="105"/>
-        <element name="Language" positionX="261" positionY="27" width="128" height="88"/>
     </elements>
 </model>

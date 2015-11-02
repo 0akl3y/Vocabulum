@@ -16,10 +16,10 @@ class Language: NSManagedObject {
     
     @NSManaged var languageName: String?
     @NSManaged var langCode: String?
-    @NSManaged var availableTranslations: NSMutableSet?
-    let regionID = "en"
-    var translatedLanguageName:String?
+    @NSManaged var availableTranslations: NSSet?
+    @NSManaged var translatedLanguageName:String?
     
+    let regionID = "en"
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)

@@ -39,7 +39,6 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
         
         self.languageA.textLabel!.text = self.currentLanguagePairSetting!.nativeLanguageString
         self.languageB.textLabel!.text = self.currentLanguagePairSetting!.trainingLanguageString
-        //self.titleField.text = self.currentLanguagePairSetting!.title
         
     }
     
@@ -47,7 +46,7 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
         
         //exclude the title section at the beginning
         
-        if(indexPath.section > 0){
+        if(indexPath.section == 1){
             
             //Pass on the index to pass on which language pair should be adjusted
             

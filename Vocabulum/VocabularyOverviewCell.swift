@@ -10,7 +10,7 @@ import UIKit
 
 class VocabularyOverviewCell: UITableViewCell {
     
-    @IBOutlet weak var nativeWord: UILabel!
-    @IBOutlet weak var translation: UILabel!
+    @IBOutlet var nativeWord: UILabel!
+    @IBOutlet var translation: UILabel!
     
 }

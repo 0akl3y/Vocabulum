@@ -7,31 +7,53 @@
 //
 
 import UIKit
+import CoreData
 
-class SelectLangTableViewController: UITableViewController {
+class SelectLangTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YandexClientDelegate {
+    
     
     weak var currentLanguagePairSetting: LanguagePair?
     @IBOutlet var selectLangTableView: UITableView!
 
     //Refers to the indx previously selected in the Table View
     var selectedIndx: Int?
-    var allLanguageCodes: [String] {
+    
+    var context:NSManagedObjectContext {
         
-        return NSLocale.availableLocaleIdentifiers().sort()
+        return CoreDataStack.sharedObject().managedObjectContext!
+    
+    }
+
+    var languageFetchRequest = NSFetchRequest(entityName: "Language")
+    
+    var allLanguages:[Language]?
+    
+    var yandexClient: YandexClient{
+        
+        return YandexClient.sharedObject()
     
     }
     
-    var allLanguageStrings: [String] {
-        
-        let result = self.allLanguageCodes.map({(lang) -> String in
-            
-            "\(NSLocale(localeIdentifier: lang).displayNameForKey(NSLocaleIdentifier, value: lang)!) (\(lang)) "
-            
-        })
-        
-        return result
-    }
     
+    override func viewWillAppear(animated: Bool) {
+
+        
+        do {
+            
+            if let languages = try self.context.executeFetchRequest(self.languageFetchRequest) as? [Language]{
+                c
+                self.allLanguages = languages
+                
+            }
+            
+        }
+            
+        catch {
+            
+            print("Failed to fetch languages")
+        }
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,29 +61,33 @@ class SelectLangTableViewController: UITableViewController {
         selectLangTableView.dataSource = self
         
     }
+    
 
     // MARK: - Table view data source
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         
-        return self.allLanguageCodes.count
+        return self.allLanguages!.count
     }
 
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("languageCell", forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCellWithIdentifier("LanguageCell", forIndexPath: indexPath)
         
-        cell.textLabel?.text = self.allLanguageStrings[indexPath.row]
+        let currentLanguage = self.allLanguages![indexPath.row]
+        let currentLanguageTitle = currentLanguage.languageName
+        
+        cell.textLabel?.text = currentLanguageTitle
 
         return cell
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let selectedLanguage = self.allLanguageCodes[indexPath.row]
+        let selectedLanguage = self.allLanguages![indexPath.row].langCode!
         if(self.selectedIndx == 0){
             
             self.currentLanguagePairSetting?.nativeLanguageID = selectedLanguage
@@ -76,6 +102,15 @@ class SelectLangTableViewController: UITableViewController {
         
         self.navigationController!.popToRootViewControllerAnimated(true)
                 
+    }
+    
+    
+    //MARK: - YandexClientDelegate methods
+    
+    func didFetchAllLanguages(){
+        
+        self.selectLangTableView.reloadData()
+    
     }
     
 }

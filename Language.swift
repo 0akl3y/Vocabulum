@@ -26,7 +26,7 @@ class Language: NSManagedObject {
     
     init(langCode:String){
         
-        let entityDescription = NSEntityDescription.entityForName("Lesson", inManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
+        let entityDescription = NSEntityDescription.entityForName("Language", inManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
         
         super.init(entity: entityDescription!, insertIntoManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
         

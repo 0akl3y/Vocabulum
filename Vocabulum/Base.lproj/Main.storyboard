@@ -532,7 +532,7 @@
         <!--Select Language-->
         <scene sceneID="8Po-0j-ABH">
             <objects>
-                <viewController id="oUH-Hp-N2l" sceneMemberID="viewController">
+                <viewController id="oUH-Hp-N2l" customClass="SelectLangTableViewController" customModule="Vocabulum" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Fm2-9N-Qz8"/>
                         <viewControllerLayoutGuide type="bottom" id="HJW-fc-aOG"/>
@@ -547,32 +547,32 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" allowsMultipleSelection="YES" allowsMultipleSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WxJ-gc-Bmf">
-                                <rect key="frame" x="0.0" y="88" width="320" height="340"/>
+                                <rect key="frame" x="0.0" y="88" width="320" height="291"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="STY-n0-3an" detailTextLabel="oEe-4n-gG1" style="IBUITableViewCellStyleValue1" id="R7v-ms-qBO">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LanguageCell" textLabel="STY-n0-3an" detailTextLabel="oEe-4n-gG1" style="IBUITableViewCellStyleSubtitle" id="R7v-ms-qBO">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" tableViewCell="R7v-ms-qBO" id="aEH-rN-HUg">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="日本語　(ja-JA)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="STY-n0-3an">
-                                                    <rect key="frame" x="15" y="12" width="113" height="20"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Japanese" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="STY-n0-3an">
+                                                    <rect key="frame" x="15" y="5" width="70" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="🇯🇵" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oEe-4n-gG1">
-                                                    <rect key="frame" x="284" y="12" width="21" height="20"/>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="日本語" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oEe-4n-gG1">
+                                                    <rect key="frame" x="15" y="25" width="33" height="14"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -611,6 +611,7 @@
                     <navigationItem key="navigationItem" title="Select Language" id="E7N-ie-Sjl"/>
                     <connections>
                         <outlet property="searchDisplayController" destination="bZT-Ra-Dvb" id="glR-ls-Q7I"/>
+                        <outlet property="selectLangTableView" destination="WxJ-gc-Bmf" id="byE-Sb-xTN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAJ-wQ-s9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -623,7 +624,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="1743" y="-567"/>
+            <point key="canvasLocation" x="1743" y="-563"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="2aP-E6-xYf">

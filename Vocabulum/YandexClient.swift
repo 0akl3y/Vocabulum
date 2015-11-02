@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 
 protocol YandexClientDelegate {
@@ -17,39 +18,103 @@ protocol YandexClientDelegate {
 
 class YandexClient: SimpleNetworking {
     
-    var isFetching = false
-    var delegate:YandexClientDelegate?
-    var languageModels:Set<Language>?
-    
-    var languageRelationDictionary: [String:Set<String>]?
-    
-    var languageCodes:[String]?
-    
     let YANDEX_LANG_URL = "https://dictionary.yandex.net/api/v1/dicservice.json/getLangs"
     let API_KEY = "dict.1.1.20150819T191226Z.b8b1f773ba67a7bb.cd98fb0bfda9e8bcf0c44e00b77f3d3f6860c2e9"
     
+    var isFetching = false
+    var delegate:YandexClientDelegate?
+    var fetchedLanguages:[Language]?
+    
+    var langCodeLanguageMapping = [String:Language]()
+    
+    var currentFetchRequest:NSFetchRequest?
+    var context:NSManagedObjectContext {
+        
+        return CoreDataStack.sharedObject().managedObjectContext!
+    }
+    var languageCodes:[String]?
     
     
+    class func sharedObject() -> YandexClient {
+        
+        struct sharedInstance {
+            
+            static var sharedObject = YandexClient()
+            
+        }
+        
+        return sharedInstance.sharedObject
+        
+    }
     
+    
+    func getPersistedLanguages(){
+        
+        //get the persisted language models from store.
+        self.currentFetchRequest = NSFetchRequest(entityName: "Language")
+        
+        //var fetchCountError: NSError? = nil
+        
+        //if(self.context.countForFetchRequest(self.currentFetchRequest!, error: &fetchCountError) > 0){
+        
+            
+            do {
+                
+                if let languages = try self.context.executeFetchRequest(self.currentFetchRequest!) as? [Language]{
+                    
+                    self.fetchedLanguages = languages
+                    
+                }
+                
+            }
+                
+            catch {
+                
+                print("Failed to fetch languages")
+            }
+        
+        //}
+        
+    }
+    
+    func checkCollectionForLanguageCode<T: SequenceType>(collection: T?, langCode:String) -> Bool{
+        
+        if let currentCollection = collection {
+            
+            return currentCollection.contains({ (element) -> Bool in
+                
+                let language = element as! Language
+                return language.langCode == langCode
+            })
+        
+        }
+        
+        return false
+    }
+    
+
     func fetchAvailableLanguages(){
+        
+        self.isFetching = true
+        
+        self.getPersistedLanguages()
         
         self.sendGETRequest(YANDEX_LANG_URL, GETData: ["key" : API_KEY], headerValues: nil) { (result, error) -> Void in
             //response: ["ru-ru", "ru-en", "ru-pl",.etc...]
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 
-                var parsedLanguageList:[String]
-                
-                
+                var parsedLanguageList:[String]?
                 
                 do {
-                    parsedLanguageList = try NSJSONSerialization.JSONObjectWithData(result!, options: NSJSONReadingOptions.MutableLeaves) as! [String]
+                    parsedLanguageList = try NSJSONSerialization.JSONObjectWithData(result!, options: NSJSONReadingOptions.MutableLeaves) as? [String]
                 } catch let error as NSError {
                 
-                    print(error)
+                    print("There was an error parsing the JSON response \(error)")
+                    parsedLanguageList = nil
                 }
                 
-                for langPair in parsedLanguageList {
+                for langPair in parsedLanguageList! {
                     
                     //Process the string
                     
@@ -58,40 +123,53 @@ class YandexClient: SimpleNetworking {
                     
                     for idx in 0...languageStrings.count - 1 {
                         
-                        if((self.languageRelationDictionary?.keys.contains({ (element: String) -> Bool in
-                            element == languageStrings[idx]
-                        })) == false){
                             
-                            self.languageRelationDictionary![languageStrings[idx]]! = Set<String>()
-                            self.languageRelationDictionary![languageStrings[idx]]!.insert(languageStrings[(idx + 1) % 2])
+                        if(!self.checkCollectionForLanguageCode(self.fetchedLanguages, langCode: languageStrings[idx])){
+                            
+                            //language is not yet in store
+                            
+                            let newLanguage = Language(langCode: languageStrings[idx])
+                            self.langCodeLanguageMapping[languageStrings[idx]] = newLanguage
+                            
+                            if(idx == 1){ //Make sure both languages already exist before adding a relation
+                                
+                                let sourceLang = languageStrings[0]
+                                newLanguage.addAvailabTranslation(self.langCodeLanguageMapping[sourceLang]!)
+                            }
                             
                         }
                         
-                        else {
-                            self.languageRelationDictionary![languageStrings[idx]]!.insert(languageStrings[(idx + 1) % 2])
+                        else{
+                            
+                            if(idx == 1){
+                                
+                                let currentLangString = languageStrings[idx]
+                                let currentLang = self.langCodeLanguageMapping[currentLangString]
+                                
+                                let otherLangString = languageStrings[0]
+                                
+                                if(!self.checkCollectionForLanguageCode(currentLang!.availableTranslations!, langCode: otherLangString)){
+                                    
+                                    let otherLang = self.langCodeLanguageMapping[otherLangString]
+                                    currentLang?.addAvailabTranslation(otherLang!)
+                                    
+                                }
+                            
+                            }
                         }
+                
+                
                     }
+                    
                 }
                 
-                
-                for key in self.languageRelationDictionary!.keys {
-                    
-                    let newLanguage = Language(langCode: key)
-                    
-                    newLanguage.addAvailableTranslationSet(self.languageRelationDictionary![key])
-                
-                
-                }
-                
-                self.delegate?.didFetchAllLanguages()
-                
-            })
-            
-            
-            
+            self.isFetching = false
+            self.delegate?.didFetchAllLanguages()})
+            CoreDataStack.sharedObject().saveContext()
         }
     }
     
+    /*
     func getVocabularyForWord(word:String, completion:(translation:String?, error:NSError?) -> Void){
         
         let requestData = ["key" : apiKey, "lang" : languageCombination, "text" :  word]
@@ -114,5 +192,6 @@ class YandexClient: SimpleNetworking {
         }
     
     }
+ */
    
 }

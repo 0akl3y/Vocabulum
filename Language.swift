@@ -18,6 +18,7 @@ class Language: NSManagedObject {
     @NSManaged var langCode: String?
     @NSManaged var availableTranslations: NSMutableSet?
     let regionID = "en"
+    var translatedLanguageName:String?
     
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
@@ -37,7 +38,9 @@ class Language: NSManagedObject {
         
         //Set the language which name should be displayed (in the users language)
         self.languageName = locale.displayNameForKey(NSLocaleIdentifier, value: self.langCode!)
-
+        
+        let regionalLocale = (NSLocale(localeIdentifier: self.langCode!))
+        self.translatedLanguageName = regionalLocale.displayNameForKey(NSLocaleIdentifier, value: self.langCode!)
     }
 
 }

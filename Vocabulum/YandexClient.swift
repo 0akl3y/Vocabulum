@@ -50,8 +50,10 @@ class YandexClient: SimpleNetworking {
         //get the persisted language models from store.
         self.currentFetchRequest = NSFetchRequest(entityName: "Language")
         let entityDescription = NSEntityDescription.entityForName("Language", inManagedObjectContext: self.context)
+        let sortDescriptior = NSSortDescriptor(key: "languageName", ascending: true)
         
         self.currentFetchRequest?.entity = entityDescription
+        self.currentFetchRequest?.sortDescriptors = [sortDescriptior]
         
             do {
                 

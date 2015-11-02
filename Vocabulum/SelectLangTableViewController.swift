@@ -36,6 +36,12 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
     
     
     override func viewWillAppear(animated: Bool) {
+        
+        let entityDescription = NSEntityDescription.entityForName("Language", inManagedObjectContext: self.context)
+        let sortDescriptior = NSSortDescriptor(key: "languageName", ascending: true)
+        
+        self.languageFetchRequest.entity = entityDescription
+        self.languageFetchRequest.sortDescriptors = [sortDescriptior]
 
         
         do {
@@ -80,6 +86,7 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         let currentLanguageTitle = currentLanguage.languageName
         
         cell.textLabel?.text = currentLanguageTitle
+        cell.detailTextLabel?.text = currentLanguage.translatedLanguageName!
 
         return cell
     }

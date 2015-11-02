@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		8F03FB1E1BD3D9FB00DA4B96 /* BookOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F03FB1D1BD3D9FB00DA4B96 /* BookOverviewCell.swift */; };
-		8F0618071BE5657F00E7F868 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0618051BE5657F00E7F868 /* Language.swift */; settings = {ASSET_TAGS = (); }; };
-		8F06180D1BE56E7800E7F868 /* YandexClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F06180C1BE56E7800E7F868 /* YandexClient.swift */; settings = {ASSET_TAGS = (); }; };
-		8F06180F1BE56E8800E7F868 /* SimpleNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F06180E1BE56E8800E7F868 /* SimpleNetworking.swift */; settings = {ASSET_TAGS = (); }; };
-		8F0618111BE59C9B00E7F868 /* Language+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0618101BE59C9B00E7F868 /* Language+CoreData.swift */; settings = {ASSET_TAGS = (); }; };
-		8F1AECB31BE1788700C04F64 /* VocabularyOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1AECB21BE1788700C04F64 /* VocabularyOverviewCell.xib */; settings = {ASSET_TAGS = (); }; };
-		8F1AECB51BE17B9100C04F64 /* SearchResultsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1AECB41BE17B9100C04F64 /* SearchResultsTableVC.swift */; settings = {ASSET_TAGS = (); }; };
+		8F0618071BE5657F00E7F868 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0618051BE5657F00E7F868 /* Language.swift */; };
+		8F06180D1BE56E7800E7F868 /* YandexClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F06180C1BE56E7800E7F868 /* YandexClient.swift */; };
+		8F06180F1BE56E8800E7F868 /* SimpleNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F06180E1BE56E8800E7F868 /* SimpleNetworking.swift */; };
+		8F0618111BE59C9B00E7F868 /* Language+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0618101BE59C9B00E7F868 /* Language+CoreData.swift */; };
+		8F1AECB31BE1788700C04F64 /* VocabularyOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1AECB21BE1788700C04F64 /* VocabularyOverviewCell.xib */; };
+		8F1AECB51BE17B9100C04F64 /* SearchResultsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1AECB41BE17B9100C04F64 /* SearchResultsTableVC.swift */; };
 		8F1D067A1BA6757E000A8575 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1D06791BA6757E000A8575 /* AppDelegate.swift */; };
 		8F1D067D1BA6757E000A8575 /* Vocabulum.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F1D067B1BA6757E000A8575 /* Vocabulum.xcdatamodeld */; };
 		8F1D067F1BA6757E000A8575 /* SetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1D067E1BA6757E000A8575 /* SetsViewController.swift */; };
@@ -238,7 +238,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = Eichler;
 				TargetAttributes = {
 					8F1D06731BA6757E000A8575 = {
@@ -379,6 +379,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -445,6 +446,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Vocabulum/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eichler.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -456,6 +458,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Vocabulum/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eichler.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -475,6 +478,7 @@
 				);
 				INFOPLIST_FILE = VocabulumTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eichler.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vocabulum.app/Vocabulum";
 			};
@@ -490,6 +494,7 @@
 				);
 				INFOPLIST_FILE = VocabulumTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eichler.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Vocabulum.app/Vocabulum";
 			};

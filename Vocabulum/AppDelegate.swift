@@ -14,17 +14,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var yandexClient: YandexClient {
-        
-        return YandexClient.sharedObject()
-    
-    }
+
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        YandexClient.sharedObject().fetchAvailableLanguages()
         
-        yandexClient.fetchAvailableLanguages()
         return true
     }
 

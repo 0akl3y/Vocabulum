@@ -41,7 +41,6 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         do {
             
             if let languages = try self.context.executeFetchRequest(self.languageFetchRequest) as? [Language]{
-                c
                 self.allLanguages = languages
                 
             }

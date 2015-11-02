@@ -28,10 +28,7 @@ class YandexClient: SimpleNetworking {
     var langCodeLanguageMapping = [String:Language]()
     
     var currentFetchRequest:NSFetchRequest?
-    var context:NSManagedObjectContext {
-        
-        return CoreDataStack.sharedObject().managedObjectContext!
-    }
+    var context:NSManagedObjectContext = CoreDataStack.sharedObject().managedObjectContext!
     var languageCodes:[String]?
     
     
@@ -52,17 +49,16 @@ class YandexClient: SimpleNetworking {
         
         //get the persisted language models from store.
         self.currentFetchRequest = NSFetchRequest(entityName: "Language")
+        let entityDescription = NSEntityDescription.entityForName("Language", inManagedObjectContext: self.context)
         
-        //var fetchCountError: NSError? = nil
+        self.currentFetchRequest?.entity = entityDescription
         
-        //if(self.context.countForFetchRequest(self.currentFetchRequest!, error: &fetchCountError) > 0){
-        
-            
             do {
                 
                 if let languages = try self.context.executeFetchRequest(self.currentFetchRequest!) as? [Language]{
                     
                     self.fetchedLanguages = languages
+                    self.getDictionaryOfExistingLanguages()
                     
                 }
                 
@@ -90,6 +86,20 @@ class YandexClient: SimpleNetworking {
         }
         
         return false
+    }
+    
+    func getDictionaryOfExistingLanguages(){
+        
+        if let languages = self.fetchedLanguages {
+            
+            for entity in languages {
+                
+                let key = entity.langCode
+                self.langCodeLanguageMapping[key!] = entity
+                
+            }
+        
+        }
     }
     
 
@@ -131,6 +141,8 @@ class YandexClient: SimpleNetworking {
                             let newLanguage = Language(langCode: languageStrings[idx])
                             self.langCodeLanguageMapping[languageStrings[idx]] = newLanguage
                             
+                            self.fetchedLanguages!.append(newLanguage)
+                            
                             if(idx == 1){ //Make sure both languages already exist before adding a relation
                                 
                                 let sourceLang = languageStrings[0]
@@ -141,6 +153,7 @@ class YandexClient: SimpleNetworking {
                         
                         else{
                             
+                            
                             if(idx == 1){
                                 
                                 let currentLangString = languageStrings[idx]
@@ -148,7 +161,7 @@ class YandexClient: SimpleNetworking {
                                 
                                 let otherLangString = languageStrings[0]
                                 
-                                if(!self.checkCollectionForLanguageCode(currentLang!.availableTranslations!, langCode: otherLangString)){
+                                if(!self.checkCollectionForLanguageCode(currentLang!.availableTranslations, langCode: otherLangString)){
                                     
                                     let otherLang = self.langCodeLanguageMapping[otherLangString]
                                     currentLang?.addAvailabTranslation(otherLang!)
@@ -164,8 +177,11 @@ class YandexClient: SimpleNetworking {
                 }
                 
             self.isFetching = false
-            self.delegate?.didFetchAllLanguages()})
+            self.delegate?.didFetchAllLanguages()
             CoreDataStack.sharedObject().saveContext()
+            
+            })
+            
         }
     }
     

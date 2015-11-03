@@ -20,6 +20,10 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     @IBOutlet var vocabularyTableView: UITableView!
     var vocabularyController: NSFetchedResultsController {
         
+        if _fetchedResultsController != nil {
+            return _vocabularyController
+        }
+        
         let request = NSFetchRequest()
         let sortDescriptor = NSSortDescriptor(key: "word", ascending: false)
         let sortDescriptors = [sortDescriptor]
@@ -46,9 +50,13 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.sharedObject().managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
         
+        fetchedResultsController.delegate = self
+        _vocabularyController.delegate = fetchedResultsController
+        
+        
         var error:NSError? = nil
         do {
-            try fetchedResultsController.performFetch()
+            try _vocabularyController.performFetch()
         } catch let error1 as NSError {
             error = error1
         }
@@ -59,9 +67,7 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
             abort()
         }
         
-        fetchedResultsController.delegate = self
-        
-        return fetchedResultsController
+        return _vocabularyController
     
     }
     override func viewDidLoad() {
@@ -91,6 +97,7 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         self.vocabularyTableView.tableHeaderView?.hidden = false
         
         self.searchBar.delegate = self
+        self.vocabularyController.delegate = self
 
     }
     
@@ -152,7 +159,23 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     }
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        
+        if editingStyle == .Delete {
+            let context = self.vocabularyController.managedObjectContext
+            
+            let wordToDelete = self.vocabularyController.objectAtIndexPath(indexPath) as! Word
+            
+            context.deleteObject(wordToDelete)
+            
+            var error: NSError? = nil
+            do {
+                try context.save()
+            } catch let error1 as NSError {
+                error = error1
+                
+                print(error)
+                abort()
+            }
+        }
     }
     override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
 
@@ -194,6 +217,8 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     }
     
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+        
+        self.vocabularyTableView.setNeedsDisplay()
         switch type {
         case .Insert:
             self.vocabularyTableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)

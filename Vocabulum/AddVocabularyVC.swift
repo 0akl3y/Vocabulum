@@ -11,7 +11,6 @@ import CoreData
 
 class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
     
-    
     var searchBar: UISearchBar!
     var isSearchMode = false
     var standardPredicate:NSPredicate?
@@ -20,8 +19,8 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     @IBOutlet var vocabularyTableView: UITableView!
     var vocabularyController: NSFetchedResultsController {
         
-        if _fetchedResultsController != nil {
-            return _vocabularyController
+        if _vocabularyController != nil {
+            return _vocabularyController!
         }
         
         let request = NSFetchRequest()
@@ -33,13 +32,11 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         if(!isSearchMode){
             
             standardPredicate = NSPredicate(format: ("(wordToLesson.title like %@) AND (wordToLesson.dateAdded == %@)"), self.relatedLesson!.title, self.relatedLesson!.dateAdded )
-        
         }
         
         else{
             
             standardPredicate = NSPredicate(format: "(wordToLesson.title like %@) AND (wordToLesson.dateAdded == %@) AND ((word contains %@) OR (translation contains %@))", self.relatedLesson!.title, self.relatedLesson!.dateAdded, self.searchBar.text!, self.searchBar.text!)
-            
         }
         
         let entity = NSEntityDescription.entityForName("Word", inManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
@@ -51,12 +48,12 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.sharedObject().managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
         
         fetchedResultsController.delegate = self
-        _vocabularyController.delegate = fetchedResultsController
+        _vocabularyController = fetchedResultsController
         
         
         var error:NSError? = nil
         do {
-            try _vocabularyController.performFetch()
+            try _vocabularyController!.performFetch()
         } catch let error1 as NSError {
             error = error1
         }
@@ -67,9 +64,12 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
             abort()
         }
         
-        return _vocabularyController
+        return _vocabularyController!
     
     }
+    
+    var _vocabularyController:NSFetchedResultsController? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         vocabularyTableView.delegate = self
@@ -79,7 +79,6 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         
         let addVocButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "insertNewWord:")
         let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancel:")
-        
         
         let editButton = self.editButtonItem()
         
@@ -150,9 +149,10 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let nib = UINib(nibName: "VocabularyOverviewCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: "vocCell") 
-        let cell = tableView.dequeueReusableCellWithIdentifier("vocCell") as! VocabularyOverviewCell
+        //let nib = UINib(nibName: "VocabularyOverviewCell", bundle: nil)
+        //tableView.registerNib(nib, forCellReuseIdentifier: "vocCell")
+
+        let cell = tableView.dequeueReusableCellWithIdentifier("VocabularyCell") as! VocabularyOverviewCell
         
         configureCell(cell, atIndexPath: indexPath)
         return cell
@@ -177,9 +177,8 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
             }
         }
     }
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-
-    }
+    
+   
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         
@@ -190,12 +189,11 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         vocabularyCell.nativeWord!.text = (currentObject.valueForKey("word")!.description)
         vocabularyCell.translation!.text = (currentObject.valueForKey("translation")!.description)
         
-        if(indexPath.row % 2 == 0){
+        /*if(indexPath.row % 2 == 0){
             
             cell.backgroundColor = UIColor(red: 0.697, green: 0.887, blue: 0.955, alpha: 1.000)
 
-        }
-
+        }*/
     }
     
     //MARK:- Controller Delegate Methoden
@@ -224,6 +222,8 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
             self.vocabularyTableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
         case .Delete:
             self.vocabularyTableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+
+            
         case .Update:
             self.configureCell(self.vocabularyTableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
         case .Move:
@@ -238,11 +238,21 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     
     //MARK:- Searchbar Delegate Methoden
     
+    
+    func cleanAndRefetchResults(){
+        
+        self._vocabularyController = nil
+        NSFetchedResultsController.deleteCacheWithName("Master")
+        
+        self.vocabularyTableView.reloadData()
+        self.vocabularyTableView.setNeedsDisplay()
+    }
+    
+    
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
 
         self.isSearchMode = true
-        self.vocabularyTableView.reloadData()
-        self.vocabularyTableView.setNeedsDisplay()
+        self.cleanAndRefetchResults()
         
     }
     
@@ -255,7 +265,7 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
         
         self.isSearchMode = false
-        self.vocabularyTableView.reloadData()
-        self.vocabularyTableView.setNeedsDisplay()
+        self.cleanAndRefetchResults()
+ 
     }
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="VocabularyOverviewCell" customClass="VocabularyOverviewCell" customModule="Vocabulum" customModuleProvider="target"/>
@@ -59,10 +59,6 @@
                     <exclude reference="C26-Wm-clm"/>
                 </mask>
             </variation>
-            <connections>
-                <outlet property="nativeWord" destination="DO8-Jp-qTj" id="ecQ-53-Sif"/>
-                <outlet property="translation" destination="rik-a9-XMc" id="ntC-WE-0ny"/>
-            </connections>
             <point key="canvasLocation" x="168" y="73"/>
         </view>
     </objects>

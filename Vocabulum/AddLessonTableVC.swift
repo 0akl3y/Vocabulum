@@ -25,7 +25,12 @@ class AddLessonTableVC: UITableViewController, UITextFieldDelegate {
         
         self.lessonTitle.text = self.currentLesson?.title
         self.lessonDescription.text = self.currentLesson?.lessonDescription
-        self.assignedLanguagePair = self.currentLesson?.lessonToLanguage
+        
+        if (self.currentLesson != nil){
+            //if the lesson does not yet exist, the assignedLanguagePair is passed directly
+            
+            self.assignedLanguagePair = self.currentLesson?.lessonToLanguage
+        }
         
         self.lessonTitle.delegate = self
         self.lessonDescription.delegate = self

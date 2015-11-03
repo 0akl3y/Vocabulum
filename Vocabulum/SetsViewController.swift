@@ -95,8 +95,6 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
                     targetVC.navigationItem.title = "Edit Lesson"
             
                 }
-                
-            
             
             case "editVocabulary":
             

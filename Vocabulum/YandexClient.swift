@@ -112,7 +112,14 @@ class YandexClient: SimpleNetworking {
         self.getPersistedLanguages()
         
         self.sendGETRequest(YANDEX_LANG_URL, GETData: ["key" : API_KEY], headerValues: nil) { (result, error) -> Void in
-            //response: ["ru-ru", "ru-en", "ru-pl",.etc...]
+            
+            
+            if(error != nil){
+                
+                print("Internet connection could not be etablished, continuing in offline mode: \(error)")
+                return
+            }
+            
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 

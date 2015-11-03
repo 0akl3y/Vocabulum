@@ -9,10 +9,10 @@
 import UIKit
 import CoreData
 
-class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
+class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate, UISearchBarDelegate {
     
     
-    @IBOutlet var searchBar: UISearchBar!
+    var searchBar: UISearchBar!
     var isSearchMode = false
     var standardPredicate:NSPredicate?
     
@@ -74,8 +74,21 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         let addVocButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "insertNewWord:")
         let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancel:")
         
+        
+        let editButton = self.editButtonItem()
+        
         self.navigationItem.rightBarButtonItem = addVocButton
         self.navigationItem.leftBarButtonItem = cancelButton
+        
+        self.navigationItem.leftBarButtonItems = [editButton, cancelButton]
+        
+        self.searchBar = UISearchBar(frame: CGRectMake(0,0,self.vocabularyTableView.frame.size.width,0))
+        self.searchBar.sizeToFit()
+        
+        self.searchBar.showsCancelButton = true
+        
+        self.vocabularyTableView.tableHeaderView = searchBar
+        self.vocabularyTableView.tableHeaderView?.hidden = false
         
         self.searchBar.delegate = self
 
@@ -124,20 +137,24 @@ class AddVocabularyVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     //MARK:- TableView Delegate and Data Source
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.vocabularyController.fetchedObjects!.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let nib = UINib(nibName: "VocabularyOverviewCell", bundle: nil)
         tableView.registerNib(nib, forCellReuseIdentifier: "vocCell") 
         let cell = tableView.dequeueReusableCellWithIdentifier("vocCell") as! VocabularyOverviewCell
+        
         configureCell(cell, atIndexPath: indexPath)
         return cell
     }
     
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+    }
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
 
     }
     

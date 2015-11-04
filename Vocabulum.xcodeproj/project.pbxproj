@@ -23,6 +23,8 @@
 		8F1D06891BA6757E000A8575 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1D06871BA6757E000A8575 /* LaunchScreen.xib */; };
 		8F1D06951BA6757E000A8575 /* VocabulumTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1D06941BA6757E000A8575 /* VocabulumTests.swift */; };
 		8F1D069F1BA676CC000A8575 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1D069E1BA676CC000A8575 /* CoreDataStack.swift */; };
+		8F20261B1BE9FC0400BCC4A7 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F20261A1BE9FC0400BCC4A7 /* Protocols.swift */; };
+		8F20261D1BE9FFD800BCC4A7 /* CustomLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F20261C1BE9FFD800BCC4A7 /* CustomLanguage.swift */; };
 		8F44B1621BC30A6F00E29377 /* VocabularyOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F44B1601BC30A6F00E29377 /* VocabularyOverviewCell.swift */; };
 		8FEC37421BD69446006CA772 /* AnimationKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC37411BD69446006CA772 /* AnimationKit.swift */; };
 		8FEC6FFF1BAF3D5900C50A91 /* AddSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC6FFE1BAF3D5900C50A91 /* AddSetViewController.swift */; };
@@ -67,6 +69,8 @@
 		8F1D06931BA6757E000A8575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F1D06941BA6757E000A8575 /* VocabulumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabulumTests.swift; sourceTree = "<group>"; };
 		8F1D069E1BA676CC000A8575 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = Vocabulum/CoreDataStack.swift; sourceTree = "<group>"; };
+		8F20261A1BE9FC0400BCC4A7 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		8F20261C1BE9FFD800BCC4A7 /* CustomLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLanguage.swift; sourceTree = "<group>"; };
 		8F44B1601BC30A6F00E29377 /* VocabularyOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VocabularyOverviewCell.swift; sourceTree = "<group>"; };
 		8FEC37411BD69446006CA772 /* AnimationKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationKit.swift; sourceTree = "<group>"; };
 		8FEC6FFE1BAF3D5900C50A91 /* AddSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSetViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +153,7 @@
 				8F1D06871BA6757E000A8575 /* LaunchScreen.xib */,
 				8F1D067B1BA6757E000A8575 /* Vocabulum.xcdatamodeld */,
 				8F1D06771BA6757E000A8575 /* Supporting Files */,
+				8F20261A1BE9FC0400BCC4A7 /* Protocols.swift */,
 			);
 			path = Vocabulum;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 		8FF33EA41BA95B390072B3F8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8F20261C1BE9FFD800BCC4A7 /* CustomLanguage.swift */,
 				8F0618051BE5657F00E7F868 /* Language.swift */,
 				8F0618101BE59C9B00E7F868 /* Language+CoreData.swift */,
 				8FF33EA21BA95B2A0072B3F8 /* Lesson.swift */,
@@ -296,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F1AECB51BE17B9100C04F64 /* SearchResultsTableVC.swift in Sources */,
+				8F20261B1BE9FC0400BCC4A7 /* Protocols.swift in Sources */,
 				8F0618071BE5657F00E7F868 /* Language.swift in Sources */,
 				8F1D069F1BA676CC000A8575 /* CoreDataStack.swift in Sources */,
 				8F03FB1E1BD3D9FB00DA4B96 /* BookOverviewCell.swift in Sources */,
@@ -308,6 +315,7 @@
 				8FEC6FFF1BAF3D5900C50A91 /* AddSetViewController.swift in Sources */,
 				8FF33EA11BA95B2A0072B3F8 /* LanguagePair.swift in Sources */,
 				8FEC37421BD69446006CA772 /* AnimationKit.swift in Sources */,
+				8F20261D1BE9FFD800BCC4A7 /* CustomLanguage.swift in Sources */,
 				8F44B1621BC30A6F00E29377 /* VocabularyOverviewCell.swift in Sources */,
 				8F06180F1BE56E8800E7F868 /* SimpleNetworking.swift in Sources */,
 				8FF7A2341BBE51AC00B85A50 /* EnterVocabularyTableViewController.swift in Sources */,

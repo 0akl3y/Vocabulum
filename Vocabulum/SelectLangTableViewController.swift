@@ -11,10 +11,9 @@ import CoreData
 
 class SelectLangTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YandexClientDelegate, UISearchBarDelegate {
     
-    
     weak var currentLanguagePairSetting: LanguagePair?
-    @IBOutlet var selectLangTableView: UITableView!
 
+    @IBOutlet var selectLangTableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
     //Refers to the indx previously selected in the Table View
     var selectedIndx: Int?
@@ -73,14 +72,10 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         self.searchBar.delegate = self
         
     }
-    
 
     // MARK: - Table view data source
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        
         
         return self.languagesDataSource.count
     }
@@ -94,22 +89,24 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         let currentLanguageTitle = currentLanguage.languageName
         
         cell.textLabel?.text = currentLanguageTitle
-        cell.detailTextLabel?.text = currentLanguage.translatedLanguageName!
+        cell.detailTextLabel?.text = currentLanguage.translatedLanguageName
 
         return cell
     }
-
+    
+    
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let selectedLanguage = self.languagesDataSource[indexPath.row].langCode!
+        let selectedLanguage = self.languagesDataSource[indexPath.row]
         if(self.selectedIndx == 0){
             
-            self.currentLanguagePairSetting?.nativeLanguageID = selectedLanguage
+            self.currentLanguagePairSetting?.nativeLanguage = selectedLanguage
         }
         
         else {
             
-            self.currentLanguagePairSetting?.trainingLanguageID = selectedLanguage        
+            self.currentLanguagePairSetting?.trainingLanguage = selectedLanguage
         }
         
         self.navigationController!.popToRootViewControllerAnimated(true)
@@ -127,8 +124,9 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         
         self.searchFilteredLanguages = self.allLanguages!.filter({ (element:Language) -> Bool in
-            element.languageName!.containsString(searchText)
+            element.languageName.containsString(searchText)
         })
+        
         
         self.searchMode = true
         self.selectLangTableView.reloadData()
@@ -147,7 +145,6 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         self.searchMode = false
         self.selectLangTableView.reloadData()
         self.selectLangTableView.setNeedsDisplay()
-        
         
     }    
 }

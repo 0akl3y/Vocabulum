@@ -33,13 +33,11 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
         
         if(self.currentLanguagePairSetting == nil){
             
-            self.currentLanguagePairSetting = LanguagePair(title: "DE - EN", nativeLanguageID: "en", trainingLanguageID: "de")
+            //Set a sample language pair
+            
+            self.currentLanguagePairSetting = LanguagePair(title: "Enter Book Name", nativeLanguage: nil, trainingLanguage: nil)
         
         }
-        
-        self.languageA.textLabel!.text = self.currentLanguagePairSetting!.nativeLanguageString
-        self.languageB.textLabel!.text = self.currentLanguagePairSetting!.trainingLanguageString
-        
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

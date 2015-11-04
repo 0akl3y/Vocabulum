@@ -10,14 +10,15 @@
 import Foundation
 import CoreData
 
-class Language: NSManagedObject {
+class Language: NSManagedObject, LanguageObject {
 
 // Insert code here to add functionality to your managed object subclass
     
-    @NSManaged var languageName: String?
-    @NSManaged var langCode: String?
+    @NSManaged var languageName: String
+    @NSManaged var langCode: String
+    @NSManaged var translatedLanguageName:String
+
     @NSManaged var availableTranslations: NSSet?
-    @NSManaged var translatedLanguageName:String?
     
     let regionID = "en"
     
@@ -37,10 +38,10 @@ class Language: NSManagedObject {
         let locale = (NSLocale(localeIdentifier: regionID))
         
         //Set the language which name should be displayed (in the users language)
-        self.languageName = locale.displayNameForKey(NSLocaleIdentifier, value: self.langCode!)
+        self.languageName = locale.displayNameForKey(NSLocaleIdentifier, value: self.langCode)!
         
-        let regionalLocale = (NSLocale(localeIdentifier: self.langCode!))
-        self.translatedLanguageName = regionalLocale.displayNameForKey(NSLocaleIdentifier, value: self.langCode!)
+        let regionalLocale = (NSLocale(localeIdentifier: self.langCode))
+        self.translatedLanguageName = regionalLocale.displayNameForKey(NSLocaleIdentifier, value: self.langCode)!
     }
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rS3-R9-Ivy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="rS3-R9-Ivy">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -191,7 +191,7 @@
                                             <rect key="frame" x="8" y="157" width="304" height="21"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2dL-8I-Tge">
@@ -413,14 +413,14 @@
                                             <rect key="frame" x="18" y="10" width="142" height="23"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4W-MY-rku">
                                             <rect key="frame" x="161" y="10" width="141" height="23"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -751,7 +751,11 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="rTj-Zj-W6c"/>
-                        <barButtonItem title="Select other Language" id="b9h-ER-9Nz"/>
+                        <barButtonItem title="Select other Language" id="b9h-ER-9Nz">
+                            <connections>
+                                <action selector="selectOtherLanguage:" destination="oUH-Hp-N2l" id="UzL-JE-DEG"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="aGE-ap-869"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Select a Language" id="E7N-ie-Sjl"/>
@@ -760,7 +764,7 @@
                         <outlet property="searchBar" destination="CKP-Ld-ieL" id="pRe-r7-Zze"/>
                         <outlet property="searchDisplayController" destination="bZT-Ra-Dvb" id="glR-ls-Q7I"/>
                         <outlet property="selectLangTableView" destination="WxJ-gc-Bmf" id="byE-Sb-xTN"/>
-                        <segue destination="9Du-Ok-ILs" kind="push" id="ly8-EX-dAh"/>
+                        <segue destination="9Du-Ok-ILs" kind="push" identifier="CustomLanguageInput" id="ly8-EX-dAh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fAJ-wQ-s9y" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -775,10 +779,10 @@
             </objects>
             <point key="canvasLocation" x="1742" y="-568"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Custom Language View Controller-->
         <scene sceneID="yQN-w7-b0f">
             <objects>
-                <tableViewController id="9Du-Ok-ILs" sceneMemberID="viewController">
+                <tableViewController id="9Du-Ok-ILs" customClass="CustomLanguageViewController" customModule="Vocabulum" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="bpN-ad-r50">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -825,8 +829,16 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="kZB-Hk-HkR">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="khl-XV-zdC"/>
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="khl-XV-zdC">
+                            <connections>
+                                <action selector="addLanguage:" destination="9Du-Ok-ILs" id="Kcz-SU-udv"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addLanguageButton" destination="khl-XV-zdC" id="Y85-qD-G2w"/>
+                        <outlet property="languageInput" destination="a3E-x4-zhk" id="Irx-Wi-cOT"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="obp-Q8-WHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

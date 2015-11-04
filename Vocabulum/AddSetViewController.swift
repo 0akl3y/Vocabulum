@@ -35,8 +35,7 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
             
             //Set a sample language pair
             
-            self.currentLanguagePairSetting = LanguagePair(title: "Enter Book Name", nativeLanguage: nil, trainingLanguage: nil)
-        
+            self.currentLanguagePairSetting = LanguagePair(title: "Enter Book Name", nativeLanguageString: nil, trainingLanguageString: nil)        
         }
     }
     
@@ -84,7 +83,7 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
         self.currentLanguagePairSetting?.title = self.titleField.text!
         // There should be at least one lesson for each language pair section
         
-        let lesson = Lesson(title: "Untitled", lessonDescription: nil)
+        let lesson = Lesson(title: "Lesson 1", lessonDescription: nil)
         lesson.lessonToLanguage = self.currentLanguagePairSetting!
         
         CoreDataStack.sharedObject().saveContext()

@@ -80,7 +80,6 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         return self.languagesDataSource.count
     }
 
-
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("LanguageCell", forIndexPath: indexPath)
@@ -94,24 +93,26 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         return cell
     }
     
-    
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let selectedLanguage = self.languagesDataSource[indexPath.row]
         if(self.selectedIndx == 0){
             
-            self.currentLanguagePairSetting?.nativeLanguage = selectedLanguage
+            self.currentLanguagePairSetting?.nativeLanguageString = selectedLanguage.languageName
+            self.currentLanguagePairSetting?.nativeLanguageCode = selectedLanguage.langCode
+            
         }
         
         else {
             
-            self.currentLanguagePairSetting?.trainingLanguage = selectedLanguage
+            self.currentLanguagePairSetting?.trainingLanguageString = selectedLanguage.languageName
+            self.currentLanguagePairSetting?.trainingLanguageCode = selectedLanguage.langCode
         }
         
         self.navigationController!.popToRootViewControllerAnimated(true)
                 
     }
+    
     
     //MARK: - YandexClientDelegate methods
     
@@ -146,5 +147,21 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         self.selectLangTableView.reloadData()
         self.selectLangTableView.setNeedsDisplay()
         
+    }
+    
+    @IBAction func selectOtherLanguage(sender: AnyObject) {
+        
+        self.performSegueWithIdentifier("CustomLanguageInput", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if(segue.identifier == "CustomLanguageInput"){
+            
+            let destinationVC = segue.destinationViewController as! CustomLanguageViewController
+            destinationVC.currentLanguagePair = self.currentLanguagePairSetting
+            destinationVC.selectedIndx = self.selectedIndx
+        
+        }
     }    
 }

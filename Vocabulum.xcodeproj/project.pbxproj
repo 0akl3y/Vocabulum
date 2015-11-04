@@ -26,6 +26,7 @@
 		8F20261B1BE9FC0400BCC4A7 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F20261A1BE9FC0400BCC4A7 /* Protocols.swift */; };
 		8F20261D1BE9FFD800BCC4A7 /* CustomLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F20261C1BE9FFD800BCC4A7 /* CustomLanguage.swift */; };
 		8F44B1621BC30A6F00E29377 /* VocabularyOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F44B1601BC30A6F00E29377 /* VocabularyOverviewCell.swift */; };
+		8FE179DF1BEA78DE00AB9CE6 /* CustomLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE179DE1BEA78DE00AB9CE6 /* CustomLanguageViewController.swift */; };
 		8FEC37421BD69446006CA772 /* AnimationKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC37411BD69446006CA772 /* AnimationKit.swift */; };
 		8FEC6FFF1BAF3D5900C50A91 /* AddSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC6FFE1BAF3D5900C50A91 /* AddSetViewController.swift */; };
 		8FEC70011BAF49E700C50A91 /* SelectLangTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC70001BAF49E700C50A91 /* SelectLangTableViewController.swift */; };
@@ -69,9 +70,10 @@
 		8F1D06931BA6757E000A8575 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F1D06941BA6757E000A8575 /* VocabulumTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VocabulumTests.swift; sourceTree = "<group>"; };
 		8F1D069E1BA676CC000A8575 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = Vocabulum/CoreDataStack.swift; sourceTree = "<group>"; };
-		8F20261A1BE9FC0400BCC4A7 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		8F20261A1BE9FC0400BCC4A7 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Protocols.swift; path = Vocabulum/Protocols.swift; sourceTree = "<group>"; };
 		8F20261C1BE9FFD800BCC4A7 /* CustomLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLanguage.swift; sourceTree = "<group>"; };
 		8F44B1601BC30A6F00E29377 /* VocabularyOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VocabularyOverviewCell.swift; sourceTree = "<group>"; };
+		8FE179DE1BEA78DE00AB9CE6 /* CustomLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLanguageViewController.swift; sourceTree = "<group>"; };
 		8FEC37411BD69446006CA772 /* AnimationKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationKit.swift; sourceTree = "<group>"; };
 		8FEC6FFE1BAF3D5900C50A91 /* AddSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSetViewController.swift; sourceTree = "<group>"; };
 		8FEC70001BAF49E700C50A91 /* SelectLangTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectLangTableViewController.swift; sourceTree = "<group>"; };
@@ -146,6 +148,7 @@
 				8FF7A2331BBE51AC00B85A50 /* EnterVocabularyTableViewController.swift */,
 				8FED754F1BBD07D900843A1D /* AddVocabularyVC.swift */,
 				8FEC37411BD69446006CA772 /* AnimationKit.swift */,
+				8FE179DE1BEA78DE00AB9CE6 /* CustomLanguageViewController.swift */,
 				8F0618091BE56D7A00E7F868 /* Networking */,
 				8FF33EA41BA95B390072B3F8 /* Model */,
 				8F1D06821BA6757E000A8575 /* Main.storyboard */,
@@ -153,7 +156,6 @@
 				8F1D06871BA6757E000A8575 /* LaunchScreen.xib */,
 				8F1D067B1BA6757E000A8575 /* Vocabulum.xcdatamodeld */,
 				8F1D06771BA6757E000A8575 /* Supporting Files */,
-				8F20261A1BE9FC0400BCC4A7 /* Protocols.swift */,
 			);
 			path = Vocabulum;
 			sourceTree = "<group>";
@@ -186,6 +188,7 @@
 		8FF33EA41BA95B390072B3F8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8F20261A1BE9FC0400BCC4A7 /* Protocols.swift */,
 				8F20261C1BE9FFD800BCC4A7 /* CustomLanguage.swift */,
 				8F0618051BE5657F00E7F868 /* Language.swift */,
 				8F0618101BE59C9B00E7F868 /* Language+CoreData.swift */,
@@ -308,6 +311,7 @@
 				8F03FB1E1BD3D9FB00DA4B96 /* BookOverviewCell.swift in Sources */,
 				8FEE0C021BB96D0D00B211FC /* AddLessonTableVC.swift in Sources */,
 				8F1D067D1BA6757E000A8575 /* Vocabulum.xcdatamodeld in Sources */,
+				8FE179DF1BEA78DE00AB9CE6 /* CustomLanguageViewController.swift in Sources */,
 				8FED75501BBD07D900843A1D /* AddVocabularyVC.swift in Sources */,
 				8F1D067A1BA6757E000A8575 /* AppDelegate.swift in Sources */,
 				8FF33EA31BA95B2A0072B3F8 /* Lesson.swift in Sources */,

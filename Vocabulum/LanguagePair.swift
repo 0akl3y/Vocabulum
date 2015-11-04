@@ -16,63 +16,42 @@ class LanguagePair: NSManagedObject {
 
     //Relationships
     @NSManaged var languageToLesson: NSOrderedSet
-    @NSManaged var nativeLanguage: Language?
-    @NSManaged var trainingLanguage: Language?
-    
-    //A CustomLanguage object should not be persisted
-    
-    var customNativeLanguageString: String?
-    var customTrainingLanguageString: String?
+
+    @NSManaged var nativeLanguageString: String?
+    @NSManaged var nativeLanguageCode: String?
+
+    @NSManaged var trainingLanguageString: String?
+    @NSManaged var trainingLanguageCode: String?
     
     let localeIdentifier = "en"
-
-    //the full strings for the languages to display in the user interface
-    
-    var nativeLanguageString: String? {
-        
-        if let language = nativeLanguage?.languageName{
-            
-            return language
-        }
-        
-        else{
-
-            return customTrainingLanguageString
-        }
-    }
-    
-    var trainingLanguageString: String? {
-        
-        if let language = trainingLanguage?.languageName{
-            
-            return language
-        }
-            
-        else{
-            
-                return customNativeLanguageString
-        }
-    }
     
     //the language pair identifiers to retrieve words from the Yandex API
     
-    var languagePairID: String {
+    var languagePairID: String? {
         
-        return "\(self.nativeLanguage!.langCode) - \(self.trainingLanguage!.langCode)"
+        if((self.nativeLanguageCode != nil) && self.trainingLanguageCode != nil){
+            
+            return "\(self.nativeLanguageCode!) - \(self.trainingLanguageCode!)"
+        
+        }
+        
+        //If nil is returned it is a custom language
+        return nil
+        
     }
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)
     }
     
-    init(title: String, nativeLanguage:Language?, trainingLanguage:Language?){
+    init(title: String, nativeLanguageString:String?, trainingLanguageString:String?){
         
         let entityDescription = NSEntityDescription.entityForName("LanguagePair", inManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
         
         super.init(entity: entityDescription!, insertIntoManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
         
-        self.nativeLanguage = nativeLanguage
-        self.trainingLanguage = trainingLanguage
+        self.nativeLanguageString = nativeLanguageString
+        self.trainingLanguageString = trainingLanguageString
         self.title = title
         
     }

@@ -65,6 +65,7 @@ class SimpleNetworking: NSObject {
                 request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(bodyData!, options: [])
             } catch let error as NSError {
                 JSONError = error
+                print(error)
                 request.HTTPBody = nil
             }
         

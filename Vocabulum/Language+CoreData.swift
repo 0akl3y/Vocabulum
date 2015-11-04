@@ -13,7 +13,6 @@ extension Language {
         
         let items = self.mutableSetValueForKey("availableTranslations")
         items.addObject(value)
-
     
     }
     
@@ -23,10 +22,7 @@ extension Language {
         let items = self.mutableSetValueForKey("availableTranslations")
         items.unionSet(values)
     
-    
     }
-        
-    
     
     func removeAvailableTranslation(value:Language){
         

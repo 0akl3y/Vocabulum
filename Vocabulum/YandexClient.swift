@@ -97,7 +97,7 @@ class YandexClient: SimpleNetworking {
             for entity in languages {
                 
                 let key = entity.langCode
-                self.langCodeLanguageMapping[key!] = entity
+                self.langCodeLanguageMapping[key] = entity
                 
             }
         

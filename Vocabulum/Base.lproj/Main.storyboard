@@ -719,17 +719,30 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry, no Yandex supported language can be combined with the current selection. Pleases select another language" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bT5-4X-Stq">
+                                <rect key="frame" x="16" y="221" width="288" height="126"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="126" id="wGn-N5-bPA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="bT5-4X-Stq" firstAttribute="centerX" secondItem="5sv-uf-8ce" secondAttribute="centerX" id="7Zl-s0-Vv2"/>
                             <constraint firstAttribute="trailingMargin" secondItem="b4y-hj-wW4" secondAttribute="trailing" id="H6e-bj-PIW"/>
                             <constraint firstItem="b4y-hj-wW4" firstAttribute="top" secondItem="CKP-Ld-ieL" secondAttribute="bottom" id="Iw0-jx-0QC"/>
                             <constraint firstItem="HJW-fc-aOG" firstAttribute="top" secondItem="b4y-hj-wW4" secondAttribute="bottom" id="U9z-98-oSI"/>
                             <constraint firstItem="CKP-Ld-ieL" firstAttribute="centerX" secondItem="5sv-uf-8ce" secondAttribute="centerX" id="WJY-NR-Edc"/>
                             <constraint firstItem="CKP-Ld-ieL" firstAttribute="top" secondItem="Fm2-9N-Qz8" secondAttribute="bottom" id="Ztj-hO-vGA"/>
                             <constraint firstItem="b4y-hj-wW4" firstAttribute="leading" secondItem="5sv-uf-8ce" secondAttribute="leadingMargin" id="dNX-T2-Wqa"/>
+                            <constraint firstItem="bT5-4X-Stq" firstAttribute="centerY" secondItem="5sv-uf-8ce" secondAttribute="centerY" id="mTo-ny-C12"/>
                             <constraint firstItem="CKP-Ld-ieL" firstAttribute="width" secondItem="5sv-uf-8ce" secondAttribute="width" id="wrS-le-2kg"/>
+                            <constraint firstItem="bT5-4X-Stq" firstAttribute="width" secondItem="b4y-hj-wW4" secondAttribute="width" id="zLy-Oc-nBb"/>
                         </constraints>
                     </view>
                     <toolbarItems>
@@ -744,6 +757,7 @@
                     <navigationItem key="navigationItem" title="Select a Language" id="E7N-ie-Sjl"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="noLangAvailable" destination="bT5-4X-Stq" id="PjE-Ok-vc4"/>
                         <outlet property="searchBar" destination="CKP-Ld-ieL" id="pRe-r7-Zze"/>
                         <outlet property="searchDisplayController" destination="bZT-Ra-Dvb" id="glR-ls-Q7I"/>
                         <outlet property="selectLangTableView" destination="b4y-hj-wW4" id="7Lt-8w-gQ9"/>

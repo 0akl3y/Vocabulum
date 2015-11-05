@@ -13,6 +13,7 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
     
     var currentLanguagePairSetting: LanguagePair?
 
+    @IBOutlet var noLangAvailable: UILabel!
     @IBOutlet var selectLangTableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
     //Refers to the indx previously selected in the Table View
@@ -61,6 +62,9 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
     
     override func viewWillAppear(animated: Bool) {
         
+        self.noLangAvailable.hidden = true
+        self.selectLangTableView.alpha = 1
+        
         
         let entityDescription = NSEntityDescription.entityForName("Language", inManagedObjectContext: self.context)
         let sortDescriptior = NSSortDescriptor(key: "languageName", ascending: true)
@@ -73,7 +77,6 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
             if let languages = try self.context.executeFetchRequest(self.languageFetchRequest) as? [Language]{
                 self.allLanguages = languages
                 self.filterNonSupportedLangCombinations()
-        
             }
         }
             
@@ -82,6 +85,16 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
             print("Failed to fetch languages")
         }
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if(self.allLanguages?.count == 0){
+            
+            self.noLangAvailable.hidden = false
+            AnimationKit.fadeInView(self.noLangAvailable)
+            AnimationKit.fadeOutView(self.selectLangTableView)
+            
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -18,7 +18,10 @@ protocol YandexClientDelegate {
 
 class YandexClient: SimpleNetworking {
     
+    
     let YANDEX_LANG_URL = "https://dictionary.yandex.net/api/v1/dicservice.json/getLangs"
+    let YANDEX_DICT_URL = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup"
+    
     let API_KEY = "dict.1.1.20150819T191226Z.b8b1f773ba67a7bb.cd98fb0bfda9e8bcf0c44e00b77f3d3f6860c2e9"
     
     var isFetching = false
@@ -194,29 +197,28 @@ class YandexClient: SimpleNetworking {
         }
     }
     
-    /*
-    func getVocabularyForWord(word:String, completion:(translation:String?, error:NSError?) -> Void){
+
+    func getVocabularyForWord(word:String, languageCombination:String, completion:(translation:String?, error:NSError?) -> Void){
         
-        let requestData = ["key" : apiKey, "lang" : languageCombination, "text" :  word]
+        let requestData = ["key" : API_KEY, "lang" : languageCombination, "text" :  word]
         
         
-        self.sendGETRequest(yandexURL, GETData: requestData, headerValues: nil) { (result, error) -> Void in
+        self.sendGETRequest(YANDEX_DICT_URL, GETData: requestData, headerValues: nil) { (result, error) -> Void in
             
             let parsedJSON = (try! NSJSONSerialization.JSONObjectWithData(result!, options: NSJSONReadingOptions.MutableContainers)) as! [String: AnyObject]
-            
-            
 
             let completeResult = parsedJSON["def"] as! [[String: AnyObject]]
             let translationList = completeResult[0] as [String : AnyObject]
             let directTranslation = translationList["tr"] as! [[String : AnyObject]]
             let translation = directTranslation[0]["text"] as! String
-
             
-            completion(translation: translation,error: error)
-            
-        }
-    
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                
+                completion(translation: translation,error: error)
+                
+            })
+        }    
     }
- */
+
    
 }

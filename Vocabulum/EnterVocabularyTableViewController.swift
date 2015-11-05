@@ -15,6 +15,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
     @IBOutlet var nativeWord: UITextField!
     @IBOutlet var difficultySetting: UISegmentedControl!
     
+    @IBOutlet var yandexButton: UIButton!
     var displayedWord:Word?
     var existingWord:Word?
     
@@ -22,6 +23,12 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
     
     var addVocButton: UIBarButtonItem!
     var cancelButton: UIBarButtonItem!
+    
+    var languageIsSupported:Bool {
+        
+        return (self.lesson?.lessonToLanguage.nativeLanguageCode != "custom") && (self.lesson?.lessonToLanguage.trainingLanguageCode != "custom")
+    
+    }
 
     override func viewDidLoad() {
         
@@ -41,26 +48,37 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
     
     override func viewWillAppear(animated: Bool) {
         
+        self.yandexButton.hidden = !self.languageIsSupported
+        
         if(self.existingWord != nil){
             
             self.translation.text = self.existingWord?.translation
             self.nativeWord.text = self.existingWord?.word
             self.difficultySetting.selectedSegmentIndex = Int((self.existingWord?.difficulty)!)
-        
+            self.navigationItem.title = "Edit Vocabulary"
         }
+        else{
+            self.navigationItem.title = "Add Vocabulary"
+        }
+        self.updateButtonStatus()
     }
     
     override func viewWillDisappear(animated: Bool) {
         self.translation.text = nil
         self.nativeWord.text = nil
         self.difficultySetting.selectedSegmentIndex = WordDifficulty.hard.rawValue
+        self.existingWord = nil
     }
     
     func updateButtonStatus(){
         
         self.addVocButton.enabled = (self.translation.text != nil && self.nativeWord.text != nil)
+        
+        self.yandexButton.enabled = self.nativeWord.text != nil && self.nativeWord.text?.characters.count > 1
     
     }
+    
+    //MARK:- Actions
     
     func save(sender:UIBarButtonItem){
         
@@ -68,9 +86,11 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         //check if no existing word has been passed on to the vc
         
-        if(self.existingWord != nil){
+        if(self.existingWord == nil){
             
             self.displayedWord = Word(word: self.nativeWord.text!, translation: self.translation.text!, difficulty:WordDifficulty(rawValue: self.difficultySetting.selectedSegmentIndex)!)
+            
+            self.displayedWord?.wordToLesson = self.lesson!
         }
         
         else{
@@ -83,7 +103,6 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         CoreDataStack.sharedObject().saveContext()
         
         self.navigationController!.popToRootViewControllerAnimated(true)
-    
     }
     
     func cancel(sender:UIBarButtonItem){
@@ -94,4 +113,17 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
     func textFieldDidEndEditing(textField: UITextField) {
         self.updateButtonStatus()
     }
+    
+    @IBAction func searchYandex(sender: AnyObject) {
+        
+        let searchedWord = self.nativeWord.text
+        let langPairID = self.lesson?.lessonToLanguage.languagePairID
+        
+        YandexClient.sharedObject().getVocabularyForWord(searchedWord!, languageCombination: langPairID!) { (translation, error) -> Void in
+            self.translation.text = translation
+        }
+        
+    }
+    
+    
 }

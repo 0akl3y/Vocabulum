@@ -31,7 +31,7 @@ class LanguagePair: NSManagedObject {
         
         if((self.nativeLanguageCode != nil) && self.trainingLanguageCode != nil){
             
-            return "\(self.nativeLanguageCode!) - \(self.trainingLanguageCode!)"
+            return "\(self.nativeLanguageCode!)-\(self.trainingLanguageCode!)"
         
         }
         

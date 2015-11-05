@@ -103,7 +103,8 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.vocabularyTableView.reloadData()
+        //self.cleanAndRefetchResults()
+    
     }
     
     
@@ -139,8 +140,12 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
         let targetVC = segue.destinationViewController as! EnterVocabularyTableViewController
         targetVC.lesson = self.relatedLesson
+        targetVC.existingWord = self.selectedWord
+        self.selectedWord = nil
+        
     }
     
     //MARK:- TableView Delegate and Data Source
@@ -180,7 +185,7 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         }
     }
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let word = self.vocabularyController.objectAtIndexPath(indexPath) as! Word
         self.selectedWord = word
         self.performSegueWithIdentifier("enterVocabulary", sender: self)

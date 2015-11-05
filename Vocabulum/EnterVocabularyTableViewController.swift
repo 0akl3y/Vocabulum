@@ -16,6 +16,8 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
     @IBOutlet var difficultySetting: UISegmentedControl!
     
     var displayedWord:Word?
+    var existingWord:Word?
+    
     var lesson:Lesson?
     
     var addVocButton: UIBarButtonItem!
@@ -37,9 +39,21 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         self.nativeWord.delegate = self
     }
     
-    
     override func viewWillAppear(animated: Bool) {
         
+        if(self.existingWord != nil){
+            
+            self.translation.text = self.existingWord?.translation
+            self.nativeWord.text = self.existingWord?.word
+            self.difficultySetting.selectedSegmentIndex = Int((self.existingWord?.difficulty)!)
+        
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.translation.text = nil
+        self.nativeWord.text = nil
+        self.difficultySetting.selectedSegmentIndex = WordDifficulty.hard.rawValue
     }
     
     func updateButtonStatus(){
@@ -52,16 +66,25 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         self.updateButtonStatus()
         
-        self.displayedWord = Word(word: self.nativeWord.text!, translation: self.translation.text!, difficulty: WordDifficulty(rawValue: self.difficultySetting.selectedSegmentIndex)!)
+        //check if no existing word has been passed on to the vc
         
-        self.displayedWord?.wordToLesson = self.lesson!
+        if(self.existingWord != nil){
+            
+            self.displayedWord = Word(word: self.nativeWord.text!, translation: self.translation.text!, difficulty:WordDifficulty(rawValue: self.difficultySetting.selectedSegmentIndex)!)
+        }
+        
+        else{
+            
+            self.existingWord?.translation = self.translation.text!
+            self.existingWord?.word = self.nativeWord.text!
+            self.existingWord?.difficulty = Int64(self.difficultySetting.selectedSegmentIndex)
+        }
         
         CoreDataStack.sharedObject().saveContext()
         
         self.navigationController!.popToRootViewControllerAnimated(true)
     
     }
-    
     
     func cancel(sender:UIBarButtonItem){
         
@@ -71,5 +94,4 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
     func textFieldDidEndEditing(textField: UITextField) {
         self.updateButtonStatus()
     }
-
 }

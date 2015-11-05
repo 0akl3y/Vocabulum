@@ -38,5 +38,4 @@ class Word: NSManagedObject {
         self.difficulty = Int64(difficulty.rawValue)
         
     }
-
 }

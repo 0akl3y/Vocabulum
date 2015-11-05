@@ -15,6 +15,8 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     var isSearchMode = false
     var standardPredicate:NSPredicate?
     
+    var selectedWord:Word?
+    
     var relatedLesson:Lesson?
     @IBOutlet var vocabularyTableView: UITableView!
     var vocabularyController: NSFetchedResultsController {
@@ -178,7 +180,12 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         }
     }
     
-   
+    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        let word = self.vocabularyController.objectAtIndexPath(indexPath) as! Word
+        self.selectedWord = word
+        self.performSegueWithIdentifier("enterVocabulary", sender: self)
+    }
+    
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         

@@ -29,6 +29,7 @@ class CustomLanguageViewController: UITableViewController {
         if(self.selectedIndx == 0){
             
             self.currentLanguagePair?.nativeLanguageString = self.languageInput.text!
+            self.currentLanguagePair?.nativeLanguageCode = "custom"
             self.navigationController?.popToRootViewControllerAnimated(true)
             
             
@@ -37,6 +38,7 @@ class CustomLanguageViewController: UITableViewController {
         else {
             
             self.currentLanguagePair?.trainingLanguageString = self.languageInput.text!
+            self.currentLanguagePair?.trainingLanguageCode = "custom"
             self.navigationController?.popToRootViewControllerAnimated(true)
 
         }

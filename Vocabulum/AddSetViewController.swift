@@ -22,6 +22,19 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
 
     @IBOutlet var addSetTableView: UITableView!
     
+    //keep the value if the user reselects an already set language, as the actual language code is set to nil.
+    //when the user pops back from language selection via the back button, the value should be restored
+
+    var previousLanguageCode:String?
+    var previousTrainingCode:String?
+    
+    var previousIsSet:Bool {
+        
+        return (self.previousLanguageCode != nil) || (self.previousTrainingCode != nil)
+    
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.titleField.delegate = self
@@ -34,18 +47,28 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
         if(self.currentLanguagePairSetting == nil){
             
             //Set a sample language pair
-            
             self.currentLanguagePairSetting = LanguagePair(title: "Enter Book Name", nativeLanguageString: nil, trainingLanguageString: nil)        
         }
         
         else{
+            
+            if(self.currentLanguagePairSetting?.nativeLanguageCode == nil){
+                
+                self.currentLanguagePairSetting?.nativeLanguageCode = self.previousLanguageCode
+            }
+            
+            if(self.currentLanguagePairSetting?.trainingLanguageCode == nil){
+                
+                self.currentLanguagePairSetting?.trainingLanguageCode = self.previousTrainingCode
+            }
+            
 
             let nativeLangString:String? = self.currentLanguagePairSetting!.nativeLanguageString
             let trainingLangString:String? = self.currentLanguagePairSetting!.trainingLanguageString
 
             self.languageA.textLabel?.text = nativeLangString != nil ? nativeLangString : ""
             self.languageB.textLabel?.text = trainingLangString != nil ? trainingLangString : ""
-        
+            
         }
         
     }
@@ -70,6 +93,7 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
                 
                 if(self.currentLanguagePairSetting?.nativeLanguageCode != nil){
                     
+                    self.previousLanguageCode = self.currentLanguagePairSetting?.nativeLanguageCode!
                     self.currentLanguagePairSetting?.nativeLanguageCode = nil
                 
                 }
@@ -78,6 +102,7 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
                 
                 if(self.currentLanguagePairSetting?.trainingLanguageCode != nil){
                     
+                    self.previousTrainingCode = self.currentLanguagePairSetting?.trainingLanguageCode!
                     self.currentLanguagePairSetting?.trainingLanguageCode = nil
                     
                 }

@@ -56,24 +56,24 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
                 return lang.langCode == setLanguages[0]})
             )!}
         }
-    
     }
     
     
     override func viewWillAppear(animated: Bool) {
+        
         
         let entityDescription = NSEntityDescription.entityForName("Language", inManagedObjectContext: self.context)
         let sortDescriptior = NSSortDescriptor(key: "languageName", ascending: true)
         
         self.languageFetchRequest.entity = entityDescription
         self.languageFetchRequest.sortDescriptors = [sortDescriptior]
-
         
         do {
             
             if let languages = try self.context.executeFetchRequest(self.languageFetchRequest) as? [Language]{
                 self.allLanguages = languages
                 self.filterNonSupportedLangCombinations()
+        
             }
         }
             
@@ -108,6 +108,8 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         let currentLanguageTitle = currentLanguage.languageName
         
         cell.textLabel?.text = currentLanguageTitle
+        print(cell.textLabel?.text)
+        
         cell.detailTextLabel?.text = currentLanguage.translatedLanguageName
 
         return cell

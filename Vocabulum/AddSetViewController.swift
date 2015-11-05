@@ -37,24 +37,65 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
             
             self.currentLanguagePairSetting = LanguagePair(title: "Enter Book Name", nativeLanguageString: nil, trainingLanguageString: nil)        
         }
+        
+        else{
+
+            let nativeLangString:String? = self.currentLanguagePairSetting!.nativeLanguageString
+            let trainingLangString:String? = self.currentLanguagePairSetting!.trainingLanguageString
+
+            self.languageA.textLabel?.text = nativeLangString != nil ? nativeLangString : ""
+            self.languageB.textLabel?.text = trainingLangString != nil ? trainingLangString : ""
+        
+        }
+        
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         //exclude the title section at the beginning
         
+        print(indexPath.section)
+        
+        
         if(indexPath.section == 1){
-            
             //Pass on the index to pass on which language pair should be adjusted
             
             self.selectedIndx = indexPath.row
-            performSegueWithIdentifier("selectLang", sender: self)
             
+            switch selectedIndx! {
+                
+                //Handle the case if the user changes an already set language, otherwise the filter for available languages will not work
+                
+            case 0:
+                
+                if(self.currentLanguagePairSetting?.nativeLanguageCode != nil){
+                    
+                    self.currentLanguagePairSetting?.nativeLanguageCode = nil
+                
+                }
+                
+            case 1:
+                
+                if(self.currentLanguagePairSetting?.trainingLanguageCode != nil){
+                    
+                    self.currentLanguagePairSetting?.trainingLanguageCode = nil
+                    
+                }
+                
+            default:
+                
+                return
+            
+            }
         }
+        
+        performSegueWithIdentifier("selectLang", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let targetVC = segue.destinationViewController as! SelectLangTableViewController
+        
+
         
         switch(segue.identifier!){
             
@@ -66,7 +107,7 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
             
             default:
             
-                targetVC.selectedIndx = nil
+               return
         }
     }
     

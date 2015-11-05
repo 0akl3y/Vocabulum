@@ -11,7 +11,7 @@ import CoreData
 
 class SelectLangTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YandexClientDelegate, UISearchBarDelegate {
     
-    weak var currentLanguagePairSetting: LanguagePair?
+    var currentLanguagePairSetting: LanguagePair?
 
     @IBOutlet var selectLangTableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
@@ -42,6 +42,24 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
     
     }
     
+    func filterNonSupportedLangCombinations(){
+        
+        //This is needed to filter the available language combinations, if one language has already been selected
+        
+        let setLanguages = [currentLanguagePairSetting?.nativeLanguageCode, currentLanguagePairSetting?.trainingLanguageCode].filter { $0 != nil}
+        print(setLanguages.count)
+        
+        if(setLanguages.count == 1){
+                
+            self.allLanguages = self.allLanguages?.filter {($0.availableTranslations?.contains({ (element) -> Bool in
+                let lang = element as! Language
+                return lang.langCode == setLanguages[0]})
+            )!}
+        }
+    
+    }
+    
+    
     override func viewWillAppear(animated: Bool) {
         
         let entityDescription = NSEntityDescription.entityForName("Language", inManagedObjectContext: self.context)
@@ -55,6 +73,7 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
             
             if let languages = try self.context.executeFetchRequest(self.languageFetchRequest) as? [Language]{
                 self.allLanguages = languages
+                self.filterNonSupportedLangCombinations()
             }
         }
             
@@ -82,6 +101,7 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("LanguageCell", forIndexPath: indexPath)
         
         let currentLanguage = self.languagesDataSource[indexPath.row]
@@ -94,15 +114,16 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+
         let selectedLanguage = self.languagesDataSource[indexPath.row]
+        
         if(self.selectedIndx == 0){
             
             self.currentLanguagePairSetting?.nativeLanguageString = selectedLanguage.languageName
             self.currentLanguagePairSetting?.nativeLanguageCode = selectedLanguage.langCode
             
         }
-        
+            
         else {
             
             self.currentLanguagePairSetting?.trainingLanguageString = selectedLanguage.languageName
@@ -110,7 +131,7 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         }
         
         self.navigationController!.popToRootViewControllerAnimated(true)
-                
+        
     }
     
     

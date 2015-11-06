@@ -66,7 +66,6 @@ class YandexClient: SimpleNetworking {
                     self.getDictionaryOfExistingLanguages()
                     
                 }
-                
             }
                 
             catch {
@@ -87,7 +86,6 @@ class YandexClient: SimpleNetworking {
                 let language = element as! Language
                 return language.langCode == langCode
             })
-        
         }
         
         return false
@@ -103,10 +101,8 @@ class YandexClient: SimpleNetworking {
                 self.langCodeLanguageMapping[key] = entity
                 
             }
-        
         }
     }
-    
 
     func fetchAvailableLanguages(){
         
@@ -160,7 +156,6 @@ class YandexClient: SimpleNetworking {
                                 let sourceLang = languageStrings[0]
                                 newLanguage.addAvailabTranslation(self.langCodeLanguageMapping[sourceLang]!)
                             }
-                            
                         }
                         
                         else{
@@ -179,13 +174,9 @@ class YandexClient: SimpleNetworking {
                                     currentLang?.addAvailabTranslation(otherLang!)
                                     
                                 }
-                            
                             }
                         }
-                
-                
                     }
-                    
                 }
                 
             self.isFetching = false
@@ -193,7 +184,6 @@ class YandexClient: SimpleNetworking {
             CoreDataStack.sharedObject().saveContext()
             
             })
-            
         }
     }
 
@@ -211,7 +201,7 @@ class YandexClient: SimpleNetworking {
             let parsedJSON = (try! NSJSONSerialization.JSONObjectWithData(result!, options: NSJSONReadingOptions.MutableLeaves)) as! [String: AnyObject]
 
             let completeResult = parsedJSON["def"] as! [[String: AnyObject]]
-            let translationList = completeResult[0]
+            let translationList = completeResult[0] //def is empty if there are no results
 
             if let directTranslation = translationList["tr"] as? [[String : AnyObject]]{
                 let translation = directTranslation[0]["text"] as! String

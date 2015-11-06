@@ -196,7 +196,6 @@ class YandexClient: SimpleNetworking {
             
         }
     }
-    
 
     func getVocabularyForWord(word:String, languageCombination:String, completion:(translation:String?, error:NSError?) -> Void){
         
@@ -205,20 +204,24 @@ class YandexClient: SimpleNetworking {
         
         self.sendGETRequest(YANDEX_DICT_URL, GETData: requestData, headerValues: nil) { (result, error) -> Void in
             
-            let parsedJSON = (try! NSJSONSerialization.JSONObjectWithData(result!, options: NSJSONReadingOptions.MutableContainers)) as! [String: AnyObject]
+            if(error != nil){
+                completion(translation: nil, error: error!)
+            }
+            
+            let parsedJSON = (try! NSJSONSerialization.JSONObjectWithData(result!, options: NSJSONReadingOptions.MutableLeaves)) as! [String: AnyObject]
 
             let completeResult = parsedJSON["def"] as! [[String: AnyObject]]
-            let translationList = completeResult[0] as [String : AnyObject]
-            let directTranslation = translationList["tr"] as! [[String : AnyObject]]
-            let translation = directTranslation[0]["text"] as! String
-            
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            let translationList = completeResult[0]
+
+            if let directTranslation = translationList["tr"] as? [[String : AnyObject]]{
+                let translation = directTranslation[0]["text"] as! String
                 
-                completion(translation: translation,error: error)
-                
-            })
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    
+                    completion(translation: translation,error: error)
+                    
+                })
+            }
         }    
     }
-
-   
 }

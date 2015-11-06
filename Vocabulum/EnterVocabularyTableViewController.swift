@@ -15,7 +15,11 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
     @IBOutlet var nativeWord: UITextField!
     @IBOutlet var difficultySetting: UISegmentedControl!
     
-    @IBOutlet var yandexButton: UIButton!
+
+    @IBOutlet var yandexButtonNative: UIButton!
+    @IBOutlet var yandexButtonTranslation: UIButton!
+    
+    
     var displayedWord:Word?
     var existingWord:Word?
     
@@ -23,6 +27,8 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
     
     var addVocButton: UIBarButtonItem!
     var cancelButton: UIBarButtonItem!
+    
+    var errorHandler:ErrorHandler?
     
     var languageIsSupported:Bool {
         
@@ -44,11 +50,12 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         self.translation.delegate = self
         self.nativeWord.delegate = self
+        self.errorHandler = ErrorHandler(targetVC: self)
     }
     
     override func viewWillAppear(animated: Bool) {
         
-        self.yandexButton.hidden = !self.languageIsSupported
+        self.yandexButtonNative.hidden = !self.languageIsSupported
         
         if(self.existingWord != nil){
             
@@ -74,7 +81,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         self.addVocButton.enabled = (self.translation.text != nil && self.nativeWord.text != nil)
         
-        self.yandexButton.enabled = self.nativeWord.text != nil && self.nativeWord.text?.characters.count > 1
+        self.yandexButtonNative.enabled = self.nativeWord.text != nil && self.nativeWord.text?.characters.count > 1
     
     }
     
@@ -114,16 +121,41 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         self.updateButtonStatus()
     }
     
-    @IBAction func searchYandex(sender: AnyObject) {
+    @IBAction func searchYandexNative(sender: AnyObject) {
         
         let searchedWord = self.nativeWord.text
         let langPairID = self.lesson?.lessonToLanguage.languagePairID
         
         YandexClient.sharedObject().getVocabularyForWord(searchedWord!, languageCombination: langPairID!) { (translation, error) -> Void in
+            
+            if(error != nil){
+                self.errorHandler!.displayErrorMessage(error!)
+            }
+            
             self.translation.text = translation
+
+        }
+    }
+    
+    @IBAction func searchYandexTranslation(sender: UIButton) {
+        
+        let searchedWord = self.translation.text
+        let langPairID = self.lesson?.lessonToLanguage.languagePairID
+        
+        let revertedLangID:String = {()-> String in
+            var components: [String] =  langPairID!.componentsSeparatedByString("-").reverse()
+            return "\(components[1])-\(components[0])"
+        }()
+        
+        
+        YandexClient.sharedObject().getVocabularyForWord(searchedWord!, languageCombination: revertedLangID) { (translation, error) -> Void in
+            if(error != nil){
+                self.errorHandler!.displayErrorMessage(error!)
+            }
+            
+            self.nativeWord.text = translation
         }
         
     }
-    
     
 }

@@ -101,6 +101,11 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
                 let targetVC = targetNavigationVC!.topViewController as! AddVocabularyVC
                 targetVC.relatedLesson = (self.fetchedResultsController.objectAtIndexPath(self.tappedCellIndexPath!) as! Lesson)
             
+            case "startLesson":
+            
+                let targetVC = segue.destinationViewController as! TrainingViewController
+                targetVC.lesson = (self.fetchedResultsController.objectAtIndexPath(self.tappedCellIndexPath!) as! Lesson)
+            
             
             default:
                 break        
@@ -249,7 +254,9 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     }
     
     func didTapStartLearning(cellIndexPath: NSIndexPath?) {
-        //perform segue to learning
+        self.tappedCellIndexPath = cellIndexPath
+        self.performSegueWithIdentifier("startLearning", sender: self)
+        
     }
     
     func didTapEditLesson(cellIndexPath: NSIndexPath?) {

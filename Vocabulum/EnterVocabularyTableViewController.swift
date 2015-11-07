@@ -129,7 +129,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         YandexClient.sharedObject().getVocabularyForWord(searchedWord!, languageCombination: langPairID!) { (translation, error) -> Void in
             
             if(error != nil){
-                self.errorHandler!.displayErrorMessage(error!)
+                self.errorHandler!.displayErrorMessage(error!, handler:nil)
             }
             
             self.translation.text = translation
@@ -144,13 +144,13 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         let revertedLangID:String = {()-> String in
             var components: [String] =  langPairID!.componentsSeparatedByString("-").reverse()
-            return "\(components[1])-\(components[0])"
+            return "\(components[0])-\(components[1])"
         }()
         
         
         YandexClient.sharedObject().getVocabularyForWord(searchedWord!, languageCombination: revertedLangID) { (translation, error) -> Void in
             if(error != nil){
-                self.errorHandler!.displayErrorMessage(error!)
+                self.errorHandler!.displayErrorMessage(error!, handler:nil)
             }
             
             self.nativeWord.text = translation

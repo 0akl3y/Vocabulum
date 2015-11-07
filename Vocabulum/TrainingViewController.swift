@@ -20,8 +20,12 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
     @IBOutlet var effectView: UIVisualEffectView!
     @IBOutlet var dialogContainer: UIView!
     
-    var errorHandler:ErrorHandler?
+    @IBOutlet var score: UILabel!
+    @IBOutlet var correctionLabel: UILabel!
     
+    var wordNumber = 0
+    
+    var errorHandler:ErrorHandler?
     var wordsForTraining = [Word]()
     
     var answer:String?
@@ -61,6 +65,10 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
         
         self.correctAnswers = 0
         self.resultIconContainer.alpha = 0
+        self.score.text = " "
+        self.correctionLabel.alpha = 0
+        
+        self.effectView.alpha = 1
 
         if(self.lesson?.lessonToWord.count == 0){
             
@@ -118,7 +126,7 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
     
     func endSession(){
         
-        //AnimationKit.fadeInView(self.effectView)
+        AnimationKit.fadeInView(self.effectView)
         
         self.sessionOverDialog?.numberOfWords = (self.defaults.valueForKey("numberOfVocabulary") as! Int)
         self.sessionOverDialog?.correctAnswers = self.correctAnswers
@@ -131,7 +139,7 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
     func didStartLesson(numberOfWords: Int) {
         
         self.removeChild(self.startDialog!)
-        //AnimationKit.fadeOutView(self.effectView)
+        AnimationKit.fadeOutView(self.effectView)
         
         self.getVocabulary(numberOfWords)
         self.getWords()
@@ -140,6 +148,7 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
     
     func didTapAgain() {
         self.removeChild(self.sessionOverDialog!)
+        AnimationKit.fadeOutView(self.effectView)
         
         self.getVocabulary(self.defaults.valueForKey("numberOfVocabulary") as! Int)
         self.getWords()
@@ -147,11 +156,15 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
     }
     
     
+    //MARK:- Actions
+    
     @IBAction func enterAnswer(sender: AnyObject) {
         
         let button = sender as! UIButton
         
         if(!self.showAnswerMode){
+            
+            self.wordNumber += 1
             
             if(self.answer == self.userInput.text){
                 
@@ -163,13 +176,23 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
             
             else{
                 
+                self.correctionLabel.text = self.answer
+                
                 self.resultIconContainer.image = self.wrongImage
+                AnimationKit.fadeInView(self.correctionLabel)
+                
                 self.currentWord?.difficulty = self.currentWord?.difficulty == 3 ? 3 : (self.currentWord?.difficulty)! + 1
             
             }
             
+            AnimationKit.fadeOutView(self.userInput)
+            self.userInput.text = ""
+            
             AnimationKit.fadeInView(self.resultIconContainer)
             button.setTitle("NEXT", forState: UIControlState.Normal)
+            self.score.text = "\(self.correctAnswers)/\(self.wordNumber)"
+            
+            
             self.showAnswerMode = true
         
         }
@@ -178,16 +201,27 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
             
             self.getWords()
             AnimationKit.fadeOutView(self.resultIconContainer)
+            AnimationKit.fadeOutView(self.correctionLabel)
+            AnimationKit.fadeInView(self.userInput)
+            
             button.setTitle("ENTER", forState: UIControlState.Normal)
             self.showAnswerMode = false
             
         }
     }
     
+    
+    @IBAction func cancelTraining(sender: UIButton) {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+        
+    }
+    
     //MARK:- ChildViewController display helper functions
 
     func showChild(viewController:UIViewController){
         
+        self.dialogContainer.hidden = false
         self.addChildViewController(viewController)
         self.dialogContainer.addSubview(viewController.view)
         viewController.didMoveToParentViewController(self)
@@ -203,6 +237,8 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
         viewController.view.removeFromSuperview()
         viewController.removeFromParentViewController()
         viewController.didMoveToParentViewController(nil)
+        self.dialogContainer.hidden = true
         self.view.setNeedsDisplay()
+        
     }
 }

@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vocabulum/TrainingViewController.swift"
-            timestampString = "468627024.496721"
+            filePath = "Vocabulum/StartBoxViewController.swift"
+            timestampString = "468632022.274808"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "172"
-            endingLineNumber = "172"
-            landmarkName = "enterAnswer(_:)"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "startTraining(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vocabulum/TrainingViewController.swift"
-            timestampString = "468627024.496721"
+            timestampString = "468632863.793812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
-            landmarkName = "enterAnswer(_:)"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "didStartLesson(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

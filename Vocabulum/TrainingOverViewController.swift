@@ -12,7 +12,6 @@ protocol ResultDialogDelegate {
     
     func didTapAgain()
 
-
 }
 
 class TrainingOverViewController: UIViewController {
@@ -41,11 +40,8 @@ class TrainingOverViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.statisticLabel.text = "Correct Answers: \(self.correctAnswers!)/\(self.numberOfWords!)"
-        
-        
     }
     
-
     @IBAction func playAgain(sender: AnyObject) {
         
         self.delegate?.didTapAgain()

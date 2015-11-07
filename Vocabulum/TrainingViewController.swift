@@ -9,10 +9,11 @@
 import UIKit
 import CoreData
 
-class TrainingViewController: UIViewController, StartBoxDelegate {
+class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDelegate {
 
     @IBOutlet var resultIconContainer: UIImageView!
-    @IBOutlet var word: UILabel!
+    @IBOutlet var wordLabel: UILabel!
+
     @IBOutlet var userInput: UITextField!
     @IBOutlet var enterButton: UIButton!
     
@@ -21,53 +22,46 @@ class TrainingViewController: UIViewController, StartBoxDelegate {
     
     var errorHandler:ErrorHandler?
     
-    var wordsForTraining:[Word]?
+    var wordsForTraining = [Word]()
+    
     var answer:String?
     var question:String?
-    
-    var defaults = NSUserDefaults.standardUserDefaults()
-    
+        
     var lesson:Lesson?
     var startDialog:StartBoxViewController?
     var sessionOverDialog:TrainingOverViewController?
     
     var correctAnswers:Int = 0
     
+    var currentWord:Word?
+    
     let correctImage = UIImage(named: "correct")
     let wrongImage = UIImage(named: "wrong")
     
+    var showAnswerMode = false
     
-    //Persist the last setting, as the user might want to keep the preferred value set
+    var defaults = NSUserDefaults.standardUserDefaults()
     
-    var numberSetting: Int {
-        
-        get{
-            return (defaults.valueForKeyPath("numberOfVocabulary") as? Int)!
-        }
-        
-        set(numberOfObjects){
-            
-            defaults.setValue(numberOfObjects, forKey: "numberOfVocabulary")
-        
-        }
-    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.startDialog = (self.storyboard?.instantiateViewControllerWithIdentifier("startBox") as! StartBoxViewController)
-        self.sessionOverDialog = (self.storyboard?.instantiateViewControllerWithIdentifier("endBox") as! TrainingOverViewController)
+        
+        self.startDialog = StartBoxViewController(nibName: "StartBox", bundle: nil)        
+        self.sessionOverDialog = TrainingOverViewController(nibName: "EndBox", bundle: nil)
         
         self.errorHandler = ErrorHandler(targetVC: self)
         
         self.startDialog!.delegate = self
+        self.sessionOverDialog!.delegate = self
     
     }
     
     override func viewWillAppear(animated: Bool) {
         
         self.correctAnswers = 0
-        
         self.resultIconContainer.alpha = 0
+
         if(self.lesson?.lessonToWord.count == 0){
             
             self.errorHandler?.displayErrorString("This lesson has no vocabulary yet", handler: {(alertAction:UIAlertAction) -> Void in
@@ -80,13 +74,13 @@ class TrainingViewController: UIViewController, StartBoxDelegate {
         }
     }
     
+    
+    
     //MARK:- Fetch Vocabulary
     
     func getVocabulary(numberOfWords: Int){
         
         //Gets the words for the training, if numberOfWords > available entries. the words might be asked mutliple times
-        
-        self.numberSetting = numberOfWords
         
         let sortDescriptor = NSSortDescriptor(key: "difficulty", ascending: true)
         let words = self.lesson?.lessonToWord.sortedArrayUsingDescriptors([sortDescriptor])
@@ -94,7 +88,7 @@ class TrainingViewController: UIViewController, StartBoxDelegate {
         for number in 0...(numberOfWords - 1) {
             
             let currentWord = words![(number % words!.count)]
-            self.wordsForTraining!.append(currentWord as! Word)
+            self.wordsForTraining.append(currentWord as! Word)
             
         }
     }
@@ -103,8 +97,9 @@ class TrainingViewController: UIViewController, StartBoxDelegate {
         
         //Gets question & answer from the array of words
         
-        if let word = self.wordsForTraining?.popLast(){
+        if let word = self.wordsForTraining.popLast(){
             
+            self.currentWord = word
             let coinflip = Int(arc4random() % 2)
             
             var wordPair = [word.translation, word.word]
@@ -112,7 +107,7 @@ class TrainingViewController: UIViewController, StartBoxDelegate {
             wordPair.removeAtIndex(coinflip)
             self.answer = wordPair[0]
             
-            self.word.text = self.question
+            self.wordLabel.text = self.question
         }
         
         else{
@@ -123,9 +118,10 @@ class TrainingViewController: UIViewController, StartBoxDelegate {
     
     func endSession(){
         
-        //pass values
+        //AnimationKit.fadeInView(self.effectView)
         
-        AnimationKit.fadeInView(self.effectView)
+        self.sessionOverDialog?.numberOfWords = (self.defaults.valueForKey("numberOfVocabulary") as! Int)
+        self.sessionOverDialog?.correctAnswers = self.correctAnswers
         self.showChild(self.sessionOverDialog!)
     
     }
@@ -135,33 +131,46 @@ class TrainingViewController: UIViewController, StartBoxDelegate {
     func didStartLesson(numberOfWords: Int) {
         
         self.removeChild(self.startDialog!)
-        AnimationKit.fadeOutView(self.effectView)
+        //AnimationKit.fadeOutView(self.effectView)
         
         self.getVocabulary(numberOfWords)
         self.getWords()
         
     }
     
+    func didTapAgain() {
+        self.removeChild(self.sessionOverDialog!)
+        
+        self.getVocabulary(self.defaults.valueForKey("numberOfVocabulary") as! Int)
+        self.getWords()
+        
+    }
+    
+    
     @IBAction func enterAnswer(sender: AnyObject) {
         
         let button = sender as! UIButton
         
-        if(button.titleLabel!.text == "ENTER"){
+        if(!self.showAnswerMode){
             
             if(self.answer == self.userInput.text){
                 
                 self.resultIconContainer.image = self.correctImage
                 self.correctAnswers += 1
+                self.currentWord?.difficulty = self.currentWord?.difficulty == 0 ? 0 : (self.currentWord?.difficulty)! - 1
+                
             }
             
             else{
                 
                 self.resultIconContainer.image = self.wrongImage
+                self.currentWord?.difficulty = self.currentWord?.difficulty == 3 ? 3 : (self.currentWord?.difficulty)! + 1
             
             }
             
             AnimationKit.fadeInView(self.resultIconContainer)
-            button.titleLabel!.text = "NEXT"
+            button.setTitle("NEXT", forState: UIControlState.Normal)
+            self.showAnswerMode = true
         
         }
         
@@ -169,7 +178,8 @@ class TrainingViewController: UIViewController, StartBoxDelegate {
             
             self.getWords()
             AnimationKit.fadeOutView(self.resultIconContainer)
-            button.titleLabel!.text = "ENTER"
+            button.setTitle("ENTER", forState: UIControlState.Normal)
+            self.showAnswerMode = false
             
         }
     }

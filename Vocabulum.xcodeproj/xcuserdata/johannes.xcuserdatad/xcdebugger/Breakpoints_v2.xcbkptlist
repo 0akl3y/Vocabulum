@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vocabulum/EnterVocabularyTableViewController.swift"
-            timestampString = "468488408.542374"
+            filePath = "Vocabulum/TrainingViewController.swift"
+            timestampString = "468627024.496721"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "viewWillDisappear(_:)"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "enterAnswer(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,142 +25,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vocabulum/YandexClient.swift"
-            timestampString = "468488408.542374"
+            filePath = "Vocabulum/TrainingViewController.swift"
+            timestampString = "468627024.496721"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
-            landmarkName = "getVocabularyForWord(_:languageCombination:completion:)"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
+            landmarkName = "enterAnswer(_:)"
             landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vocabulum/EnterVocabularyTableViewController.swift"
-            timestampString = "468487651.352891"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "searchYandexTranslation(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vocabulum/EnterVocabularyTableViewController.swift"
-            timestampString = "468490542.184402"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "searchYandexTranslation(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vocabulum/YandexClient.swift"
-            timestampString = "468554038.943775"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
-            landmarkName = "getVocabularyForWord(_:languageCombination:completion:)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Vocabulum.YandexClient.getVocabularyForWord (Vocabulum.YandexClient)(Swift.String, languageCombination : Swift.String, completion : (translation : Swift.Optional&lt;Swift.String&gt;, error : Swift.Optional&lt;ObjectiveC.NSError&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "Vocabulum"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/johannes/Developer/Vocabulum/Vocabulum/YandexClient.swift"
-                  timestampString = "468554259.770857"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "195"
-                  endingLineNumber = "195"
-                  offsetFromSymbolStart = "575">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Vocabulum.YandexClient.(getVocabularyForWord (Vocabulum.YandexClient) -&gt; (Swift.String, languageCombination : Swift.String, completion : (translation : Swift.Optional&lt;Swift.String&gt;, error : Swift.Optional&lt;ObjectiveC.NSError&gt;) -&gt; ()) -&gt; ()).(closure #1)"
-                  moduleName = "Vocabulum"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/johannes/Developer/Vocabulum/Vocabulum/YandexClient.swift"
-                  timestampString = "468554259.771096"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "197"
-                  endingLineNumber = "197"
-                  offsetFromSymbolStart = "47">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vocabulum/EnterVocabularyTableViewController.swift"
-            timestampString = "468554118.303206"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "149"
-            endingLineNumber = "149"
-            landmarkName = "searchYandexTranslation(_:)"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Vocabulum.EnterVocabularyTableViewController.searchYandexTranslation (Vocabulum.EnterVocabularyTableViewController)(ObjectiveC.UIButton) -&gt; ()"
-                  moduleName = "Vocabulum"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/johannes/Developer/Vocabulum/Vocabulum/EnterVocabularyTableViewController.swift"
-                  timestampString = "468554259.7725"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "151"
-                  endingLineNumber = "151"
-                  offsetFromSymbolStart = "874">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Vocabulum.EnterVocabularyTableViewController.(searchYandexTranslation (Vocabulum.EnterVocabularyTableViewController) -&gt; (ObjectiveC.UIButton) -&gt; ()).(closure #2)"
-                  moduleName = "Vocabulum"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/johannes/Developer/Vocabulum/Vocabulum/EnterVocabularyTableViewController.swift"
-                  timestampString = "468554259.772912"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "152"
-                  endingLineNumber = "152"
-                  offsetFromSymbolStart = "57">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -101,7 +101,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
                 let targetVC = targetNavigationVC!.topViewController as! AddVocabularyVC
                 targetVC.relatedLesson = (self.fetchedResultsController.objectAtIndexPath(self.tappedCellIndexPath!) as! Lesson)
             
-            case "startLesson":
+            case "startLearning":
             
                 let targetVC = segue.destinationViewController as! TrainingViewController
                 targetVC.lesson = (self.fetchedResultsController.objectAtIndexPath(self.tappedCellIndexPath!) as! Lesson)

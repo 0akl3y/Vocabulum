@@ -46,8 +46,6 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
     
     var defaults = NSUserDefaults.standardUserDefaults()
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,8 +70,7 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
 
         if(self.lesson?.lessonToWord.count == 0){
             
-            self.errorHandler?.displayErrorString("This lesson has no vocabulary yet", handler: {(alertAction:UIAlertAction) -> Void in
-                self.dismissViewControllerAnimated(true, completion:nil)})
+            self.errorHandler?.displayErrorString("This lesson has no vocabulary yet")
         }
 
         else{

@@ -20,10 +20,13 @@ class BookOverviewCell: UITableViewCell {
     
     var delegate: BookOverviewCellDelegate?
     var cellIndexPath: NSIndexPath?
+    
     @IBOutlet var editButton: UIButton!
     @IBOutlet var learnButton: UIButton!
     
     @IBOutlet var title: UILabel?
+    
+
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -42,28 +45,14 @@ class BookOverviewCell: UITableViewCell {
     }    
     
     //MARK:- Manage the cells editing accessory type
-    
+
     override func setEditing(editing: Bool, animated: Bool) {
         
-        self.indentationWidth = 20.0;
+        super.setEditing(editing, animated: true)
         
-        let switchToState:Bool = !self.editing        
-        
-        if(!self.editing){
+        if(editing){
             
             AnimationKit.fadeOutViews([self.learnButton, self.editButton])
-        
-        }
-        
-        else {
-        
-            AnimationKit.fadeInViews([self.learnButton, self.editButton])
-        
-        }
-        
-        super.setEditing(switchToState, animated: true)
-        
-        if(self.editing){
             self.indentationWidth = 20.0
             let editingButton = UIButton(type: UIButtonType.InfoDark)
             
@@ -71,8 +60,14 @@ class BookOverviewCell: UITableViewCell {
             editingButton.addTarget(self, action: "editLesson:", forControlEvents: UIControlEvents.TouchUpInside)
         
         }
+        
+        else if(!editing) {
+        
+            AnimationKit.fadeInViews([self.learnButton, self.editButton])
+        
+        }
+        
     }
-    
     func editLesson(sender:UIButton){
         
         self.delegate?.didTapEditLesson(self.cellIndexPath)

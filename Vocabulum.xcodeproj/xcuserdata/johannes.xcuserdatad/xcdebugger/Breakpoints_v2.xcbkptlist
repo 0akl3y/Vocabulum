@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vocabulum/StartBoxViewController.swift"
-            timestampString = "468632022.274808"
+            filePath = "Vocabulum/AddLessonTableVC.swift"
+            timestampString = "468638463.926226"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "startTraining(_:)"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "editVocabulary(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vocabulum/TrainingViewController.swift"
-            timestampString = "468632863.793812"
+            filePath = "Vocabulum/BookOverviewCell.swift"
+            timestampString = "468640674.416433"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
-            landmarkName = "didStartLesson(_:)"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "setEditing(_:animated:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vocabulum/BookOverviewCell.swift"
+            timestampString = "468642159.840837"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "setEditing(_:animated:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

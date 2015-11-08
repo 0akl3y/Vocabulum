@@ -112,9 +112,9 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
                 return
             
             }
-        }
-        
-        performSegueWithIdentifier("selectLang", sender: self)
+            
+            performSegueWithIdentifier("selectLang", sender: self)
+        }        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

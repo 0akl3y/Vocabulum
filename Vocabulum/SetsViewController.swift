@@ -60,6 +60,10 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         self.navigationItem.rightBarButtonItem = addButton
         
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        NSFetchedResultsController.deleteCacheWithName("Master")
+    }
 
     func insertNewObject(sender: AnyObject) {
         self.performSegueWithIdentifier("addSet", sender: sender)
@@ -125,9 +129,15 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! BookOverviewCell
         self.configureCell(cell, atIndexPath: indexPath)
+        
         return cell
+    }
+    
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        //cell.setEditing(tableView.editing, animated: false)
     }
 
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -271,7 +281,9 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         self.managedObjectContext?.deleteObject(sender.languagePair!)
         CoreDataStack.sharedObject().saveContext()
         
-        self.setTableView.setNeedsLayout()
+        NSFetchedResultsController.deleteCacheWithName("Master")
+        self.setTableView.reloadData()
+        self.setTableView.setNeedsLayout()        
     
     }    
     

@@ -198,36 +198,33 @@ class YandexClient: SimpleNetworking {
                 completion(translation: nil, error: error!)
             }
             
-            let parsedJSON = (try! NSJSONSerialization.JSONObjectWithData(result!, options: NSJSONReadingOptions.MutableLeaves)) as! [String: AnyObject]
+            let parsedJSON = (try! NSJSONSerialization.JSONObjectWithData(result!, options: NSJSONReadingOptions.AllowFragments)) as! [String: AnyObject]
 
             if let completeResult = parsedJSON["def"] as? [[String: AnyObject]]{
                 
-                if let translationList = completeResult[0] {
+                if(completeResult.count > 0){
                     
-                    let directTranslation = translationList["tr"] as? [[String : AnyObject]]
-                    let translation = directTranslation[0]["text"] as! String
-                
-                
-                
-                
+                    let directTranslation = completeResult[0]["tr"] as? [[String : AnyObject]] //Array Index is out of bounds if translation is not found
+                    let translation = directTranslation![0]["text"] as! String
+                    
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        
+                        completion(translation: translation,error: error)
+                        
+                    })
                 
                 }
                 
+                else{
                     
-                
-                
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    
-                    completion(translation: translation,error: error)
-                    
-                })
-            }
-            
-            
-            
-            
-            
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        
+                        completion(translation: "Could no find a translation for: \(word)",error: nil)
+                        
+                    })
 
-        }    
+                }
+            }
+        }
     }
 }

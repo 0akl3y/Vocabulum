@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDelegate {
+class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDelegate, UITextFieldDelegate {
 
     @IBOutlet var resultIconContainer: UIImageView!
     @IBOutlet var wordLabel: UILabel!
@@ -56,6 +56,8 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
         
         self.startDialog!.delegate = self
         self.sessionOverDialog!.delegate = self
+        
+        self.userInput.delegate = self
     
     }
     
@@ -207,7 +209,6 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
         }
     }
     
-    
     @IBAction func cancelTraining(sender: UIButton) {
         
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -236,6 +237,20 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
         viewController.didMoveToParentViewController(nil)
         self.dialogContainer.hidden = true
         self.view.setNeedsDisplay()
+        
+    }
+    
+    //MARK:- TextField delegate methoden
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        textField.resignFirstResponder()
         
     }
 }

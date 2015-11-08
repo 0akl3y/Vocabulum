@@ -127,20 +127,20 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if range.length == 3 {
-            
             self.updateButtonStatus()
         }
-        
         return true
     }
     
+    
     func textFieldDidEndEditing(textField: UITextField) {
         self.updateButtonStatus()
+        textField.resignFirstResponder()
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.updateButtonStatus()
-        
+        textField.resignFirstResponder()
         return true
     }
     

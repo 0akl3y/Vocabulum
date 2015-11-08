@@ -96,5 +96,14 @@ class AddLessonTableVC: UITableViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(textField: UITextField) {
         self.updateButtonStatus()
+        textField.resignFirstResponder()
     }
+    
+    // MARK:- TextField Delegate Methods
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomLanguageViewController: UITableViewController {
+class CustomLanguageViewController: UITableViewController, UITextFieldDelegate {
     
     var currentLanguagePair:LanguagePair?
     var selectedIndx: Int?
@@ -19,6 +19,8 @@ class CustomLanguageViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.languageInput.delegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -32,7 +34,6 @@ class CustomLanguageViewController: UITableViewController {
             self.currentLanguagePair?.nativeLanguageCode = "custom"
             self.navigationController?.popToRootViewControllerAnimated(true)
             
-            
         }
             
         else {
@@ -42,6 +43,20 @@ class CustomLanguageViewController: UITableViewController {
             self.navigationController?.popToRootViewControllerAnimated(true)
 
         }
+        
+    }
+    
+    //MARK:- UITextField delegate methoden
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        textField.resignFirstResponder()
         
     }
 

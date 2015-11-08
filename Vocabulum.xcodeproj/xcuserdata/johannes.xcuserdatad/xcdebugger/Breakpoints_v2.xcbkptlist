@@ -4,34 +4,28 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vocabulum/YandexClient.swift"
-            timestampString = "468706914.374893"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "getVocabularyForWord(_:languageCombination:completion:)"
-            landmarkType = "5">
+            scope = "0"
+            stopOnStyle = "0">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vocabulum/YandexClient.swift"
-            timestampString = "468707136.656677"
+            filePath = "Vocabulum/Word.swift"
+            timestampString = "468714218.282463"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
-            landmarkName = "getVocabularyForWord(_:languageCombination:completion:)"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "init(word:translation:difficulty:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

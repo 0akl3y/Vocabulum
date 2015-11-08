@@ -15,10 +15,11 @@ import UIKit
 
 }
 
-class StartBoxViewController: UIViewController {
+class StartBoxViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var numberOfWords: UITextField!
     var delegate:StartBoxDelegate?
+    @IBOutlet var startButton: UIButton!
     
     var defaults = NSUserDefaults.standardUserDefaults()
     
@@ -28,7 +29,14 @@ class StartBoxViewController: UIViewController {
     var numberSetting: Int? {
         
         get{
-            return (defaults.valueForKeyPath("numberOfVocabulary") as? Int)!
+            //This check seems to be necessary on older iPads
+            if(defaults.objectForKey("numberOfVocabulary") != nil){
+                
+                return (defaults.valueForKeyPath("numberOfVocabulary") as? Int)!
+            
+            }
+            
+            else {return nil}
         }
         
         set(numberOfObjects){
@@ -48,6 +56,7 @@ class StartBoxViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.numberOfWords.delegate = self
 
         // Do any additional setup after loading the view.
     }
@@ -63,6 +72,23 @@ class StartBoxViewController: UIViewController {
         let numberOfWords = Int(self.numberOfWords.text!)
         self.numberSetting = numberOfWords!
         self.delegate?.didStartLesson(numberOfWords!)
+        
+    }
+    
+    //MARK:- Text field delegate methoden
+    
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        
+        self.startButton.enabled = textField.text != nil
+        textField.resignFirstResponder()
         
     }
 }

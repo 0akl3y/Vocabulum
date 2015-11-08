@@ -38,4 +38,10 @@ class Word: NSManagedObject {
         self.difficulty = Int64(difficulty.rawValue)
         
     }
+        
+    func sectionNameForWord() -> String{
+        
+        return ["Known", "Easy", "Medium", "Hard"][Int(self.difficulty)]
+    
+    }
 }

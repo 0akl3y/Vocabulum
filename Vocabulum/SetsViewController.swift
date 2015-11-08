@@ -171,20 +171,8 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         return 50.0 // a good place for an enum
     }
     
-    
-    //** all credits to matt (http://stackoverflow.com/questions/30402435/swift-turn-a-country-code-into-a-emoji-flag-via-unicode)
-    func flag(country:String) -> String {
-        let base : UInt32 = 127397
-        var s = ""
-        for v in country.unicodeScalars {
-            s.append(UnicodeScalar(base + v.value))
-        }
-        return s
-    }
-    //**
-    
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let contentView = UIView(frame: CGRectMake(0, 0, tableView.frame.width, 60.0) )
+        let contentView = UIView(frame: CGRectMake(0, 0, tableView.frame.width, 50.0) )
         
         let indexPath = NSIndexPath(forRow: 0, inSection: section)
         let lesson = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Lesson

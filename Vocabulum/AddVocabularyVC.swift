@@ -26,8 +26,10 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         }
         
         let request = NSFetchRequest()
-        let sortDescriptor = NSSortDescriptor(key: "word", ascending: false)
-        let sortDescriptors = [sortDescriptor]
+        let sortDescriptorWord = NSSortDescriptor(key: "word", ascending: false)
+        let sortDescriptorDifficulty = NSSortDescriptor(key: "difficulty", ascending: false)
+        
+        let sortDescriptors = [sortDescriptorDifficulty, sortDescriptorWord]
         
         //Show only the words related to the current lesson
         
@@ -47,7 +49,7 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         request.entity = entity
         request.predicate = standardPredicate
         
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.sharedObject().managedObjectContext!, sectionNameKeyPath: nil, cacheName: "Master")
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataStack.sharedObject().managedObjectContext!, sectionNameKeyPath: "sectionNameForWord", cacheName: nil)
         
         fetchedResultsController.delegate = self
         _vocabularyController = fetchedResultsController
@@ -150,8 +152,12 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     
     //MARK:- TableView Delegate and Data Source
     
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return self.vocabularyController.sections?.count ?? 0
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.vocabularyController.fetchedObjects!.count
+        return self.vocabularyController.sections![section].numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -201,11 +207,25 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         vocabularyCell.nativeWord!.text = (currentObject.valueForKey("word")!.description)
         vocabularyCell.translation!.text = (currentObject.valueForKey("translation")!.description)
         
-        /*if(indexPath.row % 2 == 0){
-            
-            cell.backgroundColor = UIColor(red: 0.697, green: 0.887, blue: 0.955, alpha: 1.000)
+    }
+    
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40.0 // a good place for an enum
+    }
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
+        
+        let contentView = UIView(frame: CGRectMake(0, 0, tableView.frame.width, 40.0) )
+        let label = UILabel(frame: CGRectMake(5.0, 5.0, tableView.frame.size.width, 40.0))
+        
+        let indexPath = NSIndexPath(forRow: 0, inSection: section)
+        let word = self.vocabularyController.objectAtIndexPath(indexPath) as! Word
 
-        }*/
+        label.text = word.sectionNameForWord()
+        
+        contentView.addSubview(label)
+        return contentView
     }
     
     //MARK:- Controller Delegate Methoden
@@ -254,7 +274,6 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     func cleanAndRefetchResults(){
         
         self._vocabularyController = nil
-        NSFetchedResultsController.deleteCacheWithName("Master")
         
         self.vocabularyTableView.reloadData()
         self.vocabularyTableView.setNeedsDisplay()

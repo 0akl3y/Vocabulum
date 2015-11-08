@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StartBoxViewController" customModule="Vocabulum" customModuleProvider="target">
             <connections>
                 <outlet property="numberOfWords" destination="wAW-AN-SWV" id="0Ug-H8-Egr"/>
+                <outlet property="startButton" destination="9eN-m6-lsC" id="624-zs-scl"/>
                 <outlet property="view" destination="iN0-l3-epB" id="YcJ-5c-Fcu"/>
             </connections>
         </placeholder>

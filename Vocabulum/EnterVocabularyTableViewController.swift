@@ -57,6 +57,9 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         self.yandexButtonNative.hidden = !self.languageIsSupported
         
+        self.nativeWord.placeholder = self.lesson?.lessonToLanguage.nativeLanguageString
+        self.translation.placeholder = self.lesson?.lessonToLanguage.trainingLanguageString
+        
         if(self.existingWord != nil){
             
             self.translation.text = self.existingWord?.translation
@@ -82,6 +85,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         self.addVocButton.enabled = (self.translation.text != nil && self.nativeWord.text != nil)
         
         self.yandexButtonNative.enabled = self.nativeWord.text != nil && self.nativeWord.text?.characters.count > 1
+        self.yandexButtonTranslation.enabled = self.translation.text != nil && self.translation.text?.characters.count > 1
     
     }
     
@@ -117,8 +121,27 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         self.navigationController!.popToRootViewControllerAnimated(true)
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        self.updateButtonStatus()
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if range.length == 3 {
+            
+            self.updateButtonStatus()
+        }
+        
+        return true
+    }
+    
     func textFieldDidEndEditing(textField: UITextField) {
         self.updateButtonStatus()
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.updateButtonStatus()
+        
+        return true
     }
     
     @IBAction func searchYandexNative(sender: AnyObject) {

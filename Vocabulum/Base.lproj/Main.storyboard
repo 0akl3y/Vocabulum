@@ -650,7 +650,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="3" translatesAutoresizingMaskIntoConstraints="NO" id="plC-Ph-qk9">
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="3" translatesAutoresizingMaskIntoConstraints="NO" id="plC-Ph-qk9">
                                                     <rect key="frame" x="11" y="7" width="299" height="29"/>
                                                     <animations/>
                                                     <segments>
@@ -662,6 +662,11 @@
                                                 </segmentedControl>
                                             </subviews>
                                             <animations/>
+                                            <constraints>
+                                                <constraint firstItem="plC-Ph-qk9" firstAttribute="centerX" secondItem="lQO-Ke-XnU" secondAttribute="centerX" id="3MR-1Z-tKN"/>
+                                                <constraint firstItem="plC-Ph-qk9" firstAttribute="centerY" secondItem="lQO-Ke-XnU" secondAttribute="centerY" id="hbc-88-1bD"/>
+                                                <constraint firstItem="plC-Ph-qk9" firstAttribute="width" secondItem="lQO-Ke-XnU" secondAttribute="width" constant="-21" id="lrN-iO-Xmm"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>

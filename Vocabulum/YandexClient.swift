@@ -200,11 +200,21 @@ class YandexClient: SimpleNetworking {
             
             let parsedJSON = (try! NSJSONSerialization.JSONObjectWithData(result!, options: NSJSONReadingOptions.MutableLeaves)) as! [String: AnyObject]
 
-            let completeResult = parsedJSON["def"] as! [[String: AnyObject]]
-            let translationList = completeResult[0] //def is empty if there are no results
-
-            if let directTranslation = translationList["tr"] as? [[String : AnyObject]]{
-                let translation = directTranslation[0]["text"] as! String
+            if let completeResult = parsedJSON["def"] as? [[String: AnyObject]]{
+                
+                if let translationList = completeResult[0] {
+                    
+                    let directTranslation = translationList["tr"] as? [[String : AnyObject]]
+                    let translation = directTranslation[0]["text"] as! String
+                
+                
+                
+                
+                
+                }
+                
+                    
+                
                 
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     
@@ -212,6 +222,12 @@ class YandexClient: SimpleNetworking {
                     
                 })
             }
+            
+            
+            
+            
+            
+
         }    
     }
 }

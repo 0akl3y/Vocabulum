@@ -168,8 +168,20 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60.0 // a good place for an enum
+        return 50.0 // a good place for an enum
     }
+    
+    
+    //** all credits to matt (http://stackoverflow.com/questions/30402435/swift-turn-a-country-code-into-a-emoji-flag-via-unicode)
+    func flag(country:String) -> String {
+        let base : UInt32 = 127397
+        var s = ""
+        for v in country.unicodeScalars {
+            s.append(UnicodeScalar(base + v.value))
+        }
+        return s
+    }
+    //**
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let contentView = UIView(frame: CGRectMake(0, 0, tableView.frame.width, 60.0) )
@@ -194,8 +206,8 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         removeButton.assignLanguagePair(lesson.lessonToLanguage)
         
         
-        let label = UILabel(frame: CGRectMake(10.0, 10.0, 100.0, 40.0))
-        label.text = lesson.lessonToLanguage.title
+        let label = UILabel(frame: CGRectMake(5.0, 5.0, tableView.frame.size.width - (2 * button.frame.width + 20), 40.0))
+        label.text = "\(lesson.lessonToLanguage.title): \(lesson.lessonToLanguage.nativeLanguageString!)-\(lesson.lessonToLanguage.trainingLanguageString!)"
         
         contentView.addSubview(label)
         contentView.addSubview(button)

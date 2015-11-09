@@ -152,7 +152,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         YandexClient.sharedObject().getVocabularyForWord(searchedWord!, languageCombination: langPairID!) { (translation, error) -> Void in
             
-            self.updateButtonStatus()
+            
             self.translationSpinner.stopAnimating()
             
             if(error != nil){
@@ -160,6 +160,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
             }
             
             self.translation.text = translation
+            self.updateButtonStatus()
 
         }
     }
@@ -178,8 +179,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         self.nativeSpinner.hidden = false
         
         YandexClient.sharedObject().getVocabularyForWord(searchedWord!, languageCombination: revertedLangID) { (translation, error) -> Void in
-            
-            self.updateButtonStatus()
+
             self.nativeSpinner.stopAnimating()
             
             if(error != nil){
@@ -187,6 +187,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
             }
             
             self.nativeWord.text = translation
+            self.updateButtonStatus()
         }
         
     }

@@ -34,7 +34,6 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
     
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.titleField.delegate = self

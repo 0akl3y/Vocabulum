@@ -14,6 +14,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
 
     @IBOutlet var setTableView: UITableView!
     var managedObjectContext: NSManagedObjectContext? = CoreDataStack.sharedObject().managedObjectContext
+    var resultsControllerUpdates = false
     
     var tappedCellIndexPath: NSIndexPath? // keeps track of the cells tapped index path. this is done (instead of the ususal didSelectRow..) because there are mutliple button within each cell that are handled via the BookOberviewCellDelegate methods.
     
@@ -229,6 +230,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
 
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
+        self.resultsControllerUpdates = true
     }
 
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
@@ -259,6 +261,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
 
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
+        self.resultsControllerUpdates = false
     }
     
     //MARK:- Book Overview Cell Delegate Methods
@@ -298,8 +301,6 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         dialog.addAction(cancelDelete)
         
         presentViewController(dialog, animated: true, completion: nil)
-    
-    
     }
     
     func removeBook(book:LanguagePair){
@@ -311,7 +312,16 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         self.setTableView.setNeedsLayout()        
     
     }
-
     
+    //MARK:- Manage size transition of table view
     
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        //It is necessary to reload the table view, as I can see no other way to rescale the section headers when orientation changesf
+        
+        if(!self.resultsControllerUpdates){
+            
+            self.setTableView.reloadData()
+            self.tableView.setNeedsDisplay()
+        }
+    }
 }

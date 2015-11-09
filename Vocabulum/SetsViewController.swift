@@ -234,8 +234,9 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     // MARK: - Fetched results controller
 
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.beginUpdates()
         self.resultsControllerUpdates = true
+        self.tableView.beginUpdates()
+        
     }
 
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
@@ -289,8 +290,6 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     
     //MARK:- Remove Set button target
     
-    
-    
     func confirmDeletion(sender:AttributedButton){
         
         let dialogTitle: String = "Delete Book"
@@ -323,7 +322,8 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         //It is necessary to reload the table view, as I can see no other way to rescale the section headers when orientation changesf
         
-        if(!self.resultsControllerUpdates){
+        //Protect the fetchedResultsController from getting disturbed
+        if(!self.resultsControllerUpdates && self.navigationController?.visibleViewController == self) {
             
             self.setTableView.reloadData()
             self.tableView.setNeedsDisplay()

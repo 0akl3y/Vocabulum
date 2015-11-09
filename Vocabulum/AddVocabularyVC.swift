@@ -105,7 +105,8 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     }
     
     override func viewWillAppear(animated: Bool) {
-        //self.cleanAndRefetchResults()
+        
+        self.navigationItem.title = self.relatedLesson?.title
     
     }
     

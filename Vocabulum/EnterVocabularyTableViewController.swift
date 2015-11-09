@@ -52,6 +52,11 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         self.translation.delegate = self
         self.nativeWord.delegate = self
+        
+        nativeWord.addTarget(self, action: "updateButtonStatus", forControlEvents: UIControlEvents.EditingChanged)
+        
+        translation.addTarget(self, action: "updateButtonStatus", forControlEvents: UIControlEvents.EditingChanged)
+        
         self.errorHandler = ErrorHandler(targetVC: self)
     }
     
@@ -124,12 +129,6 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
     func cancel(sender:UIBarButtonItem){
         
         self.navigationController!.popToRootViewControllerAnimated(true)
-    }
-    
-    
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        self.updateButtonStatus()
-        return true
     }
     
     func textFieldDidEndEditing(textField: UITextField) {

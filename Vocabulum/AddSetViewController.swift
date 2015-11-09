@@ -38,12 +38,14 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.titleField.delegate = self
+        self.titleField.addTarget(self, action: "updateButtonStatus", forControlEvents: UIControlEvents.EditingChanged)
+        self.titleField.addTarget(self, action: "updateButtonStatus", forControlEvents: UIControlEvents.EditingDidEndOnExit)
         
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        
+ 
         self.updateButtonStatus()
         
         if(self.currentLanguagePairSetting == nil){
@@ -77,7 +79,10 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        //exclude the title section at the beginning        
+        //exclude the title section at the beginning     
+        self.titleField.endEditing(true)
+        self.titleField.resignFirstResponder()
+        self.updateButtonStatus()
         
         if(indexPath.section == 1){
             //Pass on the index to pass on which language pair should be adjusted
@@ -136,7 +141,9 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
     }
     
     func updateButtonStatus(){
-        self.saveButton.enabled = (self.titleField != nil && self.titleField.text?.characters.count > 1) && (languageA.textLabel?.text?.characters.count > 1 && languageB.textLabel?.text?.characters.count > 1)
+        
+        let textLabelsAreSet = (languageA.textLabel?.text != nil && languageB.textLabel?.text != nil)
+        self.saveButton.enabled = (self.titleField != nil && self.titleField.text?.characters.count > 1) && textLabelsAreSet
     
     }
     
@@ -169,10 +176,6 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
         return true
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        self.updateButtonStatus()
-        return true
-    }
     
     func textFieldDidEndEditing(textField: UITextField) {
         self.updateButtonStatus()

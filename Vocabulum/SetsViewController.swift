@@ -31,7 +31,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         let sortDescriptor = NSSortDescriptor(key: "lessonToLanguage.title", ascending: true)
         _ = [sortDescriptor]
         
-        let sortDescriptorDate = NSSortDescriptor(key: "dateAdded", ascending: false)
+        let sortDescriptorDate = NSSortDescriptor(key: "dateAdded", ascending: true)
         _ = [sortDescriptorDate]
         
         fetchRequest.sortDescriptors = [sortDescriptor,sortDescriptorDate]
@@ -182,6 +182,8 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         let lesson = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Lesson
         
         let button = AttributedButton(type: UIButtonType.ContactAdd)
+        button.setImage(UIImage(named: "add"), forState: UIControlState.Normal)
+        button.tintColor = UIColor.whiteColor()
         button.frame.origin.x = tableView.frame.width - (button.frame.width + 10)
         button.frame.origin.y = 10.0
 
@@ -200,6 +202,9 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         
         let label = UILabel(frame: CGRectMake(5.0, 2.0, tableView.frame.size.width - (2 * button.frame.width + 20), 40.0))
         label.text = "\(lesson.lessonToLanguage.title): \(lesson.lessonToLanguage.nativeLanguageString!)-\(lesson.lessonToLanguage.trainingLanguageString!)"
+        
+        contentView.backgroundColor = UIColor.darkGrayColor()
+        label.textColor = UIColor.whiteColor()
         
         contentView.addSubview(label)
         contentView.addSubview(button)

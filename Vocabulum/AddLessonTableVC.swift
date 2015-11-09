@@ -19,6 +19,12 @@ class AddLessonTableVC: UITableViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.lessonTitle.delegate = self
+        self.lessonDescription.delegate = self
+        
+        self.lessonTitle.addTarget(self, action: "updateButtonStatus", forControlEvents: UIControlEvents.EditingChanged)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -32,8 +38,6 @@ class AddLessonTableVC: UITableViewController, UITextFieldDelegate {
             self.assignedLanguagePair = self.currentLesson?.lessonToLanguage
         }
         
-        self.lessonTitle.delegate = self
-        self.lessonDescription.delegate = self
         self.updateButtonStatus()
     }
     

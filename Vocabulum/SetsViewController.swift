@@ -27,12 +27,15 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         fetchRequest.entity = entity
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "languagePairName", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "lessonToLanguage.title", ascending: true)
         _ = [sortDescriptor]
         
-        fetchRequest.sortDescriptors = [sortDescriptor]
+        let sortDescriptorDate = NSSortDescriptor(key: "dateAdded", ascending: false)
+        _ = [sortDescriptorDate]
         
-        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.sharedObject().managedObjectContext!, sectionNameKeyPath: "sectionNameForLesson", cacheName: "Master")
+        fetchRequest.sortDescriptors = [sortDescriptor,sortDescriptorDate]
+        
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: CoreDataStack.sharedObject().managedObjectContext!, sectionNameKeyPath: "sectionNameForLesson", cacheName: nil)
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
         
@@ -55,14 +58,13 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
 
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
-
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
-        self.navigationItem.rightBarButtonItem = addButton
+        let addButton = UIBarButtonItem(title: "Add Book", style: UIBarButtonItemStyle.Plain, target: self, action: "insertNewObject:")
         
+        self.navigationItem.rightBarButtonItem = addButton
     }
     
     override func viewWillAppear(animated: Bool) {
-        NSFetchedResultsController.deleteCacheWithName("Master")
+        CoreDataStack.sharedObject().saveContext()
     }
 
     func insertNewObject(sender: AnyObject) {
@@ -168,11 +170,12 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50.0 // a good place for an enum
+        return 40.0 // a good place for an enum
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let contentView = UIView(frame: CGRectMake(0, 0, tableView.frame.width, 50.0) )
+        
+        let contentView = UIView(frame: CGRectMake(0, 0, tableView.frame.width, 40.0) )
         
         let indexPath = NSIndexPath(forRow: 0, inSection: section)
         let lesson = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Lesson
@@ -188,7 +191,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         
         removeButton.frame.origin.x = tableView.frame.width - (2 * button.frame.width + 20)
         removeButton.frame.origin.y = 10.0
-        removeButton.backgroundColor = UIColor.redColor()
+        removeButton.setImage(UIImage(named: "delete"), forState: UIControlState.Normal)
         
         removeButton.addTarget(self, action: "removeSet:", forControlEvents: UIControlEvents.TouchUpInside)
         removeButton.assignLanguagePair(lesson.lessonToLanguage)
@@ -200,6 +203,8 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         contentView.addSubview(label)
         contentView.addSubview(button)
         contentView.addSubview(removeButton)
+        
+        contentView.sizeToFit()
 
         return contentView
     }
@@ -281,7 +286,6 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         self.managedObjectContext?.deleteObject(sender.languagePair!)
         CoreDataStack.sharedObject().saveContext()
         
-        NSFetchedResultsController.deleteCacheWithName("Master")
         self.setTableView.reloadData()
         self.setTableView.setNeedsLayout()        
     

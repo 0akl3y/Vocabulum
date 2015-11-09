@@ -165,7 +165,11 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
             
             self.wordNumber += 1
             
+            self.correctionLabel.text = self.answer
+            
             if(self.answer == self.userInput.text){
+                
+                self.correctionLabel.textColor = UIColor.greenColor()
                 
                 self.resultIconContainer.image = self.correctImage
                 self.correctAnswers += 1
@@ -175,10 +179,9 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
             
             else{
                 
-                self.correctionLabel.text = self.answer
-                
+                self.correctionLabel.textColor = UIColor.redColor()
                 self.resultIconContainer.image = self.wrongImage
-                AnimationKit.fadeInView(self.correctionLabel)
+                //AnimationKit.fadeInView(self.correctionLabel)
                 
                 self.currentWord?.difficulty = self.currentWord?.difficulty == 3 ? 3 : (self.currentWord?.difficulty)! + 1
             
@@ -186,6 +189,7 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
             
             AnimationKit.fadeOutView(self.userInput)
             self.userInput.text = ""
+            AnimationKit.fadeInView(self.correctionLabel)
             
             AnimationKit.fadeInView(self.resultIconContainer)
             button.setTitle("NEXT", forState: UIControlState.Normal)

@@ -16,12 +16,6 @@ class Lesson: NSManagedObject {
     @NSManaged var dateAdded: NSDate
     @NSManaged var lessonToLanguage: LanguagePair
     @NSManaged var lessonToWord: NSSet
-    var languagePairName: String {
-        
-        return self.sectionNameForLesson()
-    
-    }
-    
     
     override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
         super.init(entity: entity, insertIntoManagedObjectContext: context)

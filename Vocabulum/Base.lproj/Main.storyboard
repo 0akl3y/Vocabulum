@@ -31,7 +31,7 @@
         <scene sceneID="VgW-fR-Quf">
             <objects>
                 <tableViewController title="Master" id="pGg-6v-bdr" customClass="SetsViewController" customModule="Vocabulum" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="mLL-gJ-YKr">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="mLL-gJ-YKr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
@@ -46,49 +46,50 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8xw-wh-kaX">
-                                            <rect key="frame" x="246" y="2" width="40" height="40"/>
-                                            <animations/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="Q87-JX-0uR"/>
-                                                <constraint firstAttribute="width" constant="40" id="xYN-dG-l53"/>
-                                            </constraints>
-                                            <state key="normal" title="Edit"/>
-                                            <connections>
-                                                <action selector="editBookContent:" destination="m0d-ak-lc9" eventType="touchUpInside" id="md8-RY-k7x"/>
-                                            </connections>
-                                        </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CZ-PJ-6zx">
-                                            <rect key="frame" x="180" y="2" width="40" height="40"/>
+                                            <rect key="frame" x="170" y="1" width="40" height="40"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="40" id="6al-zy-In1"/>
                                                 <constraint firstAttribute="height" constant="40" id="pP6-N5-9hX"/>
                                             </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <state key="normal" title="Learn"/>
                                             <connections>
                                                 <action selector="startLearning:" destination="m0d-ak-lc9" eventType="touchUpInside" id="lJC-Xo-KRS"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ga0-YA-1A2">
-                                            <rect key="frame" x="8" y="11" width="162" height="21"/>
+                                            <rect key="frame" x="8" y="11" width="152" height="21"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="cRV-CL-yht"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8xw-wh-kaX">
+                                            <rect key="frame" x="229" y="2" width="83" height="40"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="Q87-JX-0uR"/>
+                                                <constraint firstAttribute="width" constant="83" id="xYN-dG-l53"/>
+                                            </constraints>
+                                            <state key="normal" title="Vocabulary"/>
+                                            <connections>
+                                                <action selector="editBookContent:" destination="m0d-ak-lc9" eventType="touchUpInside" id="md8-RY-k7x"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <animations/>
                                     <constraints>
                                         <constraint firstItem="8xw-wh-kaX" firstAttribute="centerY" secondItem="d3P-M7-ByW" secondAttribute="centerY" id="8o6-Af-8Lf"/>
                                         <constraint firstItem="9CZ-PJ-6zx" firstAttribute="leading" secondItem="Ga0-YA-1A2" secondAttribute="trailing" constant="10" id="BYc-QH-ECx"/>
                                         <constraint firstItem="9CZ-PJ-6zx" firstAttribute="centerY" secondItem="d3P-M7-ByW" secondAttribute="centerY" id="H53-kw-aqS"/>
-                                        <constraint firstItem="8xw-wh-kaX" firstAttribute="leading" secondItem="9CZ-PJ-6zx" secondAttribute="trailing" constant="26" id="LB1-MW-oTc"/>
+                                        <constraint firstItem="8xw-wh-kaX" firstAttribute="leading" secondItem="9CZ-PJ-6zx" secondAttribute="trailing" constant="19" id="LB1-MW-oTc"/>
                                         <constraint firstItem="Ga0-YA-1A2" firstAttribute="centerY" secondItem="d3P-M7-ByW" secondAttribute="centerY" id="PIG-vc-mjn"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="8xw-wh-kaX" secondAttribute="trailing" constant="26" id="Raa-tR-Evc"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="8xw-wh-kaX" secondAttribute="trailing" id="Raa-tR-Evc"/>
                                         <constraint firstItem="Ga0-YA-1A2" firstAttribute="leading" secondItem="d3P-M7-ByW" secondAttribute="leadingMargin" id="h8b-9b-MSb"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -322,7 +323,7 @@
         <scene sceneID="CjU-vp-B5S">
             <objects>
                 <tableViewController id="bOt-Vo-GlK" customClass="AddLessonTableVC" customModule="Vocabulum" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Ww3-O8-MfV">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Ww3-O8-MfV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
@@ -451,7 +452,7 @@
             </objects>
             <point key="canvasLocation" x="1287" y="89"/>
         </scene>
-        <!--Add VocabularyVC-->
+        <!--Vocabulary List-->
         <scene sceneID="m0A-Ag-mfw">
             <objects>
                 <tableViewController id="3wH-OR-Nv1" customClass="AddVocabularyVC" customModule="Vocabulum" customModuleProvider="target" sceneMemberID="viewController">
@@ -518,7 +519,7 @@
                             <outlet property="delegate" destination="3wH-OR-Nv1" id="uOJ-YL-ri4"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="sTh-2C-HlX"/>
+                    <navigationItem key="navigationItem" title="Vocabulary List" id="sTh-2C-HlX"/>
                     <connections>
                         <outlet property="vocabularyTableView" destination="oi3-Zr-qSp" id="MSA-Ym-Yif"/>
                         <segue destination="Pmc-SL-XgP" kind="push" identifier="enterVocabulary" id="K3Y-hv-qrD"/>
@@ -555,7 +556,7 @@
         <scene sceneID="5ai-M4-bRF">
             <objects>
                 <tableViewController title="Add Word" modalPresentationStyle="overCurrentContext" id="Pmc-SL-XgP" customClass="EnterVocabularyTableViewController" customModule="Vocabulum" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="yRY-yh-qji">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="yRY-yh-qji">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
@@ -619,8 +620,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Translation" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fWC-Fb-GzS">
-                                                    <rect key="frame" x="8" y="8" width="265" height="28"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Translation" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fWC-Fb-GzS">
+                                                    <rect key="frame" x="8" y="8" width="265" height="27"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
@@ -700,7 +701,7 @@
                             <outlet property="delegate" destination="Pmc-SL-XgP" id="y6w-3E-mgE"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="6t3-wg-ZZH"/>
+                    <navigationItem key="navigationItem" title="Edit Vocabulary" id="6t3-wg-ZZH"/>
                     <connections>
                         <outlet property="difficultySetting" destination="plC-Ph-qk9" id="n9J-gY-oBI"/>
                         <outlet property="nativeSpinner" destination="bsD-Ml-NgM" id="SXx-mh-NjQ"/>
@@ -719,7 +720,7 @@
         <scene sceneID="d7C-Xo-457">
             <objects>
                 <tableViewController id="Oog-7e-Ec5" customClass="AddSetViewController" customModule="Vocabulum" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="2" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Kyo-3L-b6E">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" sectionIndexMinimumDisplayRowCount="2" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Kyo-3L-b6E">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>
@@ -784,7 +785,7 @@
                                 <action selector="close:" destination="Oog-7e-Ec5" id="D0I-6Q-qrB"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="CSD-We-ohU">
+                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="Save" id="CSD-We-ohU">
                             <connections>
                                 <action selector="save:" destination="Oog-7e-Ec5" id="uVn-b0-rQP"/>
                             </connections>
@@ -930,7 +931,7 @@
         <scene sceneID="yQN-w7-b0f">
             <objects>
                 <tableViewController id="9Du-Ok-ILs" customClass="CustomLanguageViewController" customModule="Vocabulum" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="bpN-ad-r50">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="none" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="bpN-ad-r50">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <animations/>

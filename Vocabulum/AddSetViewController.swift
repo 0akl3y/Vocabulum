@@ -44,6 +44,8 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         
+        self.updateButtonStatus()
+        
         if(self.currentLanguagePairSetting == nil){
             
             //Set a sample language pair
@@ -75,10 +77,7 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        //exclude the title section at the beginning
-        
-        print(indexPath.section)
-        
+        //exclude the title section at the beginning        
         
         if(indexPath.section == 1){
             //Pass on the index to pass on which language pair should be adjusted
@@ -136,6 +135,11 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
+    func updateButtonStatus(){
+        self.saveButton.enabled = (self.titleField != nil && self.titleField.text?.characters.count > 1) && (languageA.textLabel?.text?.characters.count > 1 && languageB.textLabel?.text?.characters.count > 1)
+    
+    }
+    
 // MARK:- Actions    
 
     @IBAction func close(sender: AnyObject) {
@@ -160,11 +164,20 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
 // MARK:- TextField Delegate Methods
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.updateButtonStatus()
         textField.resignFirstResponder()
         return true
     }
     
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        self.updateButtonStatus()
+        return true
+    }
+    
     func textFieldDidEndEditing(textField: UITextField) {
+        self.updateButtonStatus()
         textField.resignFirstResponder()
     }
+    
+    
 }

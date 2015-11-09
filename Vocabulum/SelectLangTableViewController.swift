@@ -140,9 +140,7 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         let currentLanguage = self.languagesDataSource[indexPath.row]
         let currentLanguageTitle = currentLanguage.languageName
         
-        cell.textLabel?.text = currentLanguageTitle
-        print(cell.textLabel?.text)
-        
+        cell.textLabel?.text = currentLanguageTitle        
         cell.detailTextLabel?.text = currentLanguage.translatedLanguageName
 
         return cell
@@ -184,14 +182,22 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         
-        self.searchFilteredLanguages = self.allLanguages!.filter({ (element:Language) -> Bool in
-            element.languageName.containsString(searchText)
-        })
+        if(searchBar.text?.characters.count >= 1){
         
+            self.searchFilteredLanguages = self.allLanguages!.filter({ (element:Language) -> Bool in
+                element.languageName.containsString(searchText)
+            })
+
+            self.searchMode = true
+            self.selectLangTableView.reloadData()
+            self.selectLangTableView.setNeedsDisplay()
+        }
         
-        self.searchMode = true
-        self.selectLangTableView.reloadData()
-        self.selectLangTableView.setNeedsDisplay()
+        else {
+            self.searchMode = false
+            self.selectLangTableView.reloadData()
+            self.selectLangTableView.setNeedsDisplay()
+        }
         
     }
     

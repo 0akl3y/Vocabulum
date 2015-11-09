@@ -54,7 +54,10 @@ class BookOverviewCell: UITableViewCell {
             
             AnimationKit.fadeOutViews([self.learnButton, self.editButton])
             self.indentationWidth = 20.0
-            let editingButton = UIButton(type: UIButtonType.InfoDark)
+            let editingButton = UIButton(type: UIButtonType.System)
+            editingButton.frame.size = CGSizeMake(22.0, 22.0)
+            
+            editingButton.setImage(UIImage(named: "Map Editing"), forState: UIControlState.Normal)
             
             self.editingAccessoryView = editingButton
             editingButton.addTarget(self, action: "editLesson:", forControlEvents: UIControlEvents.TouchUpInside)

@@ -82,7 +82,7 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         // Do any additional setup after loading the view.
         
         let addVocButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "insertNewWord:")
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancel:")
+        let cancelButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Done, target: self, action: "cancel:")
         
         let editButton = self.editButtonItem()
         
@@ -277,15 +277,25 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if(searchBar.text?.characters.count >= 1){
+            
+            self.isSearchMode = true
+        }
+        
+        else{
+            
+            self.isSearchMode = false
 
-        self.isSearchMode = true
+        }
+        
         self.cleanAndRefetchResults()
         
     }
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         self.searchBar.endEditing(true)
-        self.searchBar.text = ""
+        self.searchBar.text = nil
         
     }
     

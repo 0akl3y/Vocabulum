@@ -57,14 +57,12 @@ class SimpleNetworking: NSObject {
             }        
         }
         
-        var JSONError: NSError? = nil
         
         if(bodyData != nil){
             
             do {
                 request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(bodyData!, options: [])
             } catch let error as NSError {
-                JSONError = error
                 print(error)
                 request.HTTPBody = nil
             }

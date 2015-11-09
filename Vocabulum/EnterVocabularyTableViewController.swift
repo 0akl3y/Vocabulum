@@ -85,10 +85,12 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
     
     func updateButtonStatus(){
         
-        self.addVocButton.enabled = (self.translation.text != nil && self.nativeWord.text != nil)
+        self.addVocButton.enabled = (self.translation.text != nil && self.nativeWord.text != nil) &&  (self.translation.text?.characters.count > 0 && self.nativeWord.text?.characters.count > 0)
         
         self.yandexButtonNative.enabled = self.nativeWord.text != nil && self.nativeWord.text?.characters.count > 1
         self.yandexButtonTranslation.enabled = self.translation.text != nil && self.translation.text?.characters.count > 1
+        
+
     
     }
     
@@ -124,17 +126,11 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         self.navigationController!.popToRootViewControllerAnimated(true)
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
-        self.updateButtonStatus()
-    }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        if range.length == 3 {
-            self.updateButtonStatus()
-        }
+        self.updateButtonStatus()
         return true
     }
-    
     
     func textFieldDidEndEditing(textField: UITextField) {
         self.updateButtonStatus()
@@ -157,6 +153,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         YandexClient.sharedObject().getVocabularyForWord(searchedWord!, languageCombination: langPairID!) { (translation, error) -> Void in
             
+            self.updateButtonStatus()
             self.translationSpinner.stopAnimating()
             
             if(error != nil){
@@ -183,6 +180,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         YandexClient.sharedObject().getVocabularyForWord(searchedWord!, languageCombination: revertedLangID) { (translation, error) -> Void in
             
+            self.updateButtonStatus()
             self.nativeSpinner.stopAnimating()
             
             if(error != nil){

@@ -193,11 +193,11 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         removeButton.frame.origin.y = 10.0
         removeButton.setImage(UIImage(named: "delete"), forState: UIControlState.Normal)
         
-        removeButton.addTarget(self, action: "removeSet:", forControlEvents: UIControlEvents.TouchUpInside)
+        removeButton.addTarget(self, action: "confirmDeletion:", forControlEvents: UIControlEvents.TouchUpInside)
         removeButton.assignLanguagePair(lesson.lessonToLanguage)
         
         
-        let label = UILabel(frame: CGRectMake(5.0, 5.0, tableView.frame.size.width - (2 * button.frame.width + 20), 40.0))
+        let label = UILabel(frame: CGRectMake(5.0, 2.0, tableView.frame.size.width - (2 * button.frame.width + 20), 40.0))
         label.text = "\(lesson.lessonToLanguage.title): \(lesson.lessonToLanguage.nativeLanguageString!)-\(lesson.lessonToLanguage.trainingLanguageString!)"
         
         contentView.addSubview(label)
@@ -281,14 +281,37 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     
     //MARK:- Remove Set button target
     
-    func removeSet(sender:AttributedButton){
+    
+    
+    func confirmDeletion(sender:AttributedButton){
+        
+        let dialogTitle: String = "Delete Book"
+        let dialogMessage: String = "Are your sure that you want to delete \(sender.languagePair!.title)"
+        
+        let dialog: UIAlertController = UIAlertController(title: dialogTitle, message: dialogMessage, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        let confirmDelete: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { UIAlertAction in self.removeBook(sender.languagePair!); })
+        
+        let cancelDelete: UIAlertAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Cancel, handler: nil)
+        
+        dialog.addAction(confirmDelete)
+        dialog.addAction(cancelDelete)
+        
+        presentViewController(dialog, animated: true, completion: nil)
+    
+    
+    }
+    
+    func removeBook(book:LanguagePair){
 
-        self.managedObjectContext?.deleteObject(sender.languagePair!)
+        self.managedObjectContext?.deleteObject(book)
         CoreDataStack.sharedObject().saveContext()
         
         self.setTableView.reloadData()
         self.setTableView.setNeedsLayout()        
     
-    }    
+    }
+
+    
     
 }

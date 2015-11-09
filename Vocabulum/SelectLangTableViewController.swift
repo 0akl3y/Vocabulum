@@ -13,6 +13,8 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
     
     var currentLanguagePairSetting: LanguagePair?
 
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
+
     @IBOutlet var noLangAvailable: UILabel!
     @IBOutlet var selectLangTableView: UITableView!
     @IBOutlet var searchBar: UISearchBar!
@@ -48,7 +50,6 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         //This is needed to filter the available language combinations, if one language has already been selected
         
         let setLanguages = [currentLanguagePairSetting?.nativeLanguageCode, currentLanguagePairSetting?.trainingLanguageCode].filter { $0 != nil}
-        print(setLanguages.count)
         
         if(setLanguages.count == 1){
                 
@@ -65,6 +66,12 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         self.noLangAvailable.hidden = true
         self.selectLangTableView.alpha = 1
         
+        self.fetchLanguages()
+        
+    }
+    
+    
+    func fetchLanguages(){
         
         let entityDescription = NSEntityDescription.entityForName("Language", inManagedObjectContext: self.context)
         let sortDescriptior = NSSortDescriptor(key: "languageName", ascending: true)
@@ -72,23 +79,36 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         self.languageFetchRequest.entity = entityDescription
         self.languageFetchRequest.sortDescriptors = [sortDescriptior]
         
-        do {
+        //check, if there are already entries in store
+        
+        
+        if(self.context.countForFetchRequest(self.languageFetchRequest, error: nil) == 0){
+            //No data available yet wait for the YandexClient delegate
             
-            if let languages = try self.context.executeFetchRequest(self.languageFetchRequest) as? [Language]{
-                self.allLanguages = languages
-                self.filterNonSupportedLangCombinations()
-            }
-        }
-            
-        catch {
-            
-            print("Failed to fetch languages")
+            self.activityIndicator.hidden = false
+            self.activityIndicator.startAnimating()
         }
         
+        else{
+            
+            do {
+                
+                if let languages = try self.context.executeFetchRequest(self.languageFetchRequest) as? [Language]{
+                    self.allLanguages = languages
+                    self.filterNonSupportedLangCombinations()
+                }
+            }
+                
+            catch {
+                
+                print("Failed to fetch languages")
+            }
+        
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
-        if(self.allLanguages?.count == 0){
+        if(self.allLanguages?.count == 0 && !yandexClient.isFetching){
             
             self.noLangAvailable.hidden = false
             AnimationKit.fadeInView(self.noLangAvailable)
@@ -154,9 +174,13 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
     
     func didFetchAllLanguages(){
         
+        self.activityIndicator.stopAnimating()
+        self.fetchLanguages()
         self.selectLangTableView.reloadData()
     
     }
+    
+    //MARK: - SearchBarDelegateMethods
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         

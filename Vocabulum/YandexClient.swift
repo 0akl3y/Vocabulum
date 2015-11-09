@@ -212,7 +212,6 @@ class YandexClient: SimpleNetworking {
                         completion(translation: translation,error: error)
                         
                     })
-                
                 }
                 
                 else{
@@ -220,9 +219,7 @@ class YandexClient: SimpleNetworking {
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         
                         completion(translation: "Could no find a translation for: \(word)",error: nil)
-                        
                     })
-
                 }
             }
         }

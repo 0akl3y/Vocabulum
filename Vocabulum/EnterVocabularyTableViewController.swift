@@ -15,6 +15,8 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
     @IBOutlet var nativeWord: UITextField!
     @IBOutlet var difficultySetting: UISegmentedControl!
     
+    @IBOutlet var nativeSpinner: UIActivityIndicatorView!
+    @IBOutlet var translationSpinner: UIActivityIndicatorView!
 
     @IBOutlet var yandexButtonNative: UIButton!
     @IBOutlet var yandexButtonTranslation: UIButton!
@@ -56,6 +58,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
     override func viewWillAppear(animated: Bool) {
         
         self.yandexButtonNative.hidden = !self.languageIsSupported
+        self.yandexButtonTranslation.hidden = !self.languageIsSupported
         
         self.nativeWord.placeholder = self.lesson?.lessonToLanguage.nativeLanguageString
         self.translation.placeholder = self.lesson?.lessonToLanguage.trainingLanguageString
@@ -149,7 +152,12 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         let searchedWord = self.nativeWord.text
         let langPairID = self.lesson?.lessonToLanguage.languagePairID
         
+        self.translationSpinner.startAnimating()
+        self.translationSpinner.hidden = false
+        
         YandexClient.sharedObject().getVocabularyForWord(searchedWord!, languageCombination: langPairID!) { (translation, error) -> Void in
+            
+            self.translationSpinner.stopAnimating()
             
             if(error != nil){
                 self.errorHandler!.displayErrorMessage(error!)
@@ -170,8 +178,13 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
             return "\(components[0])-\(components[1])"
         }()
         
+        self.nativeSpinner.startAnimating()
+        self.nativeSpinner.hidden = false
         
         YandexClient.sharedObject().getVocabularyForWord(searchedWord!, languageCombination: revertedLangID) { (translation, error) -> Void in
+            
+            self.nativeSpinner.stopAnimating()
+            
             if(error != nil){
                 self.errorHandler!.displayErrorMessage(error!)
             }

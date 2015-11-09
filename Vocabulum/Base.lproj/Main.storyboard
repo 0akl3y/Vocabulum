@@ -588,6 +588,15 @@
                                                         <action selector="searchYandexNative:" destination="Pmc-SL-XgP" eventType="touchUpInside" id="OGZ-FS-yah"/>
                                                     </connections>
                                                 </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="bsD-Ml-NgM">
+                                                    <rect key="frame" x="150" y="12" width="20" height="20"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="riI-52-08g"/>
+                                                        <constraint firstAttribute="height" constant="20" id="z8V-e8-1Ym"/>
+                                                    </constraints>
+                                                    <color key="color" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <animations/>
                                             <constraints>
@@ -595,6 +604,8 @@
                                                 <constraint firstItem="756-x5-xc2" firstAttribute="centerY" secondItem="UZp-rk-4pn" secondAttribute="centerY" id="Ksp-Fo-ouK"/>
                                                 <constraint firstItem="E8q-uw-gy0" firstAttribute="top" secondItem="UZp-rk-4pn" secondAttribute="topMargin" id="XlP-xR-kJt"/>
                                                 <constraint firstItem="E8q-uw-gy0" firstAttribute="bottom" secondItem="UZp-rk-4pn" secondAttribute="bottomMargin" id="dea-oo-scS"/>
+                                                <constraint firstItem="bsD-Ml-NgM" firstAttribute="centerX" secondItem="UZp-rk-4pn" secondAttribute="centerX" id="hGB-CU-xi1"/>
+                                                <constraint firstItem="bsD-Ml-NgM" firstAttribute="centerY" secondItem="UZp-rk-4pn" secondAttribute="centerY" id="j6d-hs-Bjo"/>
                                                 <constraint firstItem="E8q-uw-gy0" firstAttribute="leading" secondItem="UZp-rk-4pn" secondAttribute="leadingMargin" id="lAW-NZ-bFj"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="756-x5-xc2" secondAttribute="trailing" constant="5" id="rnr-He-gFD"/>
                                             </constraints>
@@ -626,13 +637,24 @@
                                                         <action selector="searchYandexTranslation:" destination="Pmc-SL-XgP" eventType="touchUpInside" id="aCl-kE-2In"/>
                                                     </connections>
                                                 </button>
+                                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="zEE-wL-6ua">
+                                                    <rect key="frame" x="150" y="12" width="20" height="20"/>
+                                                    <animations/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="Ocj-NV-mDR"/>
+                                                        <constraint firstAttribute="height" constant="20" id="b3D-Es-uHx"/>
+                                                    </constraints>
+                                                    <color key="color" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                </activityIndicatorView>
                                             </subviews>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstItem="fWC-Fb-GzS" firstAttribute="leading" secondItem="hzL-AI-x1q" secondAttribute="leadingMargin" id="EXg-oY-9pe"/>
                                                 <constraint firstItem="fWC-Fb-GzS" firstAttribute="top" secondItem="hzL-AI-x1q" secondAttribute="topMargin" id="ZJA-Ev-mav"/>
+                                                <constraint firstItem="zEE-wL-6ua" firstAttribute="centerY" secondItem="hzL-AI-x1q" secondAttribute="centerY" id="aCE-lI-pSD"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="0v5-lN-jIJ" secondAttribute="trailing" constant="5" id="aQa-zS-PgB"/>
                                                 <constraint firstItem="0v5-lN-jIJ" firstAttribute="centerY" secondItem="hzL-AI-x1q" secondAttribute="centerY" id="i9a-7n-1xv"/>
+                                                <constraint firstItem="zEE-wL-6ua" firstAttribute="centerX" secondItem="hzL-AI-x1q" secondAttribute="centerX" id="ux3-lM-ZZe"/>
                                                 <constraint firstItem="0v5-lN-jIJ" firstAttribute="leading" secondItem="fWC-Fb-GzS" secondAttribute="trailing" constant="8" id="wO9-O2-dW6"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="fWC-Fb-GzS" secondAttribute="bottom" id="zS9-y8-Q2M"/>
                                             </constraints>
@@ -681,8 +703,10 @@
                     <navigationItem key="navigationItem" id="6t3-wg-ZZH"/>
                     <connections>
                         <outlet property="difficultySetting" destination="plC-Ph-qk9" id="n9J-gY-oBI"/>
+                        <outlet property="nativeSpinner" destination="bsD-Ml-NgM" id="SXx-mh-NjQ"/>
                         <outlet property="nativeWord" destination="E8q-uw-gy0" id="GJz-Uy-Dpl"/>
                         <outlet property="translation" destination="fWC-Fb-GzS" id="hvm-nu-BeY"/>
+                        <outlet property="translationSpinner" destination="zEE-wL-6ua" id="Q9m-O8-7ws"/>
                         <outlet property="yandexButtonNative" destination="756-x5-xc2" id="6mh-do-BZM"/>
                         <outlet property="yandexButtonTranslation" destination="0v5-lN-jIJ" id="Ixa-7n-mjm"/>
                     </connections>
@@ -691,7 +715,7 @@
             </objects>
             <point key="canvasLocation" x="2245" y="831"/>
         </scene>
-        <!--Add Set View Controller-->
+        <!--Add Book-->
         <scene sceneID="d7C-Xo-457">
             <objects>
                 <tableViewController id="Oog-7e-Ec5" customClass="AddSetViewController" customModule="Vocabulum" customModuleProvider="target" sceneMemberID="viewController">
@@ -754,7 +778,7 @@
                             <outlet property="delegate" destination="Oog-7e-Ec5" id="hfy-pr-gKe"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="Tf9-Wi-0Bk">
+                    <navigationItem key="navigationItem" title="Add Book" id="Tf9-Wi-0Bk">
                         <barButtonItem key="leftBarButtonItem" title="Close" id="YEz-6I-ZT0">
                             <connections>
                                 <action selector="close:" destination="Oog-7e-Ec5" id="D0I-6Q-qrB"/>
@@ -843,15 +867,26 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="HVr-1O-daU">
+                                <rect key="frame" x="142" y="266" width="37" height="37"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="37" id="02v-FS-tYb"/>
+                                    <constraint firstAttribute="height" constant="37" id="nOH-EI-nqh"/>
+                                </constraints>
+                                <color key="color" red="0.08235294118" green="0.37647058820000001" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="bT5-4X-Stq" firstAttribute="centerX" secondItem="5sv-uf-8ce" secondAttribute="centerX" id="7Zl-s0-Vv2"/>
+                            <constraint firstItem="HVr-1O-daU" firstAttribute="centerY" secondItem="5sv-uf-8ce" secondAttribute="centerY" id="CgJ-MP-SqB"/>
                             <constraint firstAttribute="trailingMargin" secondItem="b4y-hj-wW4" secondAttribute="trailing" id="H6e-bj-PIW"/>
                             <constraint firstItem="b4y-hj-wW4" firstAttribute="top" secondItem="CKP-Ld-ieL" secondAttribute="bottom" id="Iw0-jx-0QC"/>
                             <constraint firstItem="HJW-fc-aOG" firstAttribute="top" secondItem="b4y-hj-wW4" secondAttribute="bottom" id="U9z-98-oSI"/>
                             <constraint firstItem="CKP-Ld-ieL" firstAttribute="centerX" secondItem="5sv-uf-8ce" secondAttribute="centerX" id="WJY-NR-Edc"/>
+                            <constraint firstItem="HVr-1O-daU" firstAttribute="centerX" secondItem="5sv-uf-8ce" secondAttribute="centerX" id="Xqa-us-Bwi"/>
                             <constraint firstItem="CKP-Ld-ieL" firstAttribute="top" secondItem="Fm2-9N-Qz8" secondAttribute="bottom" id="Ztj-hO-vGA"/>
                             <constraint firstItem="b4y-hj-wW4" firstAttribute="leading" secondItem="5sv-uf-8ce" secondAttribute="leadingMargin" id="dNX-T2-Wqa"/>
                             <constraint firstItem="bT5-4X-Stq" firstAttribute="centerY" secondItem="5sv-uf-8ce" secondAttribute="centerY" id="mTo-ny-C12"/>
@@ -871,6 +906,7 @@
                     <navigationItem key="navigationItem" title="Select a Language" id="E7N-ie-Sjl"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="HVr-1O-daU" id="cQW-5L-0qy"/>
                         <outlet property="noLangAvailable" destination="bT5-4X-Stq" id="PjE-Ok-vc4"/>
                         <outlet property="searchBar" destination="CKP-Ld-ieL" id="pRe-r7-Zze"/>
                         <outlet property="searchDisplayController" destination="bZT-Ra-Dvb" id="glR-ls-Q7I"/>
@@ -890,7 +926,7 @@
             </objects>
             <point key="canvasLocation" x="1742" y="-568"/>
         </scene>
-        <!--Custom Language View Controller-->
+        <!--Add Language-->
         <scene sceneID="yQN-w7-b0f">
             <objects>
                 <tableViewController id="9Du-Ok-ILs" customClass="CustomLanguageViewController" customModule="Vocabulum" customModuleProvider="target" sceneMemberID="viewController">
@@ -902,10 +938,10 @@
                         <color key="separatorColor" red="0.1215686275" green="0.12941176469999999" blue="0.14117647059999999" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="sectionIndexBackgroundColor" red="0.92156862750000001" green="0.91764705879999997" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         <sections>
-                            <tableViewSection headerTitle="Add Language" footerTitle="Please note that Yandex Dictionary support is only available for listed languages" id="mcl-Aq-wnO">
+                            <tableViewSection headerTitle="" footerTitle="Please note that Yandex Dictionary support is only available for listed languages" id="mcl-Aq-wnO">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="o1G-CV-UHD">
-                                        <rect key="frame" x="0.0" y="94" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="79" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="o1G-CV-UHD" id="uZe-jb-FvP">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -939,7 +975,7 @@
                             <outlet property="delegate" destination="9Du-Ok-ILs" id="P8T-8C-SPB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="kZB-Hk-HkR">
+                    <navigationItem key="navigationItem" title="Add Language" id="kZB-Hk-HkR">
                         <barButtonItem key="rightBarButtonItem" title="Add" id="khl-XV-zdC">
                             <connections>
                                 <action selector="addLanguage:" destination="9Du-Ok-ILs" id="Kcz-SU-udv"/>

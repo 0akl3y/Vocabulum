@@ -27,7 +27,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         fetchRequest.entity = entity
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "dateAdded", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "languagePairName", ascending: true)
         _ = [sortDescriptor]
         
         fetchRequest.sortDescriptors = [sortDescriptor]
@@ -43,7 +43,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
             error = error1
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             print(error)
-            abort()
+            //abort()
         }
         
         return _fetchedResultsController!

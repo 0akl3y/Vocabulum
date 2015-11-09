@@ -161,9 +161,6 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        //let nib = UINib(nibName: "VocabularyOverviewCell", bundle: nil)
-        //tableView.registerNib(nib, forCellReuseIdentifier: "vocCell")
 
         let cell = tableView.dequeueReusableCellWithIdentifier("VocabularyCell") as! VocabularyOverviewCell
         
@@ -211,21 +208,20 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40.0 // a good place for an enum
+        return 44.0
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-        
-        let contentView = UIView(frame: CGRectMake(0, 0, tableView.frame.width, 40.0) )
-        let label = UILabel(frame: CGRectMake(5.0, 5.0, tableView.frame.size.width, 40.0))
+        let label = UILabel(frame: CGRectMake(0.0, 0.0, tableView.frame.size.width, 40.0))
         
         let indexPath = NSIndexPath(forRow: 0, inSection: section)
         let word = self.vocabularyController.objectAtIndexPath(indexPath) as! Word
 
         label.text = word.sectionNameForWord()
+        label.textAlignment = NSTextAlignment.Center
+        label.textColor = UIColor.blueColor()
         
-        contentView.addSubview(label)
-        return contentView
+        return label
     }
     
     //MARK:- Controller Delegate Methoden

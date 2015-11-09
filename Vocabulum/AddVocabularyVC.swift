@@ -212,7 +212,8 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-        let label = UILabel(frame: CGRectMake(0.0, 0.0, tableView.frame.size.width, 40.0))
+        let label = UILabel(frame: CGRectMake(0.0, 0.0, tableView.frame.size.width, 44.0))
+        label.backgroundColor = UIColor.lightGrayColor()
         
         let indexPath = NSIndexPath(forRow: 0, inSection: section)
         let word = self.vocabularyController.objectAtIndexPath(indexPath) as! Word

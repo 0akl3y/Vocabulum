@@ -89,7 +89,7 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
         
         //Gets the words for the training, if numberOfWords > available entries. the words might be asked mutliple times
         
-        let sortDescriptor = NSSortDescriptor(key: "difficulty", ascending: true)
+        let sortDescriptor = NSSortDescriptor(key: "difficulty", ascending: false)
         let words = self.lesson?.lessonToWord.sortedArrayUsingDescriptors([sortDescriptor])
         
         for number in 0...(numberOfWords - 1) {

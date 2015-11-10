@@ -4,7 +4,7 @@
 Vocabulum is a vocabulary training app with an integrated dictionary. The dictionary uses the Yandex Dictionary API https://tech.yandex.com/dictionary/
 for translation. The Yandex dictionary API supports several languages. Unfortunately not all languages are supported, but the user can also input custom languages and use the app without dictionary support.
 
-Book list overview
+##Book list overview
 
 In Vocabulum, vocabulary can be organized in Books and Lessons. After opening Vocabulum, the Book List view lists all available Books and gives various options to edit, add an delete Books and Lessons. 
 

@@ -14,7 +14,7 @@ Users can add new Books via the "Add Book" button in the upper right corner. Les
 
 Every Book has a language pairing and a title assigned. Users can select and change the language pairing by tapping on the cells in the language section.
 
-This will open a list of all Yandex supported languages. If the language combination already has a language selected, the language list will only show languages that are available for this selection. It is also possible to enter any language name via the "Select other Language" button. However the Yandex dictionary feature will not be available in this case.
+This will open a list of all Yandex supported languages. If the language combination already has a language selected, the language list will only show languages that are available for this selection. It is also possible to enter any language name via the "Select other Language" button. However, the Yandex dictionary feature will not be available in this case.
 
 ##Add Vocabulary
 

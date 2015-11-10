@@ -10,7 +10,7 @@ In Vocabulum, vocabulary can be organized in Books and Lessons. After opening Vo
 
 Users can add new Books via the "Add Book" button in the upper right corner. Lessons can be added via the page icon right from the book title. Lessons can be removed by either swiping from right to left, or by making the delete button available via the "Edit" button at the upper right side. Tapping the edit button also makes further options availalbe to edit title and description of an existing language.
 
-##Add Books and Language
+##Organize books, lessons and languages
 
 Every Book has a language pairing and a title assigned. Users can select and change the language pairing by tapping on the cells in the language section.
 

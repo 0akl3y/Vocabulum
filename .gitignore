@@ -26,3 +26,7 @@ Vocabulum.xcodeproj/xcuserdata/johannes.xcuserdatad/xcdebugger/Breakpoints_v2.xc
 Vocabulum.xcodeproj/project.xcworkspace/xcuserdata/johannes.xcuserdatad/UserInterfaceState.xcuserstate
 
 Vocabulum.xcodeproj/project.xcworkspace/xcuserdata/johannes.xcuserdatad/UserInterfaceState.xcuserstate
+
+*.xcbkptlist
+
+*.pbxproj

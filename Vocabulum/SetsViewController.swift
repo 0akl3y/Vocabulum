@@ -74,6 +74,11 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     }
 
     // MARK: - Segues
+    @IBAction func openAboutPage(sender: UIBarButtonItem) {
+        
+        self.performSegueWithIdentifier("showAboutPage", sender: self);
+        
+    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         

@@ -27,11 +27,14 @@
 		8F1D069F1BA676CC000A8575 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1D069E1BA676CC000A8575 /* CoreDataStack.swift */; };
 		8F20261B1BE9FC0400BCC4A7 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F20261A1BE9FC0400BCC4A7 /* Protocols.swift */; };
 		8F20261D1BE9FFD800BCC4A7 /* CustomLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F20261C1BE9FFD800BCC4A7 /* CustomLanguage.swift */; };
+		8F21B01D1C4C06580018C657 /* AboutPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F21B01C1C4C06580018C657 /* AboutPageVC.swift */; };
+		8F21B01F1C4C2DA70018C657 /* about-page.html in Resources */ = {isa = PBXBuildFile; fileRef = 8F21B01E1C4C2DA70018C657 /* about-page.html */; };
 		8F44B1621BC30A6F00E29377 /* VocabularyOverviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F44B1601BC30A6F00E29377 /* VocabularyOverviewCell.swift */; };
 		8F6A54581BEC88F80097ECAC /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6A54571BEC88F80097ECAC /* ErrorHandler.swift */; };
 		8F9F20811BED62B700A8BE8F /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F20801BED62B700A8BE8F /* TrainingViewController.swift */; };
 		8F9F20831BED63E100A8BE8F /* StartBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F20821BED63E100A8BE8F /* StartBoxViewController.swift */; };
 		8F9F20851BED649200A8BE8F /* TrainingOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F9F20841BED649200A8BE8F /* TrainingOverViewController.swift */; };
+		8FB85EB31C4C3A7700DCCBBA /* yandex-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 8FB85EB21C4C3A7700DCCBBA /* yandex-logo.png */; };
 		8FE179DF1BEA78DE00AB9CE6 /* CustomLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FE179DE1BEA78DE00AB9CE6 /* CustomLanguageViewController.swift */; };
 		8FEC37421BD69446006CA772 /* AnimationKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC37411BD69446006CA772 /* AnimationKit.swift */; };
 		8FEC6FFF1BAF3D5900C50A91 /* AddSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FEC6FFE1BAF3D5900C50A91 /* AddSetViewController.swift */; };
@@ -80,11 +83,14 @@
 		8F1D069E1BA676CC000A8575 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataStack.swift; path = Vocabulum/CoreDataStack.swift; sourceTree = "<group>"; };
 		8F20261A1BE9FC0400BCC4A7 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Protocols.swift; path = Vocabulum/Protocols.swift; sourceTree = "<group>"; };
 		8F20261C1BE9FFD800BCC4A7 /* CustomLanguage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLanguage.swift; sourceTree = "<group>"; };
+		8F21B01C1C4C06580018C657 /* AboutPageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutPageVC.swift; sourceTree = "<group>"; };
+		8F21B01E1C4C2DA70018C657 /* about-page.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = "about-page.html"; path = "about-page/about-page.html"; sourceTree = "<group>"; };
 		8F44B1601BC30A6F00E29377 /* VocabularyOverviewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VocabularyOverviewCell.swift; sourceTree = "<group>"; };
 		8F6A54571BEC88F80097ECAC /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		8F9F20801BED62B700A8BE8F /* TrainingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
 		8F9F20821BED63E100A8BE8F /* StartBoxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartBoxViewController.swift; sourceTree = "<group>"; };
 		8F9F20841BED649200A8BE8F /* TrainingOverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingOverViewController.swift; sourceTree = "<group>"; };
+		8FB85EB21C4C3A7700DCCBBA /* yandex-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "yandex-logo.png"; path = "about-page/yandex-logo.png"; sourceTree = "<group>"; };
 		8FE179DE1BEA78DE00AB9CE6 /* CustomLanguageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLanguageViewController.swift; sourceTree = "<group>"; };
 		8FEC37411BD69446006CA772 /* AnimationKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationKit.swift; sourceTree = "<group>"; };
 		8FEC6FFE1BAF3D5900C50A91 /* AddSetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddSetViewController.swift; sourceTree = "<group>"; };
@@ -177,7 +183,9 @@
 				8F9F20801BED62B700A8BE8F /* TrainingViewController.swift */,
 				8F9F20821BED63E100A8BE8F /* StartBoxViewController.swift */,
 				8F9F20841BED649200A8BE8F /* TrainingOverViewController.swift */,
+				8F21B01C1C4C06580018C657 /* AboutPageVC.swift */,
 				8F0618091BE56D7A00E7F868 /* Networking */,
+				8FB85EB41C4C3AB200DCCBBA /* about-page */,
 				8F0DBECD1BEE9065007B938D /* User Interface */,
 				8FF33EA41BA95B390072B3F8 /* Model */,
 				8F1D06851BA6757E000A8575 /* Images.xcassets */,
@@ -210,6 +218,15 @@
 				8F1D06931BA6757E000A8575 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8FB85EB41C4C3AB200DCCBBA /* about-page */ = {
+			isa = PBXGroup;
+			children = (
+				8F21B01E1C4C2DA70018C657 /* about-page.html */,
+				8FB85EB21C4C3A7700DCCBBA /* yandex-logo.png */,
+			);
+			name = "about-page";
 			sourceTree = "<group>";
 		};
 		8FF33EA41BA95B390072B3F8 /* Model */ = {
@@ -312,7 +329,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				8F1D06841BA6757E000A8575 /* Main.storyboard in Resources */,
+				8FB85EB31C4C3A7700DCCBBA /* yandex-logo.png in Resources */,
 				8F0DBECC1BEE8CA6007B938D /* StartBox.xib in Resources */,
+				8F21B01F1C4C2DA70018C657 /* about-page.html in Resources */,
 				8F1AECB31BE1788700C04F64 /* VocabularyOverviewCell.xib in Resources */,
 				8F1D06891BA6757E000A8575 /* LaunchScreen.xib in Resources */,
 				8F1D06861BA6757E000A8575 /* Images.xcassets in Resources */,
@@ -363,6 +382,7 @@
 				8FF33E9F1BA95B2A0072B3F8 /* Word.swift in Sources */,
 				8F0618111BE59C9B00E7F868 /* Language+CoreData.swift in Sources */,
 				8FEC70011BAF49E700C50A91 /* SelectLangTableViewController.swift in Sources */,
+				8F21B01D1C4C06580018C657 /* AboutPageVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

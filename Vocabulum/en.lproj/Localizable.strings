@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  Vocabulum
+
+  Created by Johannes Eichler on 14/03/16.
+  Copyright © 2016 Eichler. All rights reserved.
+*/
+
+"Add Book"="Add Book";
+"Add Lesson"="Add Lesson";
+"Edit Lesson"="Edit Lesson";
+"Delete Book"="Delete Book";
+"Are your sure that you want to delete,"="Are your sure that you want to delete,";
+"OK"="OK";
+"NO"="NO";
+"Lesson 1"="Lesson 1";
+"Enter Book Name"="Enter Book Name";
+"Ooops!"="Ooops!";
+"Close"="Close";
+"Edit Vocabulary"="Edit Vocabulary";
+"Add Vocabulary"="Add Vocabulary";
+"This lesson has no vocabulary yet"="This lesson has no vocabulary yet";
+"Correct Answers:"="Correct Answers:";

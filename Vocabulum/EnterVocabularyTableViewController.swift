@@ -73,10 +73,10 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
             self.translation.text = self.existingWord?.translation
             self.nativeWord.text = self.existingWord?.word
             self.difficultySetting.selectedSegmentIndex = Int((self.existingWord?.difficulty)!)
-            self.navigationItem.title = "Edit Vocabulary"
+            self.navigationItem.title = NSLocalizedString("Edit Vocabulary", comment:"")
         }
         else{
-            self.navigationItem.title = "Add Vocabulary"
+            self.navigationItem.title = NSLocalizedString("Add Vocabulary", comment: "")
         }
         self.updateButtonStatus()
     }

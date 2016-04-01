@@ -14,6 +14,7 @@
 		8F0618111BE59C9B00E7F868 /* Language+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0618101BE59C9B00E7F868 /* Language+CoreData.swift */; };
 		8F0DBECC1BEE8CA6007B938D /* StartBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F0DBECB1BEE8CA6007B938D /* StartBox.xib */; };
 		8F0DBECF1BEEA30E007B938D /* EndBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F0DBECE1BEEA30E007B938D /* EndBox.xib */; };
+		8F1175461C96ABF800673D01 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8F1175481C96ABF800673D01 /* Localizable.strings */; };
 		8F1AECB31BE1788700C04F64 /* VocabularyOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1AECB21BE1788700C04F64 /* VocabularyOverviewCell.xib */; };
 		8F1AECB51BE17B9100C04F64 /* SearchResultsTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1AECB41BE17B9100C04F64 /* SearchResultsTableVC.swift */; };
 		8F1D067A1BA6757E000A8575 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F1D06791BA6757E000A8575 /* AppDelegate.swift */; };
@@ -66,6 +67,10 @@
 		8F0618101BE59C9B00E7F868 /* Language+CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Language+CoreData.swift"; path = "Vocabulum/Language+CoreData.swift"; sourceTree = "<group>"; };
 		8F0DBECB1BEE8CA6007B938D /* StartBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StartBox.xib; path = Vocabulum/StartBox.xib; sourceTree = "<group>"; };
 		8F0DBECE1BEEA30E007B938D /* EndBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EndBox.xib; sourceTree = "<group>"; };
+		8F1175411C96AB9C00673D01 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
+		8F1175421C96AB9D00673D01 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		8F1175471C96ABF800673D01 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8F1175491C96AC0100673D01 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8F1AECB21BE1788700C04F64 /* VocabularyOverviewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = VocabularyOverviewCell.xib; path = Vocabulum/VocabularyOverviewCell.xib; sourceTree = "<group>"; };
 		8F1AECB41BE17B9100C04F64 /* SearchResultsTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsTableVC.swift; sourceTree = "<group>"; };
 		8F1D06741BA6757E000A8575 /* Vocabulum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vocabulum.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +149,14 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		8F1175431C96ABB700673D01 /* Localizable */ = {
+			isa = PBXGroup;
+			children = (
+				8F1175481C96ABF800673D01 /* Localizable.strings */,
+			);
+			name = Localizable;
+			sourceTree = "<group>";
+		};
 		8F1D066B1BA6757E000A8575 = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +178,7 @@
 		8F1D06761BA6757E000A8575 /* Vocabulum */ = {
 			isa = PBXGroup;
 			children = (
+				8F1175431C96ABB700673D01 /* Localizable */,
 				8F1D06791BA6757E000A8575 /* AppDelegate.swift */,
 				8F44B1601BC30A6F00E29377 /* VocabularyOverviewCell.swift */,
 				8F03FB1D1BD3D9FB00DA4B96 /* BookOverviewCell.swift */,
@@ -311,6 +325,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 8F1D066B1BA6757E000A8575;
 			productRefGroup = 8F1D06751BA6757E000A8575 /* Products */;
@@ -332,6 +347,7 @@
 				8FB85EB31C4C3A7700DCCBBA /* yandex-logo.png in Resources */,
 				8F0DBECC1BEE8CA6007B938D /* StartBox.xib in Resources */,
 				8F21B01F1C4C2DA70018C657 /* about-page.html in Resources */,
+				8F1175461C96ABF800673D01 /* Localizable.strings in Resources */,
 				8F1AECB31BE1788700C04F64 /* VocabularyOverviewCell.xib in Resources */,
 				8F1D06891BA6757E000A8575 /* LaunchScreen.xib in Resources */,
 				8F1D06861BA6757E000A8575 /* Images.xcassets in Resources */,
@@ -405,10 +421,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		8F1175481C96ABF800673D01 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8F1175471C96ABF800673D01 /* en */,
+				8F1175491C96AC0100673D01 /* de */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		8F1D06821BA6757E000A8575 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				8F1D06831BA6757E000A8575 /* Base */,
+				8F1175411C96AB9C00673D01 /* de */,
 			);
 			name = Main.storyboard;
 			path = Vocabulum;
@@ -418,6 +444,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				8F1D06881BA6757E000A8575 /* Base */,
+				8F1175421C96AB9D00673D01 /* de */,
 			);
 			name = LaunchScreen.xib;
 			path = Vocabulum;

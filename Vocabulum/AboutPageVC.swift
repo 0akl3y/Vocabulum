@@ -43,5 +43,4 @@ class AboutPageVC: UIViewController, UIWebViewDelegate {
     
         return true
     }
-
 }

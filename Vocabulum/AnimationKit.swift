@@ -34,7 +34,7 @@ class AnimationKit: NSObject {
                 
                 for elm in views {
                 
-                elm.alpha = 1.0
+                    elm.alpha = 1.0
                     
                 }
             }

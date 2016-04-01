@@ -27,9 +27,9 @@ class ErrorHandler: NSObject {
     
     func displayErrorString(message:String){
         
-        let alertView = UIAlertController(title: "Ooops!", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let alertView = UIAlertController(title: NSLocalizedString("Ooops!", comment: ""), message: message, preferredStyle: UIAlertControllerStyle.Alert)
         
-        let action = UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel, handler:{(action:UIAlertAction)-> Void in self.targetViewController.dismissViewControllerAnimated(true, completion: nil)})
+        let action = UIAlertAction(title: NSLocalizedString("Close", comment: ""), style: UIAlertActionStyle.Cancel, handler:{(action:UIAlertAction)-> Void in self.targetViewController.dismissViewControllerAnimated(true, completion: nil)})
         
             alertView.addAction(action)
         

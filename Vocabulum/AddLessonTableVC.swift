@@ -23,7 +23,7 @@ class AddLessonTableVC: UITableViewController, UITextFieldDelegate {
         self.lessonTitle.delegate = self
         self.lessonDescription.delegate = self
         
-        self.lessonTitle.addTarget(self, action: "updateButtonStatus", forControlEvents: UIControlEvents.EditingChanged)
+        self.lessonTitle.addTarget(self, action: #selector(AddLessonTableVC.updateButtonStatus), forControlEvents: UIControlEvents.EditingChanged)
         
     }
     

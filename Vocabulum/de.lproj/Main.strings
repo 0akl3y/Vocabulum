@@ -4,40 +4,40 @@
 "0v5-lN-jIJ.normalTitle" = "Button";
 
 /* Class = "UINavigationItem"; title = "Edit Vocabulary"; ObjectID = "6t3-wg-ZZH"; */
-"6t3-wg-ZZH.title" = "Edit Vocabulary";
+"6t3-wg-ZZH.title" = "Wörter bearbeiten";
 
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "756-x5-xc2"; */
 "756-x5-xc2.normalTitle" = "Button";
 
 /* Class = "UITableViewSection"; headerTitle = "Difficulty"; ObjectID = "8kd-mq-TK6"; */
-"8kd-mq-TK6.headerTitle" = "Difficulty";
+"8kd-mq-TK6.headerTitle" = "Schwierigkeit";
 
 /* Class = "UIButton"; normalTitle = "Vocabulary"; ObjectID = "8xw-wh-kaX"; */
-"8xw-wh-kaX.normalTitle" = "Vocabulary";
+"8xw-wh-kaX.normalTitle" = "Vokabeln";
 
 /* Class = "UIButton"; normalTitle = "Learn"; ObjectID = "9CZ-PJ-6zx"; */
-"9CZ-PJ-6zx.normalTitle" = "Learn";
+"9CZ-PJ-6zx.normalTitle" = "Lernen";
 
 /* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "CQt-ng-0O9"; */
-"CQt-ng-0O9.title" = "Save";
+"CQt-ng-0O9.title" = "Speichern";
 
 /* Class = "UIButton"; normalTitle = "Edit Vocabulary"; ObjectID = "CS3-hH-CyL"; */
-"CS3-hH-CyL.normalTitle" = "Edit Vocabulary";
+"CS3-hH-CyL.normalTitle" = "Vokabeln bearbeiten";
 
 /* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "CSD-We-ohU"; */
-"CSD-We-ohU.title" = "Save";
+"CSD-We-ohU.title" = "Speichern";
 
 /* Class = "UIViewController"; title = "Training View"; ObjectID = "DB9-16-cmG"; */
-"DB9-16-cmG.title" = "Training View";
+"DB9-16-cmG.title" = "Übungsansicht";
 
 /* Class = "UINavigationItem"; title = "Select a Language"; ObjectID = "E7N-ie-Sjl"; */
-"E7N-ie-Sjl.title" = "Select a Language";
+"E7N-ie-Sjl.title" = "Sprachauswahl";
 
 /* Class = "UITextField"; placeholder = "Enter Word"; ObjectID = "E8q-uw-gy0"; */
-"E8q-uw-gy0.placeholder" = "Enter Word";
+"E8q-uw-gy0.placeholder" = "Wort eingeben";
 
 /* Class = "UILabel"; text = "Title"; ObjectID = "EYq-y1-pX6"; */
-"EYq-y1-pX6.text" = "Title";
+"EYq-y1-pX6.text" = "Titel";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "EgV-bQ-xxw"; */
 "EgV-bQ-xxw.text" = "Detail";
@@ -46,61 +46,61 @@
 "Ga0-YA-1A2.text" = "Label";
 
 /* Class = "UITableViewSection"; headerTitle = "Lesson Title"; ObjectID = "KUH-sn-Uht"; */
-"KUH-sn-Uht.headerTitle" = "Lesson Title";
+"KUH-sn-Uht.headerTitle" = "Lektionstitel";
 
 /* Class = "UIBarButtonItem"; title = "About"; ObjectID = "LhD-xn-YuO"; */
-"LhD-xn-YuO.title" = "About";
+"LhD-xn-YuO.title" = "Über Vocabulum";
 
 /* Class = "UIButton"; normalTitle = "ENTER"; ObjectID = "MD5-AN-QxP"; */
 "MD5-AN-QxP.normalTitle" = "ENTER";
 
 /* Class = "UITableViewSection"; headerTitle = "Languages"; ObjectID = "MoY-AF-sgu"; */
-"MoY-AF-sgu.headerTitle" = "Languages";
+"MoY-AF-sgu.headerTitle" = "Sprachen";
 
 /* Class = "UITextField"; placeholder = "Book Titlel"; ObjectID = "PaG-GR-tNI"; */
-"PaG-GR-tNI.placeholder" = "Book Titlel";
+"PaG-GR-tNI.placeholder" = "Buchtitel";
 
 /* Class = "UITableViewController"; title = "Add Word"; ObjectID = "Pmc-SL-XgP"; */
-"Pmc-SL-XgP.title" = "Add Word";
+"Pmc-SL-XgP.title" = "Wort hinzufügen";
 
 /* Class = "UINavigationItem"; title = "Add Book"; ObjectID = "Tf9-Wi-0Bk"; */
-"Tf9-Wi-0Bk.title" = "Add Book";
+"Tf9-Wi-0Bk.title" = "Buch hinzufügen";
 
 /* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "U8c-Iw-hKY"; */
-"U8c-Iw-hKY.title" = "Cancel";
+"U8c-Iw-hKY.title" = "Abbrechen";
 
 /* Class = "UIBarButtonItem"; title = "Close"; ObjectID = "YEz-6I-ZT0"; */
-"YEz-6I-ZT0.title" = "Close";
+"YEz-6I-ZT0.title" = "Schliessen";
 
 /* Class = "UITextField"; placeholder = "Enter a language"; ObjectID = "a3E-x4-zhk"; */
-"a3E-x4-zhk.placeholder" = "Enter a language";
+"a3E-x4-zhk.placeholder" = "Sprache eingeben";
 
 /* Class = "UIBarButtonItem"; title = "Select other Language"; ObjectID = "b9h-ER-9Nz"; */
-"b9h-ER-9Nz.title" = "Select other Language";
+"b9h-ER-9Nz.title" = "Andere Sprache wählen";
 
 /* Class = "UILabel"; text = "Sorry, no Yandex supported language can be combined with the current selection. Pleases select another language"; ObjectID = "bT5-4X-Stq"; */
-"bT5-4X-Stq.text" = "Sorry, no Yandex supported language can be combined with the current selection. Pleases select another language";
+"bT5-4X-Stq.text" = "Leider ist bei Yandex keine Sprache verfügbar, die mit der aktuellen Auswahl kombiniert werden kann. Bitte wählen Sie eine andere Sprache ";
 
 /* Class = "UITableViewSection"; headerTitle = "Description"; ObjectID = "dQW-Bp-Exp"; */
-"dQW-Bp-Exp.headerTitle" = "Description";
+"dQW-Bp-Exp.headerTitle" = "Beschreibung";
 
 /* Class = "UITextField"; placeholder = "Enter Translation"; ObjectID = "fWC-Fb-GzS"; */
-"fWC-Fb-GzS.placeholder" = "Enter Translation";
+"fWC-Fb-GzS.placeholder" = "Übersetzung";
 
 /* Class = "UINavigationItem"; title = "About Vocabulum"; ObjectID = "kGB-yy-Q92"; */
-"kGB-yy-Q92.title" = "About Vocabulum";
+"kGB-yy-Q92.title" = "Über Vocabulum";
 
 /* Class = "UINavigationItem"; title = "Add Language"; ObjectID = "kZB-Hk-HkR"; */
-"kZB-Hk-HkR.title" = "Add Language";
+"kZB-Hk-HkR.title" = "Sprache hinzufügen";
 
 /* Class = "UIBarButtonItem"; title = "Add"; ObjectID = "khl-XV-zdC"; */
-"khl-XV-zdC.title" = "Add";
+"khl-XV-zdC.title" = "Hinzufügen";
 
 /* Class = "UITableViewSection"; footerTitle = "Please note that Yandex Dictionary support is only available for listed languages"; ObjectID = "mcl-Aq-wnO"; */
-"mcl-Aq-wnO.footerTitle" = "Please note that Yandex Dictionary support is only available for listed languages";
+"mcl-Aq-wnO.footerTitle" = "Bitte beachten Sie, dass Yandex-Wörterbuch-Support nur für die gewählten Sprachen verfügbar ist";
 
 /* Class = "UITableViewSection"; headerTitle = "Title"; ObjectID = "n66-P6-lmm"; */
-"n66-P6-lmm.headerTitle" = "Title";
+"n66-P6-lmm.headerTitle" = "Titel";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "nJl-zl-pNw"; */
 "nJl-zl-pNw.text" = "Label";
@@ -118,28 +118,28 @@
 "pGg-6v-bdr.title" = "Master";
 
 /* Class = "UISegmentedControl"; plC-Ph-qk9.segmentTitles[0] = "Known"; ObjectID = "plC-Ph-qk9"; */
-"plC-Ph-qk9.segmentTitles[0]" = "Known";
+"plC-Ph-qk9.segmentTitles[0]" = "Bekannt";
 
 /* Class = "UISegmentedControl"; plC-Ph-qk9.segmentTitles[1] = "Easy"; ObjectID = "plC-Ph-qk9"; */
-"plC-Ph-qk9.segmentTitles[1]" = "Easy";
+"plC-Ph-qk9.segmentTitles[1]" = "Leicht";
 
 /* Class = "UISegmentedControl"; plC-Ph-qk9.segmentTitles[2] = "Medium"; ObjectID = "plC-Ph-qk9"; */
-"plC-Ph-qk9.segmentTitles[2]" = "Medium";
+"plC-Ph-qk9.segmentTitles[2]" = "Mittel";
 
 /* Class = "UISegmentedControl"; plC-Ph-qk9.segmentTitles[3] = "Hard"; ObjectID = "plC-Ph-qk9"; */
-"plC-Ph-qk9.segmentTitles[3]" = "Hard";
+"plC-Ph-qk9.segmentTitles[3]" = "Völlig unbekannt";
 
 /* Class = "UINavigationController"; title = "Master"; ObjectID = "rS3-R9-Ivy"; */
 "rS3-R9-Ivy.title" = "Master";
 
 /* Class = "UINavigationItem"; title = "Vocabulary List"; ObjectID = "sTh-2C-HlX"; */
-"sTh-2C-HlX.title" = "Vocabulary List";
+"sTh-2C-HlX.title" = "Vokabelliste";
 
 /* Class = "UINavigationItem"; title = "Book List"; ObjectID = "tQt-TN-PWz"; */
-"tQt-TN-PWz.title" = "Book List";
+"tQt-TN-PWz.title" = "Buchliste";
 
 /* Class = "UITableViewSection"; headerTitle = "Vocabulary"; ObjectID = "w3K-iT-NFb"; */
-"w3K-iT-NFb.headerTitle" = "Vocabulary";
+"w3K-iT-NFb.headerTitle" = "Vokabeln";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "w4W-MY-rku"; */
 "w4W-MY-rku.text" = "Label";

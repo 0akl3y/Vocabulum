@@ -42,8 +42,8 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         super.viewDidLoad()
 
-        self.addVocButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "save:")
-        self.cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancel:")
+        self.addVocButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: #selector(EnterVocabularyTableViewController.save(_:)))
+        self.cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(EnterVocabularyTableViewController.cancel(_:)))
         
         self.addVocButton.enabled = false;
         
@@ -53,9 +53,9 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         self.translation.delegate = self
         self.nativeWord.delegate = self
         
-        nativeWord.addTarget(self, action: "updateButtonStatus", forControlEvents: UIControlEvents.EditingChanged)
+        nativeWord.addTarget(self, action: #selector(EnterVocabularyTableViewController.updateButtonStatus), forControlEvents: UIControlEvents.EditingChanged)
         
-        translation.addTarget(self, action: "updateButtonStatus", forControlEvents: UIControlEvents.EditingChanged)
+        translation.addTarget(self, action: #selector(EnterVocabularyTableViewController.updateButtonStatus), forControlEvents: UIControlEvents.EditingChanged)
         
         self.errorHandler = ErrorHandler(targetVC: self)
     }

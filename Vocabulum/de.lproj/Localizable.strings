@@ -6,8 +6,8 @@
   Copyright © 2016 Eichler. All rights reserved.
 */
 "Add Book"="Buch hinzufügen";
-"Add Lesson"="Lektion hinzufügen";
-"Edit Lesson"="Lektion bearbeiten";
+"Add Lesson"="Neue Lektion";
+"Edit Lesson"="Bearbeiten";
 "Delete Book"="Buch löschen";
 "Are your sure that you want to delete,"="Die folgende Datei löschen?:";
 "OK"="OK";
@@ -16,7 +16,7 @@
 "Enter Book Name"="Buchnamen eingeben";
 "Ooops!"="Hoppla!";
 "Close"="Schliessen";
-"Edit Vocabulary"="Vokabeln bearbeiten";
-"Add Vocabulary"="Vokabeln hinzufügen";
+"Edit Vocabulary"="Liste bearbeiten";
+"Add Vocabulary"="Neue Vokabeln";
 "This lesson has no vocabulary yet"="Diese Lektion hat noch keine Vokabeln";
 "Correct Answers:"="Korrekte Antworten:";

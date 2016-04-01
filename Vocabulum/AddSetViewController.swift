@@ -37,8 +37,8 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.titleField.delegate = self
-        self.titleField.addTarget(self, action: "updateButtonStatus", forControlEvents: UIControlEvents.EditingChanged)
-        self.titleField.addTarget(self, action: "updateButtonStatus", forControlEvents: UIControlEvents.EditingDidEndOnExit)
+        self.titleField.addTarget(self, action: #selector(AddSetViewController.updateButtonStatus), forControlEvents: UIControlEvents.EditingChanged)
+        self.titleField.addTarget(self, action: #selector(AddSetViewController.updateButtonStatus), forControlEvents: UIControlEvents.EditingDidEndOnExit)
         
     }
     

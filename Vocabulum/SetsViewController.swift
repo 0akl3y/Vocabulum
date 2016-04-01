@@ -59,7 +59,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
 
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        let addButton = UIBarButtonItem(title: NSLocalizedString("Add Book", comment: ""), style: UIBarButtonItemStyle.Plain, target: self, action: "insertNewObject:")
+        let addButton = UIBarButtonItem(title: NSLocalizedString("Add Book", comment: ""), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SetsViewController.insertNewObject(_:)))
         
         self.navigationItem.rightBarButtonItem = addButton
     }
@@ -193,7 +193,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         button.frame.origin.y = 10.0
 
         button.assignLanguagePair(lesson.lessonToLanguage)
-        button.addTarget(self, action: "addLesson:", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(SetsViewController.addLesson(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         let removeButton = AttributedButton(frame: button.frame)
         
@@ -201,7 +201,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         removeButton.frame.origin.y = 10.0
         removeButton.setImage(UIImage(named: "delete"), forState: UIControlState.Normal)
         
-        removeButton.addTarget(self, action: "confirmDeletion:", forControlEvents: UIControlEvents.TouchUpInside)
+        removeButton.addTarget(self, action: #selector(SetsViewController.confirmDeletion(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         removeButton.assignLanguagePair(lesson.lessonToLanguage)
         
         

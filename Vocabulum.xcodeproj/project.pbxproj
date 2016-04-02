@@ -12,7 +12,6 @@
 		8F06180D1BE56E7800E7F868 /* YandexClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F06180C1BE56E7800E7F868 /* YandexClient.swift */; };
 		8F06180F1BE56E8800E7F868 /* SimpleNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F06180E1BE56E8800E7F868 /* SimpleNetworking.swift */; };
 		8F0618111BE59C9B00E7F868 /* Language+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F0618101BE59C9B00E7F868 /* Language+CoreData.swift */; };
-		8F0DBECC1BEE8CA6007B938D /* StartBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F0DBECB1BEE8CA6007B938D /* StartBox.xib */; };
 		8F0DBECF1BEEA30E007B938D /* EndBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F0DBECE1BEEA30E007B938D /* EndBox.xib */; };
 		8F1175461C96ABF800673D01 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8F1175481C96ABF800673D01 /* Localizable.strings */; };
 		8F1AECB31BE1788700C04F64 /* VocabularyOverviewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8F1AECB21BE1788700C04F64 /* VocabularyOverviewCell.xib */; };
@@ -46,6 +45,7 @@
 		8FF33E9F1BA95B2A0072B3F8 /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF33E9E1BA95B2A0072B3F8 /* Word.swift */; };
 		8FF33EA11BA95B2A0072B3F8 /* LanguagePair.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF33EA01BA95B2A0072B3F8 /* LanguagePair.swift */; };
 		8FF33EA31BA95B2A0072B3F8 /* Lesson.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF33EA21BA95B2A0072B3F8 /* Lesson.swift */; };
+		8FF79E381CAF2802004C04AF /* StartBox.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8FF79E3A1CAF2802004C04AF /* StartBox.xib */; };
 		8FF7A2341BBE51AC00B85A50 /* EnterVocabularyTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FF7A2331BBE51AC00B85A50 /* EnterVocabularyTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,7 +65,6 @@
 		8F06180C1BE56E7800E7F868 /* YandexClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YandexClient.swift; sourceTree = "<group>"; };
 		8F06180E1BE56E8800E7F868 /* SimpleNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleNetworking.swift; sourceTree = "<group>"; };
 		8F0618101BE59C9B00E7F868 /* Language+CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Language+CoreData.swift"; path = "Vocabulum/Language+CoreData.swift"; sourceTree = "<group>"; };
-		8F0DBECB1BEE8CA6007B938D /* StartBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StartBox.xib; path = Vocabulum/StartBox.xib; sourceTree = "<group>"; };
 		8F0DBECE1BEEA30E007B938D /* EndBox.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EndBox.xib; sourceTree = "<group>"; };
 		8F1175411C96AB9C00673D01 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		8F1175421C96AB9D00673D01 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -106,6 +105,8 @@
 		8FF33E9E1BA95B2A0072B3F8 /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Word.swift; path = Vocabulum/Word.swift; sourceTree = "<group>"; };
 		8FF33EA01BA95B2A0072B3F8 /* LanguagePair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LanguagePair.swift; path = Vocabulum/LanguagePair.swift; sourceTree = "<group>"; };
 		8FF33EA21BA95B2A0072B3F8 /* Lesson.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Lesson.swift; path = Vocabulum/Lesson.swift; sourceTree = "<group>"; };
+		8FF79E3C1CAF280C004C04AF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/StartBox.strings; sourceTree = "<group>"; };
+		8FF79E3D1CAF282B004C04AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/StartBox.xib; sourceTree = "<group>"; };
 		8FF7A2331BBE51AC00B85A50 /* EnterVocabularyTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnterVocabularyTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -140,7 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				8F1AECB21BE1788700C04F64 /* VocabularyOverviewCell.xib */,
-				8F0DBECB1BEE8CA6007B938D /* StartBox.xib */,
+				8FF79E3A1CAF2802004C04AF /* StartBox.xib */,
 				8F1D06821BA6757E000A8575 /* Main.storyboard */,
 				8F0DBECE1BEEA30E007B938D /* EndBox.xib */,
 				8F1D06871BA6757E000A8575 /* LaunchScreen.xib */,
@@ -345,7 +346,7 @@
 			files = (
 				8F1D06841BA6757E000A8575 /* Main.storyboard in Resources */,
 				8FB85EB31C4C3A7700DCCBBA /* yandex-logo.png in Resources */,
-				8F0DBECC1BEE8CA6007B938D /* StartBox.xib in Resources */,
+				8FF79E381CAF2802004C04AF /* StartBox.xib in Resources */,
 				8F21B01F1C4C2DA70018C657 /* about-page.html in Resources */,
 				8F1175461C96ABF800673D01 /* Localizable.strings in Resources */,
 				8F1AECB31BE1788700C04F64 /* VocabularyOverviewCell.xib in Resources */,
@@ -450,6 +451,16 @@
 			path = Vocabulum;
 			sourceTree = "<group>";
 		};
+		8FF79E3A1CAF2802004C04AF /* StartBox.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8FF79E3C1CAF280C004C04AF /* de */,
+				8FF79E3D1CAF282B004C04AF /* Base */,
+			);
+			name = StartBox.xib;
+			path = Vocabulum;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -543,7 +554,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Vocabulum/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.eichler.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eichler.Vocabulum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -558,7 +569,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Vocabulum/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.eichler.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eichler.Vocabulum;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";

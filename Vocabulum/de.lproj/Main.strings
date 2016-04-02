@@ -49,7 +49,7 @@
 "KUH-sn-Uht.headerTitle" = "Lektionstitel";
 
 /* Class = "UIBarButtonItem"; title = "About"; ObjectID = "LhD-xn-YuO"; */
-"LhD-xn-YuO.title" = "Über Vocabulum";
+"LhD-xn-YuO.title" = "About";
 
 /* Class = "UIButton"; normalTitle = "ENTER"; ObjectID = "MD5-AN-QxP"; */
 "MD5-AN-QxP.normalTitle" = "ENTER";
@@ -88,7 +88,7 @@
 "fWC-Fb-GzS.placeholder" = "Übersetzung";
 
 /* Class = "UINavigationItem"; title = "About Vocabulum"; ObjectID = "kGB-yy-Q92"; */
-"kGB-yy-Q92.title" = "Über Vocabulum";
+"kGB-yy-Q92.title" = "About";
 
 /* Class = "UINavigationItem"; title = "Add Language"; ObjectID = "kZB-Hk-HkR"; */
 "kZB-Hk-HkR.title" = "Sprache hinzufügen";
@@ -106,13 +106,13 @@
 "nJl-zl-pNw.text" = "Label";
 
 /* Class = "UIButton"; normalTitle = "Cancel Training"; ObjectID = "nTz-gC-gKQ"; */
-"nTz-gC-gKQ.normalTitle" = "Cancel Training";
+"nTz-gC-gKQ.normalTitle" = "Training abbrechen";
 
 /* Class = "UILabel"; text = " "; ObjectID = "nYM-NQ-WoZ"; */
 "nYM-NQ-WoZ.text" = " ";
 
 /* Class = "UITextField"; placeholder = "Enter Translation"; ObjectID = "oyK-cT-5C0"; */
-"oyK-cT-5C0.placeholder" = "Enter Translation";
+"oyK-cT-5C0.placeholder" = "Übersetzung eingeben...";
 
 /* Class = "UITableViewController"; title = "Master"; ObjectID = "pGg-6v-bdr"; */
 "pGg-6v-bdr.title" = "Master";
@@ -127,7 +127,7 @@
 "plC-Ph-qk9.segmentTitles[2]" = "Mittel";
 
 /* Class = "UISegmentedControl"; plC-Ph-qk9.segmentTitles[3] = "Hard"; ObjectID = "plC-Ph-qk9"; */
-"plC-Ph-qk9.segmentTitles[3]" = "Völlig unbekannt";
+"plC-Ph-qk9.segmentTitles[3]" = "Unbekannt";
 
 /* Class = "UINavigationController"; title = "Master"; ObjectID = "rS3-R9-Ivy"; */
 "rS3-R9-Ivy.title" = "Master";

@@ -302,9 +302,9 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         
         let dialog: UIAlertController = UIAlertController(title: dialogTitle, message: dialogMessage, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
-        let confirmDelete: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { UIAlertAction in self.removeBook(sender.languagePair!); })
+        let confirmDelete: UIAlertAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Destructive, handler: { UIAlertAction in self.removeBook(sender.languagePair!); })
         
-        let cancelDelete: UIAlertAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Cancel, handler: nil)
+        let cancelDelete: UIAlertAction = UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
         
         dialog.addAction(confirmDelete)
         dialog.addAction(cancelDelete)

@@ -192,10 +192,9 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
             AnimationKit.fadeInView(self.correctionLabel)
             
             AnimationKit.fadeInView(self.resultIconContainer)
-            button.setTitle("NEXT", forState: UIControlState.Normal)
+            button.setTitle(NSLocalizedString("NEXT", comment: ""), forState: UIControlState.Normal)
             self.score.text = "\(self.correctAnswers)/\(self.wordNumber)"
-            
-            
+                        
             self.showAnswerMode = true
         
         }
@@ -207,7 +206,7 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
             AnimationKit.fadeOutView(self.correctionLabel)
             AnimationKit.fadeInView(self.userInput)
             
-            button.setTitle("ENTER", forState: UIControlState.Normal)
+            button.setTitle(NSLocalizedString("ENTER", comment: ""), forState: UIControlState.Normal)
             self.showAnswerMode = false
             
         }

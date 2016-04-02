@@ -22,9 +22,7 @@ class CoreDataStack: NSObject {
         return sharedInstance.sharedObject
     
     }
-    
-    
-    
+
     // MARK: - Core Data stack
     
     lazy var applicationDocumentsDirectory: NSURL = {

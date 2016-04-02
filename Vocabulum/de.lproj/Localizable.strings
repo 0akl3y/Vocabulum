@@ -5,6 +5,7 @@
   Created by Johannes Eichler on 14/03/16.
   Copyright © 2016 Eichler. All rights reserved.
 */
+
 "Add Book"="Buch hinzufügen";
 "Add Lesson"="Neue Lektion";
 "Edit Lesson"="Bearbeiten";
@@ -20,3 +21,9 @@
 "Add Vocabulary"="Neue Vokabeln";
 "This lesson has no vocabulary yet"="Diese Lektion hat noch keine Vokabeln";
 "Correct Answers:"="Korrekte Antworten:";
+"Known"="Bekannt";
+"Easy"="Leicht";
+"Medium"="Mittel";
+"Hard"="Unbekannt";
+"NEXT"="WEITER";
+"ENTER"="ENTER";

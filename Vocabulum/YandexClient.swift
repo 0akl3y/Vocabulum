@@ -9,7 +9,6 @@
 import UIKit
 import CoreData
 
-
 protocol YandexClientDelegate {
     
     func didFetchAllLanguages()

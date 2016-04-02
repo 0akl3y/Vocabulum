@@ -34,8 +34,7 @@ class Language: NSManagedObject, LanguageObject {
         
         self.langCode = langCode
         
-        //Set the users language and region settings. Currently this is always English as there is no localization yet.
-        let locale = (NSLocale(localeIdentifier: regionID))
+        let locale = NSLocale.currentLocale()
         
         //Set the language which name should be displayed (in the users language)
         self.languageName = locale.displayNameForKey(NSLocaleIdentifier, value: self.langCode)!
@@ -43,5 +42,4 @@ class Language: NSManagedObject, LanguageObject {
         let regionalLocale = (NSLocale(localeIdentifier: self.langCode))
         self.translatedLanguageName = regionalLocale.displayNameForKey(NSLocaleIdentifier, value: self.langCode)!
     }
-
 }

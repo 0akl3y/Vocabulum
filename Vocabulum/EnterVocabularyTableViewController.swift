@@ -152,16 +152,18 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         YandexClient.sharedObject().getVocabularyForWord(searchedWord!, languageCombination: langPairID!) { (translation, error) -> Void in
             
-            
-            self.translationSpinner.stopAnimating()
-            
-            if(error != nil){
-                self.errorHandler!.displayErrorMessage(error!)
-            }
-            
-            self.translation.text = translation
-            self.updateButtonStatus()
-
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                self.translationSpinner.stopAnimating()
+                
+                if(error != nil){
+                    
+                    self.errorHandler!.displayErrorMessage(error!)
+                }
+                
+                self.translation.text = translation
+                self.updateButtonStatus()
+            })
         }
     }
     

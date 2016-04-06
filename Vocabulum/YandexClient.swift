@@ -195,6 +195,7 @@ class YandexClient: SimpleNetworking {
             
             if(error != nil){
                 completion(translation: nil, error: error!)
+                return
             }
             
             let parsedJSON = (try! NSJSONSerialization.JSONObjectWithData(result!, options: NSJSONReadingOptions.AllowFragments)) as! [String: AnyObject]

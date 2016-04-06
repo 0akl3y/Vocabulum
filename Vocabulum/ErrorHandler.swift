@@ -29,13 +29,13 @@ class ErrorHandler: NSObject {
         
         let alertView = UIAlertController(title: NSLocalizedString("Ooops!", comment: ""), message: message, preferredStyle: UIAlertControllerStyle.Alert)
         
-        let action = UIAlertAction(title: NSLocalizedString("Close", comment: ""), style: UIAlertActionStyle.Cancel, handler:{(action:UIAlertAction)-> Void in self.targetViewController.dismissViewControllerAnimated(true, completion: nil)})
+        let action = UIAlertAction(title: NSLocalizedString("Close", comment: ""), style: UIAlertActionStyle.Cancel, handler:{(action:UIAlertAction)-> Void in alertView.dismissViewControllerAnimated(true, completion: nil)})
         
             alertView.addAction(action)
         
+        dispatch_async(dispatch_get_main_queue()) { 
+            self.targetViewController.presentViewController(alertView, animated: true, completion: nil)
+        }
 
-        self.targetViewController.presentViewController(alertView, animated: true, completion: nil)
-    
     }
-}
-    
+}    

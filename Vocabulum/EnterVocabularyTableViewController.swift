@@ -158,7 +158,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
                 
                 if(error != nil){
                     
-                    self.errorHandler!.displayErrorMessage(error!)
+                    self.errorHandler!.displayErrorMessage(error!, onClose: nil)
                 }
                 
                 self.translation.text = translation
@@ -185,7 +185,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
             self.nativeSpinner.stopAnimating()
             
             if(error != nil){
-                self.errorHandler!.displayErrorMessage(error!)
+                self.errorHandler!.displayErrorMessage(error!, onClose: nil)
             }
             
             self.nativeWord.text = translation

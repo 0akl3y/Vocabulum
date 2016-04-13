@@ -12,6 +12,8 @@ import UIKit
 
 class ErrorHandler: NSObject {
     
+    
+    
     let targetViewController: UIViewController
     init(targetVC:UIViewController){
         
@@ -19,19 +21,25 @@ class ErrorHandler: NSObject {
     
     }
     
-    func displayErrorMessage(error:NSError){
+    func displayErrorMessage(error:NSError, onClose:(() -> Void)?){
         let errorMessage = error.userInfo[NSLocalizedDescriptionKey] as! String
-        self.displayErrorString(errorMessage)
+        self.displayErrorString(errorMessage) { () -> Void in
+            onClose?()
+        }
     }
 
     
-    func displayErrorString(message:String){
+    func displayErrorString(message:String, onClose:(() -> Void)?){
         
         let alertView = UIAlertController(title: NSLocalizedString("Ooops!", comment: ""), message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let action = UIAlertAction(title: NSLocalizedString("Close", comment: ""), style: UIAlertActionStyle.Cancel, handler:{(action:UIAlertAction)-> Void in
+            
+            alertView.dismissViewControllerAnimated(true, completion: nil)
+            onClose!()
         
-        let action = UIAlertAction(title: NSLocalizedString("Close", comment: ""), style: UIAlertActionStyle.Cancel, handler:{(action:UIAlertAction)-> Void in alertView.dismissViewControllerAnimated(true, completion: nil)})
+        })
         
-            alertView.addAction(action)
+        alertView.addAction(action)
         
         dispatch_async(dispatch_get_main_queue()) { 
             self.targetViewController.presentViewController(alertView, animated: true, completion: nil)

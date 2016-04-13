@@ -72,7 +72,9 @@ class TrainingViewController: UIViewController, StartBoxDelegate,ResultDialogDel
 
         if(self.lesson?.lessonToWord.count == 0){
             
-            self.errorHandler?.displayErrorString(NSLocalizedString("This lesson has no vocabulary yet", comment: ""))
+            self.errorHandler?.displayErrorString(NSLocalizedString("This lesson has no vocabulary yet", comment: ""), onClose: {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            })
         }
 
         else{

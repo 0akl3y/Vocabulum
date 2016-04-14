@@ -212,7 +212,7 @@
                   moduleName = "Vocabulum"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/johannes/Developer/Vocabulum/Vocabulum/TrainingViewController.swift"
-                  timestampString = "482223593.128833"
+                  timestampString = "482306943.199818"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "75"
@@ -227,7 +227,7 @@
                   moduleName = "Vocabulum"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/johannes/Developer/Vocabulum/Vocabulum/TrainingViewController.swift"
-                  timestampString = "482223593.129009"
+                  timestampString = "482306943.199924"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "76"
@@ -235,6 +235,70 @@
                   offsetFromSymbolStart = "15">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vocabulum/AddSetViewController.swift"
+            timestampString = "482307236.673871"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
+            landmarkName = "updateButtonStatus()"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Vocabulum.AddSetViewController.updateButtonStatus () -&gt; ()"
+                  moduleName = "Vocabulum"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/johannes/Developer/Vocabulum/Vocabulum/AddSetViewController.swift"
+                  timestampString = "482306943.200903"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "4326">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Vocabulum.AddSetViewController.updateButtonStatus () -&gt; ()"
+                  moduleName = "Vocabulum"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/johannes/Developer/Vocabulum/Vocabulum/AddSetViewController.swift"
+                  timestampString = "482306943.201019"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "153"
+                  endingLineNumber = "153"
+                  offsetFromSymbolStart = "5934">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vocabulum/AddSetViewController.swift"
+            timestampString = "482306942.753827"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "viewWillAppear(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

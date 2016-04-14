@@ -72,6 +72,8 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
             self.languageA.textLabel?.text = nativeLangString != nil ? nativeLangString : ""
             self.languageB.textLabel?.text = trainingLangString != nil ? trainingLangString : ""
             
+            self.updateButtonStatus()
+            
         }
         
     }
@@ -141,9 +143,13 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
     
     func updateButtonStatus(){
         
-        let textLabelsAreSet = (languageA.textLabel?.text != nil && languageB.textLabel?.text != nil)
-        self.saveButton.enabled = (self.titleField != nil && self.titleField.text?.characters.count > 1) && textLabelsAreSet
-    
+        let textLabelAFilled = languageA.textLabel?.text != nil && languageA.textLabel?.text!.characters.count > 0
+        
+        let textLabelBFilled = languageB.textLabel?.text != nil && languageB.textLabel?.text!.characters.count > 0
+        
+        let textLabelsAreSet = textLabelAFilled && textLabelBFilled
+        
+        self.saveButton.enabled = (self.titleField != nil && self.titleField.text?.characters.count > 1) && textLabelsAreSet    
     }
     
 // MARK:- Actions    

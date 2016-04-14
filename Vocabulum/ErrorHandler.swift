@@ -12,8 +12,6 @@ import UIKit
 
 class ErrorHandler: NSObject {
     
-    
-    
     let targetViewController: UIViewController
     init(targetVC:UIViewController){
         
@@ -35,7 +33,7 @@ class ErrorHandler: NSObject {
         let action = UIAlertAction(title: NSLocalizedString("Close", comment: ""), style: UIAlertActionStyle.Cancel, handler:{(action:UIAlertAction)-> Void in
             
             alertView.dismissViewControllerAnimated(true, completion: nil)
-            onClose!()
+            onClose?()
         
         })
         

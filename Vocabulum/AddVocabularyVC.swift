@@ -81,8 +81,8 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
 
         // Do any additional setup after loading the view.
         
-        let addVocButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "insertNewWord:")
-        let cancelButton = UIBarButtonItem(title: "Close", style: UIBarButtonItemStyle.Done, target: self, action: "cancel:")
+        let addVocButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(AddVocabularyVC.insertNewWord(_:)))
+        let cancelButton = UIBarButtonItem(title: NSLocalizedString("Close", comment: ""), style: UIBarButtonItemStyle.Done, target: self, action: #selector(AddVocabularyVC.cancel(_:)))
         
         let editButton = self.editButtonItem()
         

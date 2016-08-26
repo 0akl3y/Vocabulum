@@ -59,7 +59,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
 
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
-        let addButton = UIBarButtonItem(title: "Add Book", style: UIBarButtonItemStyle.Plain, target: self, action: "insertNewObject:")
+        let addButton = UIBarButtonItem(title: NSLocalizedString("Add Book", comment: ""), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SetsViewController.insertNewObject(_:)))
         
         self.navigationItem.rightBarButtonItem = addButton
     }
@@ -74,6 +74,11 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     }
 
     // MARK: - Segues
+    @IBAction func openAboutPage(sender: UIBarButtonItem) {
+        
+        self.performSegueWithIdentifier("showAboutPage", sender: self);
+        
+    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
@@ -90,7 +95,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
                     // A new Lesson is added
                     
                     targetVC.assignedLanguagePair = senderButton.languagePair
-                    targetVC.navigationItem.title = "Add Lesson"
+                    targetVC.navigationItem.title = NSLocalizedString("Add Lesson", comment: "")
                     
                 }
             
@@ -99,7 +104,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
                     //An existing Lesson is edited
                     
                     targetVC.currentLesson = (self.fetchedResultsController.objectAtIndexPath(self.tappedCellIndexPath!) as! Lesson)
-                    targetVC.navigationItem.title = "Edit Lesson"
+                    targetVC.navigationItem.title = NSLocalizedString("Edit Lesson", comment: "")
             
                 }
             
@@ -188,7 +193,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         button.frame.origin.y = 10.0
 
         button.assignLanguagePair(lesson.lessonToLanguage)
-        button.addTarget(self, action: "addLesson:", forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(self, action: #selector(SetsViewController.addLesson(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         let removeButton = AttributedButton(frame: button.frame)
         
@@ -196,7 +201,7 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
         removeButton.frame.origin.y = 10.0
         removeButton.setImage(UIImage(named: "delete"), forState: UIControlState.Normal)
         
-        removeButton.addTarget(self, action: "confirmDeletion:", forControlEvents: UIControlEvents.TouchUpInside)
+        removeButton.addTarget(self, action: #selector(SetsViewController.confirmDeletion(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         removeButton.assignLanguagePair(lesson.lessonToLanguage)
         
         
@@ -292,14 +297,14 @@ class SetsViewController: UITableViewController, NSFetchedResultsControllerDeleg
     
     func confirmDeletion(sender:AttributedButton){
         
-        let dialogTitle: String = "Delete Book"
-        let dialogMessage: String = "Are your sure that you want to delete \(sender.languagePair!.title)"
+        let dialogTitle: String = NSLocalizedString("Delete Book", comment: "")
+        let dialogMessage: String = NSLocalizedString("Are your sure that you want to delete,", comment:"") + "\(sender.languagePair!.title)"
         
         let dialog: UIAlertController = UIAlertController(title: dialogTitle, message: dialogMessage, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
-        let confirmDelete: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Destructive, handler: { UIAlertAction in self.removeBook(sender.languagePair!); })
+        let confirmDelete: UIAlertAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""), style: UIAlertActionStyle.Destructive, handler: { UIAlertAction in self.removeBook(sender.languagePair!); })
         
-        let cancelDelete: UIAlertAction = UIAlertAction(title: "NO", style: UIAlertActionStyle.Cancel, handler: nil)
+        let cancelDelete: UIAlertAction = UIAlertAction(title: NSLocalizedString("NO", comment: ""), style: UIAlertActionStyle.Cancel, handler: nil)
         
         dialog.addAction(confirmDelete)
         dialog.addAction(cancelDelete)

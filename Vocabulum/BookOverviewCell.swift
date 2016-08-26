@@ -60,7 +60,7 @@ class BookOverviewCell: UITableViewCell {
             editingButton.setImage(UIImage(named: "Map Editing"), forState: UIControlState.Normal)
             
             self.editingAccessoryView = editingButton
-            editingButton.addTarget(self, action: "editLesson:", forControlEvents: UIControlEvents.TouchUpInside)
+            editingButton.addTarget(self, action: #selector(BookOverviewCell.editLesson(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         
         }
         

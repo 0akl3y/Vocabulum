@@ -37,8 +37,8 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.titleField.delegate = self
-        self.titleField.addTarget(self, action: "updateButtonStatus", forControlEvents: UIControlEvents.EditingChanged)
-        self.titleField.addTarget(self, action: "updateButtonStatus", forControlEvents: UIControlEvents.EditingDidEndOnExit)
+        self.titleField.addTarget(self, action: #selector(AddSetViewController.updateButtonStatus), forControlEvents: UIControlEvents.EditingChanged)
+        self.titleField.addTarget(self, action: #selector(AddSetViewController.updateButtonStatus), forControlEvents: UIControlEvents.EditingDidEndOnExit)
         
     }
     
@@ -50,7 +50,7 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
         if(self.currentLanguagePairSetting == nil){
             
             //Set a sample language pair
-            self.currentLanguagePairSetting = LanguagePair(title: "Enter Book Name", nativeLanguageString: nil, trainingLanguageString: nil)        
+            self.currentLanguagePairSetting = LanguagePair(title: NSLocalizedString("Enter Book Name", comment: ""), nativeLanguageString: nil, trainingLanguageString: nil)
         }
         
         else{
@@ -71,6 +71,8 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
 
             self.languageA.textLabel?.text = nativeLangString != nil ? nativeLangString : ""
             self.languageB.textLabel?.text = trainingLangString != nil ? trainingLangString : ""
+            
+            self.updateButtonStatus()
             
         }
         
@@ -141,9 +143,13 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
     
     func updateButtonStatus(){
         
-        let textLabelsAreSet = (languageA.textLabel?.text != nil && languageB.textLabel?.text != nil)
-        self.saveButton.enabled = (self.titleField != nil && self.titleField.text?.characters.count > 1) && textLabelsAreSet
-    
+        let textLabelAFilled = languageA.textLabel?.text != nil && languageA.textLabel?.text!.characters.count > 0
+        
+        let textLabelBFilled = languageB.textLabel?.text != nil && languageB.textLabel?.text!.characters.count > 0
+        
+        let textLabelsAreSet = textLabelAFilled && textLabelBFilled
+        
+        self.saveButton.enabled = (self.titleField != nil && self.titleField.text?.characters.count > 1) && textLabelsAreSet    
     }
     
 // MARK:- Actions    
@@ -159,7 +165,7 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
         self.currentLanguagePairSetting?.title = self.titleField.text!
         // There should be at least one lesson for each language pair section
         
-        let lesson = Lesson(title: "Lesson 1", lessonDescription: nil)
+        let lesson = Lesson(title: NSLocalizedString("Lesson 1", comment: ""), lessonDescription: nil)
         lesson.lessonToLanguage = self.currentLanguagePairSetting!
         
         CoreDataStack.sharedObject().saveContext()

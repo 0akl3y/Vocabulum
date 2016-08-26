@@ -20,14 +20,13 @@ class CustomLanguage: NSObject, LanguageObject {
     
     var availableTranslations: NSSet?
     
-    let regionID = "en"
+    //let regionID = "en"
     
     init(langCode:String){
         
         self.langCode = langCode
         
-        //Set the users language and region settings. Currently this is always English as there is no localization yet.
-        let locale = (NSLocale(localeIdentifier: regionID))
+        let locale = NSLocale.currentLocale()
         
         //Set the language which name should be displayed (in the users language)
         self.languageName = locale.displayNameForKey(NSLocaleIdentifier, value: self.langCode)!

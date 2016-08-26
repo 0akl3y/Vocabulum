@@ -1,0 +1,9 @@
+
+/* Class = "UIButton"; normalTitle = "Start Training Session"; ObjectID = "9eN-m6-lsC"; */
+"9eN-m6-lsC.normalTitle" = "Training beginnen";
+
+/* Class = "UILabel"; text = "Number of Words"; ObjectID = "Qyk-oU-h3R"; */
+"Qyk-oU-h3R.text" = "Zahl der Vokabeln";
+
+/* Class = "UITextField"; placeholder = "10"; ObjectID = "wAW-AN-SWV"; */
+"wAW-AN-SWV.placeholder" = "10";

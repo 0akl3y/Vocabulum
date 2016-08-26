@@ -27,6 +27,12 @@ Vocabulum.xcodeproj/project.xcworkspace/xcuserdata/johannes.xcuserdatad/UserInte
 
 Vocabulum.xcodeproj/project.xcworkspace/xcuserdata/johannes.xcuserdatad/UserInterfaceState.xcuserstate
 
+<<<<<<< Updated upstream
 *.xcbkptlist
 
 *.pbxproj
+=======
+*.xcuserstate
+
+*.xcuserstate
+>>>>>>> Stashed changes

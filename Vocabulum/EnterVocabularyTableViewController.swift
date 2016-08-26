@@ -42,8 +42,8 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         super.viewDidLoad()
 
-        self.addVocButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: "save:")
-        self.cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: "cancel:")
+        self.addVocButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: #selector(EnterVocabularyTableViewController.save(_:)))
+        self.cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(EnterVocabularyTableViewController.cancel(_:)))
         
         self.addVocButton.enabled = false;
         
@@ -53,9 +53,9 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         self.translation.delegate = self
         self.nativeWord.delegate = self
         
-        nativeWord.addTarget(self, action: "updateButtonStatus", forControlEvents: UIControlEvents.EditingChanged)
+        nativeWord.addTarget(self, action: #selector(EnterVocabularyTableViewController.updateButtonStatus), forControlEvents: UIControlEvents.EditingChanged)
         
-        translation.addTarget(self, action: "updateButtonStatus", forControlEvents: UIControlEvents.EditingChanged)
+        translation.addTarget(self, action: #selector(EnterVocabularyTableViewController.updateButtonStatus), forControlEvents: UIControlEvents.EditingChanged)
         
         self.errorHandler = ErrorHandler(targetVC: self)
     }
@@ -73,10 +73,10 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
             self.translation.text = self.existingWord?.translation
             self.nativeWord.text = self.existingWord?.word
             self.difficultySetting.selectedSegmentIndex = Int((self.existingWord?.difficulty)!)
-            self.navigationItem.title = "Edit Vocabulary"
+            self.navigationItem.title = NSLocalizedString("Edit Vocabulary", comment:"")
         }
         else{
-            self.navigationItem.title = "Add Vocabulary"
+            self.navigationItem.title = NSLocalizedString("Add Vocabulary", comment: "")
         }
         self.updateButtonStatus()
     }
@@ -152,16 +152,18 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         YandexClient.sharedObject().getVocabularyForWord(searchedWord!, languageCombination: langPairID!) { (translation, error) -> Void in
             
-            
-            self.translationSpinner.stopAnimating()
-            
-            if(error != nil){
-                self.errorHandler!.displayErrorMessage(error!)
-            }
-            
-            self.translation.text = translation
-            self.updateButtonStatus()
-
+            dispatch_async(dispatch_get_main_queue(), {
+                
+                self.translationSpinner.stopAnimating()
+                
+                if(error != nil){
+                    
+                    self.errorHandler!.displayErrorMessage(error!, onClose: nil)
+                }
+                
+                self.translation.text = translation
+                self.updateButtonStatus()
+            })
         }
     }
     
@@ -183,7 +185,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
             self.nativeSpinner.stopAnimating()
             
             if(error != nil){
-                self.errorHandler!.displayErrorMessage(error!)
+                self.errorHandler!.displayErrorMessage(error!, onClose: nil)
             }
             
             self.nativeWord.text = translation

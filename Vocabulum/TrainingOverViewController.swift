@@ -39,7 +39,7 @@ class TrainingOverViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        self.statisticLabel.text = "Correct Answers: \(self.correctAnswers!)/\(self.numberOfWords!)"
+        self.statisticLabel.text = NSLocalizedString("Correct Answers:", comment: "")  + "\(self.correctAnswers!)/\(self.numberOfWords!)"
     }
     
     @IBAction func playAgain(sender: AnyObject) {

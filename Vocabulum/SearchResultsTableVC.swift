@@ -18,11 +18,14 @@ class SearchResultsTableVC: UITableViewController {
         super.viewDidLoad()
         searchTableView.delegate = self
         searchTableView.dataSource = self
+        
+        let nib = UINib(nibName: "VocabularyOverviewCell", bundle: nil)
+        tableView.registerNib(nib, forCellReuseIdentifier: "Cell")
 
     }
 
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
 
         return 1
@@ -34,9 +37,6 @@ class SearchResultsTableVC: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-
-        let nib = UINib(nibName: "VocabularyOverviewCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: "Cell")
         
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! VocabularyOverviewCell
         

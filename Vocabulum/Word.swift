@@ -41,7 +41,10 @@ class Word: NSManagedObject {
         
     func sectionNameForWord() -> String{
         
-        return ["Known", "Easy", "Medium", "Hard"][Int(self.difficulty)]
+        return [NSLocalizedString("Known", comment: ""),
+                NSLocalizedString("Easy", comment: ""),
+                NSLocalizedString("Medium", comment: ""),
+                NSLocalizedString("Hard", comment: "")][Int(self.difficulty)]
     
     }
 }

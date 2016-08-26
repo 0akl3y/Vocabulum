@@ -17,12 +17,6 @@ protocol YandexClientDelegate {
 
 class YandexClient: SimpleNetworking {
     
-    
-    let YANDEX_LANG_URL = "https://dictionary.yandex.net/api/v1/dicservice.json/getLangs"
-    let YANDEX_DICT_URL = "https://dictionary.yandex.net/api/v1/dicservice.json/lookup"
-    
-    let API_KEY = "dict.1.1.20150819T191226Z.b8b1f773ba67a7bb.cd98fb0bfda9e8bcf0c44e00b77f3d3f6860c2e9"
-    
     var isFetching = false
     var delegate:YandexClientDelegate?
     var fetchedLanguages:[Language]?
@@ -69,20 +63,24 @@ class YandexClient: SimpleNetworking {
                 
             catch {
                 
-                print("Failed to fetch languages")
+                print("\(error)")
             }
         
         //}
         
     }
     
-    func checkCollectionForLanguageCode<T: SequenceType>(collection: T?, langCode:String) -> Bool{
+    private func checkCollectionForLanguageCode<T: SequenceType>(collection: T?, langCode:String) -> Bool{
         
         if let currentCollection = collection {
             
             return currentCollection.contains({ (element) -> Bool in
                 
-                let language = element as! Language
+                guard let language = element as? Language else{
+                    
+                    return false
+                
+                }
                 return language.langCode == langCode
             })
         }
@@ -90,7 +88,7 @@ class YandexClient: SimpleNetworking {
         return false
     }
     
-    func getDictionaryOfExistingLanguages(){
+    private func getDictionaryOfExistingLanguages(){
         
         if let languages = self.fetchedLanguages {
             
@@ -103,7 +101,7 @@ class YandexClient: SimpleNetworking {
         }
     }
 
-    func fetchAvailableLanguages(){
+    func fetchAvailableLanguages(completion:(()->())?){
         
         self.isFetching = true
         
@@ -140,7 +138,6 @@ class YandexClient: SimpleNetworking {
                     
                     for idx in 0...languageStrings.count - 1 {
                         
-                            
                         if(!self.checkCollectionForLanguageCode(self.fetchedLanguages, langCode: languageStrings[idx])){
                             
                             //language is not yet in store
@@ -158,7 +155,6 @@ class YandexClient: SimpleNetworking {
                         }
                         
                         else{
-                            
                             
                             if(idx == 1){
                                 
@@ -180,6 +176,9 @@ class YandexClient: SimpleNetworking {
                 
             self.isFetching = false
             self.delegate?.didFetchAllLanguages()
+                
+            completion?()
+                
             CoreDataStack.sharedObject().saveContext()
             
             })

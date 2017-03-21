@@ -13,22 +13,22 @@ class Lesson: NSManagedObject {
     
     @NSManaged var lessonDescription: String?
     @NSManaged var title: String
-    @NSManaged var dateAdded: NSDate
+    @NSManaged var dateAdded: Date
     @NSManaged var lessonToLanguage: LanguagePair
     @NSManaged var lessonToWord: NSSet
     
-    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
-        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
     }
     
     init(title: String, lessonDescription: String?){
         
-        let entityDescription = NSEntityDescription.entityForName("Lesson", inManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Lesson", in: CoreDataStack.sharedObject().managedObjectContext!)
         
-        super.init(entity: entityDescription!, insertIntoManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
+        super.init(entity: entityDescription!, insertInto: CoreDataStack.sharedObject().managedObjectContext!)
         
         self.title = title
-        self.dateAdded = NSDate()
+        self.dateAdded = Date()
         
         if (lessonDescription != nil){
             

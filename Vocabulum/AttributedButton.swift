@@ -21,7 +21,7 @@ class AttributedButton: UIButton {
         super.init(frame: frame)
     }
     
-    func assignLanguagePair(languagePair:LanguagePair){
+    func assignLanguagePair(_ languagePair:LanguagePair){
         
         self.languagePair = languagePair
     

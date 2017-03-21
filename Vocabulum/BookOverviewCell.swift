@@ -10,16 +10,16 @@ import UIKit
 
 protocol BookOverviewCellDelegate {
     
-    func didTapStartLearning(cellIndexPath:NSIndexPath?)
-    func didTapEdit(cellIndexPath:NSIndexPath?)
-    func didTapEditLesson(cellIndexPath:NSIndexPath?)
+    func didTapStartLearning(_ cellIndexPath:IndexPath?)
+    func didTapEdit(_ cellIndexPath:IndexPath?)
+    func didTapEditLesson(_ cellIndexPath:IndexPath?)
 
 }
 
 class BookOverviewCell: UITableViewCell {
     
     var delegate: BookOverviewCellDelegate?
-    var cellIndexPath: NSIndexPath?
+    var cellIndexPath: IndexPath?
     
     @IBOutlet var editButton: UIButton!
     @IBOutlet var learnButton: UIButton!
@@ -28,25 +28,25 @@ class BookOverviewCell: UITableViewCell {
     
 
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
     }
-    @IBAction func startLearning(sender: UIButton) {
+    @IBAction func startLearning(_ sender: UIButton) {
         
         self.delegate?.didTapStartLearning(self.cellIndexPath)
 
     }
 
-    @IBAction func editBookContent(sender: UIButton) {
+    @IBAction func editBookContent(_ sender: UIButton) {
         
         self.delegate?.didTapEdit(self.cellIndexPath)
     }    
     
     //MARK:- Manage the cells editing accessory type
 
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         
         super.setEditing(editing, animated: true)
         
@@ -54,13 +54,13 @@ class BookOverviewCell: UITableViewCell {
             
             AnimationKit.fadeOutViews([self.learnButton, self.editButton])
             self.indentationWidth = 20.0
-            let editingButton = UIButton(type: UIButtonType.System)
-            editingButton.frame.size = CGSizeMake(22.0, 22.0)
+            let editingButton = UIButton(type: UIButtonType.system)
+            editingButton.frame.size = CGSize(width: 22.0, height: 22.0)
             
-            editingButton.setImage(UIImage(named: "Map Editing"), forState: UIControlState.Normal)
+            editingButton.setImage(UIImage(named: "Map Editing"), for: UIControlState())
             
             self.editingAccessoryView = editingButton
-            editingButton.addTarget(self, action: #selector(BookOverviewCell.editLesson(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            editingButton.addTarget(self, action: #selector(BookOverviewCell.editLesson(_:)), for: UIControlEvents.touchUpInside)
         
         }
         
@@ -71,7 +71,7 @@ class BookOverviewCell: UITableViewCell {
         }
         
     }
-    func editLesson(sender:UIButton){
+    func editLesson(_ sender:UIButton){
         
         self.delegate?.didTapEditLesson(self.cellIndexPath)
     

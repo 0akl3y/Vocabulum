@@ -40,15 +40,15 @@ class LanguagePair: NSManagedObject {
         
     }
     
-    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
-        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
     }
     
     init(title: String, nativeLanguageString:String?, trainingLanguageString:String?){
         
-        let entityDescription = NSEntityDescription.entityForName("LanguagePair", inManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
+        let entityDescription = NSEntityDescription.entity(forEntityName: "LanguagePair", in: CoreDataStack.sharedObject().managedObjectContext!)
         
-        super.init(entity: entityDescription!, insertIntoManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
+        super.init(entity: entityDescription!, insertInto: CoreDataStack.sharedObject().managedObjectContext!)
         
         self.nativeLanguageString = nativeLanguageString
         self.trainingLanguageString = trainingLanguageString

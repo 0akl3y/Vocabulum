@@ -20,25 +20,25 @@ class SearchResultsTableVC: UITableViewController {
         searchTableView.dataSource = self
         
         let nib = UINib(nibName: "VocabularyOverviewCell", bundle: nil)
-        tableView.registerNib(nib, forCellReuseIdentifier: "Cell")
+        tableView.register(nib, forCellReuseIdentifier: "Cell")
 
     }
 
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
 
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return searchResult != nil ? searchResult!.count : 0
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell") as! VocabularyOverviewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! VocabularyOverviewCell
         
         let content = searchResult![indexPath.row]
         

@@ -23,7 +23,7 @@ class YandexClient: SimpleNetworking {
     
     var langCodeLanguageMapping = [String:Language]()
     
-    var currentFetchRequest:NSFetchRequest?
+    var currentFetchRequest:NSFetchRequest<NSFetchRequestResult>?
     var context:NSManagedObjectContext = CoreDataStack.sharedObject().managedObjectContext!
     var languageCodes:[String]?
     
@@ -45,7 +45,7 @@ class YandexClient: SimpleNetworking {
         
         //get the persisted language models from store.
         self.currentFetchRequest = NSFetchRequest(entityName: "Language")
-        let entityDescription = NSEntityDescription.entityForName("Language", inManagedObjectContext: self.context)
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Language", in: self.context)
         let sortDescriptior = NSSortDescriptor(key: "languageName", ascending: true)
         
         self.currentFetchRequest?.entity = entityDescription
@@ -53,7 +53,7 @@ class YandexClient: SimpleNetworking {
         
             do {
                 
-                if let languages = try self.context.executeFetchRequest(self.currentFetchRequest!) as? [Language]{
+                if let languages = try self.context.fetch(self.currentFetchRequest!) as? [Language]{
                     
                     self.fetchedLanguages = languages
                     self.getDictionaryOfExistingLanguages()
@@ -70,11 +70,11 @@ class YandexClient: SimpleNetworking {
         
     }
     
-    private func checkCollectionForLanguageCode<T: SequenceType>(collection: T?, langCode:String) -> Bool{
+    fileprivate func checkCollectionForLanguageCode<T: Sequence>(_ collection: T?, langCode:String) -> Bool{
         
         if let currentCollection = collection {
             
-            return currentCollection.contains({ (element) -> Bool in
+            return currentCollection.contains(where: { (element) -> Bool in
                 
                 guard let language = element as? Language else{
                     
@@ -88,7 +88,7 @@ class YandexClient: SimpleNetworking {
         return false
     }
     
-    private func getDictionaryOfExistingLanguages(){
+    fileprivate func getDictionaryOfExistingLanguages(){
         
         if let languages = self.fetchedLanguages {
             
@@ -101,7 +101,7 @@ class YandexClient: SimpleNetworking {
         }
     }
 
-    func fetchAvailableLanguages(completion:(()->())?){
+    func fetchAvailableLanguages(_ completion:(()->())?){
         
         self.isFetching = true
         
@@ -109,20 +109,18 @@ class YandexClient: SimpleNetworking {
         
         self.sendGETRequest(YANDEX_LANG_URL, GETData: ["key" : API_KEY], headerValues: nil) { (result, error) -> Void in
             
-            
             if(error != nil){
                 
                 print("Internet connection could not be etablished, continuing in offline mode: \(error)")
                 return
             }
             
-            
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute:{ () -> Void in
                 
                 var parsedLanguageList:[String]?
                 
                 do {
-                    parsedLanguageList = try NSJSONSerialization.JSONObjectWithData(result!, options: NSJSONReadingOptions.MutableLeaves) as? [String]
+                    parsedLanguageList = try JSONSerialization.jsonObject(with: result! as Data, options: JSONSerialization.ReadingOptions.mutableLeaves) as? [String]
                 } catch let error as NSError {
                 
                     print("There was an error parsing the JSON response \(error)")
@@ -133,7 +131,7 @@ class YandexClient: SimpleNetworking {
                     
                     //Process the string
                     
-                    var languageStrings = langPair.componentsSeparatedByString("-")
+                    var languageStrings = langPair.components(separatedBy: "-")
                     if(languageStrings[0] == languageStrings[1]){continue}//Languages must not be related to themselves, at least not in this app
                     
                     for idx in 0...languageStrings.count - 1 {
@@ -185,7 +183,7 @@ class YandexClient: SimpleNetworking {
         }
     }
 
-    func getVocabularyForWord(word:String, languageCombination:String, completion:(translation:String?, error:NSError?) -> Void){
+    func getVocabularyForWord(_ word:String, languageCombination:String, completion:@escaping (_ translation:String?, _ error:Error?) -> Void){
         
         let requestData = ["key" : API_KEY, "lang" : languageCombination, "text" :  word]
         
@@ -193,11 +191,11 @@ class YandexClient: SimpleNetworking {
         self.sendGETRequest(YANDEX_DICT_URL, GETData: requestData, headerValues: nil) { (result, error) -> Void in
             
             if(error != nil){
-                completion(translation: nil, error: error!)
+                completion(nil, error!)
                 return
             }
             
-            let parsedJSON = (try! NSJSONSerialization.JSONObjectWithData(result!, options: NSJSONReadingOptions.AllowFragments)) as! [String: AnyObject]
+            let parsedJSON = (try! JSONSerialization.jsonObject(with: result! as Data, options: JSONSerialization.ReadingOptions.allowFragments)) as! [String: AnyObject]
 
             if let completeResult = parsedJSON["def"] as? [[String: AnyObject]]{
                 
@@ -206,18 +204,18 @@ class YandexClient: SimpleNetworking {
                     let directTranslation = completeResult[0]["tr"] as? [[String : AnyObject]] //Array Index is out of bounds if translation is not found
                     let translation = directTranslation![0]["text"] as! String
                     
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    DispatchQueue.main.async(execute: { () -> Void in
                         
-                        completion(translation: translation,error: error)
+                        completion(translation,error)
                         
                     })
                 }
                 
                 else{
                     
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    DispatchQueue.main.async(execute: { () -> Void in
                         
-                        completion(translation: "Could no find a translation for: \(word)",error: nil)
+                        completion("Could no find a translation for: \(word)",nil)
                     })
                 }
             }

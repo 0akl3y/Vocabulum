@@ -17,11 +17,11 @@ class TestingCoreDataStack {
     
     init?(){
         
-        self.testingManagedObjectModel = NSManagedObjectModel.mergedModelFromBundles([NSBundle.mainBundle()])
+        self.testingManagedObjectModel = NSManagedObjectModel.mergedModel(from: [Bundle.main])
         self.testingStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.testingManagedObjectModel!)
         
         do{
-            try self.testingStoreCoordinator?.addPersistentStoreWithType(NSInMemoryStoreType, configuration: nil, URL: nil, options: nil)
+            try self.testingStoreCoordinator?.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
         }
             
         catch{
@@ -30,7 +30,7 @@ class TestingCoreDataStack {
             
         }
         
-        self.testingManagedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        self.testingManagedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         self.testingManagedObjectContext?.persistentStoreCoordinator = self.testingStoreCoordinator
     }
         

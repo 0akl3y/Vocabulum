@@ -26,13 +26,13 @@ class CustomLanguage: NSObject, LanguageObject {
         
         self.langCode = langCode
         
-        let locale = NSLocale.currentLocale()
+        let locale = Locale.current
         
         //Set the language which name should be displayed (in the users language)
-        self.languageName = locale.displayNameForKey(NSLocaleIdentifier, value: self.langCode)!
+        self.languageName = (locale as NSLocale).displayName(forKey: NSLocale.Key.identifier, value: self.langCode)!
         
-        let regionalLocale = (NSLocale(localeIdentifier: self.langCode))
-        self.translatedLanguageName = regionalLocale.displayNameForKey(NSLocaleIdentifier, value: self.langCode)!
+        let regionalLocale = (Locale(identifier: self.langCode))
+        self.translatedLanguageName = (regionalLocale as NSLocale).displayName(forKey: NSLocale.Key.identifier, value: self.langCode)!
     }
     
 }

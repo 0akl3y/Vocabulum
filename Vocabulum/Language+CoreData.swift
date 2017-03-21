@@ -9,25 +9,25 @@
 
 extension Language {
     
-    func addAvailabTranslation(value:Language){
+    func addAvailabTranslation(_ value:Language){
         
-        let items = self.mutableSetValueForKey("availableTranslations")
-        items.addObject(value)
+        let items = self.mutableSetValue(forKey: "availableTranslations")
+        items.add(value)
     
     }
     
     
-    func addAvailableTranslationSet(values:Set<Language>){
+    func addAvailableTranslationSet(_ values:Set<Language>){
         
-        let items = self.mutableSetValueForKey("availableTranslations")
-        items.unionSet(values)
+        let items = self.mutableSetValue(forKey: "availableTranslations")
+        items.union(values)
     
     }
     
-    func removeAvailableTranslation(value:Language){
+    func removeAvailableTranslation(_ value:Language){
         
-        let items = self.mutableSetValueForKey("availableTranslations")
-        items.removeObject(value)
+        let items = self.mutableSetValue(forKey: "availableTranslations")
+        items.remove(value)
     
     }
 

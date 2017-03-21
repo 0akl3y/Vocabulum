@@ -10,46 +10,46 @@ import UIKit
 
 class AnimationKit: NSObject {
     
-    static func fadeInView(view:UIView){
+    static func fadeInView(_ view:UIView){
         
-        UIView.animateWithDuration(0.4) { () -> Void in
+        UIView.animate(withDuration: 0.4, animations: { () -> Void in
             
             view.alpha = 1.0
-        }
+        }) 
     }
     
-    static func fadeOutView(view:UIView){
+    static func fadeOutView(_ view:UIView){
         
-        UIView.animateWithDuration(0.4) { () -> Void in
+        UIView.animate(withDuration: 0.4, animations: { () -> Void in
             
             view.alpha = 0
             
-        }
+        }) 
     
     }
     
-    static func fadeInViews(views:[UIView]){
+    static func fadeInViews(_ views:[UIView]){
         
-            UIView.animateWithDuration(0.4) { () -> Void in
+            UIView.animate(withDuration: 0.4, animations: { () -> Void in
                 
                 for elm in views {
                 
                     elm.alpha = 1.0
                     
                 }
-            }
+            }) 
         }
     
-    static func fadeOutViews(views:[UIView]){
+    static func fadeOutViews(_ views:[UIView]){
         
-        UIView.animateWithDuration(0.4) { () -> Void in
+        UIView.animate(withDuration: 0.4, animations: { () -> Void in
             
             for elm in views {
                 
                 elm.alpha = 0
                 
             }
-        }
+        }) 
     }
     
     

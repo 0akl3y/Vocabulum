@@ -26,13 +26,13 @@ class CustomLanguageViewController: UITableViewController, UITextFieldDelegate {
     }
     
 
-    @IBAction func addLanguage(sender: AnyObject) {
+    @IBAction func addLanguage(_ sender: AnyObject) {
         
         if(self.selectedIndx == 0){
             
             self.currentLanguagePair?.nativeLanguageString = self.languageInput.text!
             self.currentLanguagePair?.nativeLanguageCode = "custom"
-            self.navigationController?.popToRootViewControllerAnimated(true)
+            self.navigationController?.popToRootViewController(animated: true)
             
         }
             
@@ -40,7 +40,7 @@ class CustomLanguageViewController: UITableViewController, UITextFieldDelegate {
             
             self.currentLanguagePair?.trainingLanguageString = self.languageInput.text!
             self.currentLanguagePair?.trainingLanguageCode = "custom"
-            self.navigationController?.popToRootViewControllerAnimated(true)
+            self.navigationController?.popToRootViewController(animated: true)
 
         }
         
@@ -48,14 +48,14 @@ class CustomLanguageViewController: UITableViewController, UITextFieldDelegate {
     
     //MARK:- UITextField delegate methoden
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
         return true
     }
     
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         textField.resignFirstResponder()
         
     }

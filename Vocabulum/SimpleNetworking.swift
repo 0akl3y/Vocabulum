@@ -10,15 +10,15 @@ import UIKit
 
 class SimpleNetworking: NSObject {
    
-    var sharedSession: NSURLSession {
+    var sharedSession: URLSession {
         
         get{
             
-            return NSURLSession.sharedSession()
+            return URLSession.shared
         }
     }
     
-    func escapeToURL(targetURL: String, methodCall: [String: AnyObject]?) -> String{
+    func escapeToURL(_ targetURL: String, methodCall: [String: Any]?) -> String{
         
         //takes the methodCall array containing the method call and all parameters and returns the complete URL for the GET request
         
@@ -26,24 +26,24 @@ class SimpleNetworking: NSObject {
         
         for (key, value) in methodCall! {
             
-            let currentValue: String = "\(value)".stringByAddingPercentEncodingWithAllowedCharacters( NSCharacterSet.URLQueryAllowedCharacterSet())!
+            let currentValue: String = "\(value)".addingPercentEncoding( withAllowedCharacters: CharacterSet.urlQueryAllowed)!
             let methodElement = "\(key)" + "=" + "\(currentValue)"
             
             parsedURLString.append(methodElement)
             
         }
         
-        let getRequestPart = parsedURLString.joinWithSeparator("&")
+        let getRequestPart = parsedURLString.joined(separator: "&")
         let completeURL = targetURL + "?" + getRequestPart
         
         return completeURL
     }
     
-    func sendJSONRequest(targetURL: String, method: String, additionalHeaderValues:[String:String]?, bodyData: [String:AnyObject]?, completion:(result:NSData?, error:NSError?) -> Void){
+    func sendJSONRequest(_ targetURL: String, method: String, additionalHeaderValues:[String:String]?, bodyData: [String:AnyObject]?, completion:@escaping (_ result:Data?, _ error:Error?) -> Void){
         
-        let request = NSMutableURLRequest(URL: NSURL(string: targetURL)!)
+        var request = URLRequest(url: URL(string: targetURL)!)
         
-        request.HTTPMethod = method
+        request.httpMethod = method
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
@@ -61,43 +61,46 @@ class SimpleNetworking: NSObject {
         if(bodyData != nil){
             
             do {
-                request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(bodyData!, options: [])
+                request.httpBody = try JSONSerialization.data(withJSONObject: bodyData!, options: [])
             } catch let error as NSError {
                 print(error)
-                request.HTTPBody = nil
+                request.httpBody = nil
             }
         
         }
         
         
-        let task = sharedSession.dataTaskWithRequest(request) { data, response, error in
+        
+        
+        
+        let task = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
             
             if error != nil { // Handle error…
-                completion(result: nil, error: error!)
+                completion(nil, error! as NSError?)
                 return
             }
             
             //let newData = data.subdataWithRange(NSMakeRange(5, data.length - 5))
-            completion(result: data, error: error)
+            completion(data, error)
             
-        }
+        }) 
         task.resume()
         
         
     }
     
     
-    func sendGETRequest(targetURL: String, GETData: [String:AnyObject]?, headerValues:[String: String]?, completion:(result:NSData?, error:NSError?) -> Void) {
+    func sendGETRequest(_ targetURL: String, GETData: [String:Any]?, headerValues:[String: String]?, completion:@escaping (_ result:Data?, _ error:Error?) -> Void) {
             
-            var requestURL: NSURL = NSURL(string: targetURL)!
+            var requestURL: URL = URL(string: targetURL)!
         
             if(GETData != nil){
 
                 let requestURLString: String = self.escapeToURL(targetURL, methodCall: GETData)
-                requestURL = NSURL(string: requestURLString)!
+                requestURL = URL(string: requestURLString)!
             }
         
-            let currentRequest = NSMutableURLRequest(URL: requestURL)
+            var currentRequest = URLRequest(url: requestURL)
         
             if let additionalHeaderFields = headerValues {
                 
@@ -109,16 +112,16 @@ class SimpleNetworking: NSObject {
                 
             }
         
-            let task = sharedSession.dataTaskWithRequest(currentRequest) { data, response, error in
+            let task = sharedSession.dataTask(with: currentRequest, completionHandler: { data, response, error in
             
             if error != nil {
-                completion(result: nil, error: error!)
+                completion(nil, error!)
                 return
             }
             
-            completion(result: data, error: error)
+            completion(data, error)
             
-        }
+        }) 
         task.resume()
         
             

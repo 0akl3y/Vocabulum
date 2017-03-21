@@ -8,6 +8,30 @@
 
 import UIKit
 import CoreData
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class EnterVocabularyTableViewController: UITableViewController, UITextFieldDelegate {
 
@@ -42,10 +66,10 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         super.viewDidLoad()
 
-        self.addVocButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Save, target: self, action: #selector(EnterVocabularyTableViewController.save(_:)))
-        self.cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Cancel, target: self, action: #selector(EnterVocabularyTableViewController.cancel(_:)))
+        self.addVocButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.save, target: self, action: #selector(EnterVocabularyTableViewController.save(_:)))
+        self.cancelButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.cancel, target: self, action: #selector(EnterVocabularyTableViewController.cancel(_:)))
         
-        self.addVocButton.enabled = false;
+        self.addVocButton.isEnabled = false;
         
         self.navigationItem.rightBarButtonItem = addVocButton
         self.navigationItem.leftBarButtonItem = cancelButton
@@ -53,17 +77,17 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         self.translation.delegate = self
         self.nativeWord.delegate = self
         
-        nativeWord.addTarget(self, action: #selector(EnterVocabularyTableViewController.updateButtonStatus), forControlEvents: UIControlEvents.EditingChanged)
+        nativeWord.addTarget(self, action: #selector(EnterVocabularyTableViewController.updateButtonStatus), for: UIControlEvents.editingChanged)
         
-        translation.addTarget(self, action: #selector(EnterVocabularyTableViewController.updateButtonStatus), forControlEvents: UIControlEvents.EditingChanged)
+        translation.addTarget(self, action: #selector(EnterVocabularyTableViewController.updateButtonStatus), for: UIControlEvents.editingChanged)
         
         self.errorHandler = ErrorHandler(targetVC: self)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
-        self.yandexButtonNative.hidden = !self.languageIsSupported
-        self.yandexButtonTranslation.hidden = !self.languageIsSupported
+        self.yandexButtonNative.isHidden = !self.languageIsSupported
+        self.yandexButtonTranslation.isHidden = !self.languageIsSupported
         
         self.nativeWord.placeholder = self.lesson?.lessonToLanguage.nativeLanguageString
         self.translation.placeholder = self.lesson?.lessonToLanguage.trainingLanguageString
@@ -81,7 +105,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         self.updateButtonStatus()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         self.translation.text = nil
         self.nativeWord.text = nil
         self.difficultySetting.selectedSegmentIndex = WordDifficulty.hard.rawValue
@@ -90,10 +114,10 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
     
     func updateButtonStatus(){
         
-        self.addVocButton.enabled = (self.translation.text != nil && self.nativeWord.text != nil) &&  (self.translation.text?.characters.count > 0 && self.nativeWord.text?.characters.count > 0)
+        self.addVocButton.isEnabled = (self.translation.text != nil && self.nativeWord.text != nil) &&  (self.translation.text?.characters.count > 0 && self.nativeWord.text?.characters.count > 0)
         
-        self.yandexButtonNative.enabled = self.nativeWord.text != nil && self.nativeWord.text?.characters.count > 1
-        self.yandexButtonTranslation.enabled = self.translation.text != nil && self.translation.text?.characters.count > 1
+        self.yandexButtonNative.isEnabled = self.nativeWord.text != nil && self.nativeWord.text?.characters.count > 1
+        self.yandexButtonTranslation.isEnabled = self.translation.text != nil && self.translation.text?.characters.count > 1
         
 
     
@@ -101,7 +125,7 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
     
     //MARK:- Actions
     
-    func save(sender:UIBarButtonItem){
+    func save(_ sender:UIBarButtonItem){
         
         self.updateButtonStatus()
         
@@ -123,36 +147,36 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         
         CoreDataStack.sharedObject().saveContext()
         
-        self.navigationController!.popToRootViewControllerAnimated(true)
+        self.navigationController!.popToRootViewController(animated: true)
     }
     
-    func cancel(sender:UIBarButtonItem){
+    func cancel(_ sender:UIBarButtonItem){
         
-        self.navigationController!.popToRootViewControllerAnimated(true)
+        self.navigationController!.popToRootViewController(animated: true)
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         self.updateButtonStatus()
         textField.resignFirstResponder()
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.updateButtonStatus()
         textField.resignFirstResponder()
         return true
     }
     
-    @IBAction func searchYandexNative(sender: AnyObject) {
+    @IBAction func searchYandexNative(_ sender: AnyObject) {
         
         let searchedWord = self.nativeWord.text
         let langPairID = self.lesson?.lessonToLanguage.languagePairID
         
         self.translationSpinner.startAnimating()
-        self.translationSpinner.hidden = false
+        self.translationSpinner.isHidden = false
         
         YandexClient.sharedObject().getVocabularyForWord(searchedWord!, languageCombination: langPairID!) { (translation, error) -> Void in
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 
                 self.translationSpinner.stopAnimating()
                 
@@ -167,18 +191,18 @@ class EnterVocabularyTableViewController: UITableViewController, UITextFieldDele
         }
     }
     
-    @IBAction func searchYandexTranslation(sender: UIButton) {
+    @IBAction func searchYandexTranslation(_ sender: UIButton) {
         
         let searchedWord = self.translation.text
         let langPairID = self.lesson?.lessonToLanguage.languagePairID
         
         let revertedLangID:String = {()-> String in
-            var components: [String] =  langPairID!.componentsSeparatedByString("-").reverse()
+            var components: [String] =  langPairID!.components(separatedBy: "-").reversed()
             return "\(components[0])-\(components[1])"
         }()
         
         self.nativeSpinner.startAnimating()
-        self.nativeSpinner.hidden = false
+        self.nativeSpinner.isHidden = false
         
         YandexClient.sharedObject().getVocabularyForWord(searchedWord!, languageCombination: revertedLangID) { (translation, error) -> Void in
 

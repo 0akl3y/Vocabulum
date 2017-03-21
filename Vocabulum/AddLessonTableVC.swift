@@ -23,11 +23,11 @@ class AddLessonTableVC: UITableViewController, UITextFieldDelegate {
         self.lessonTitle.delegate = self
         self.lessonDescription.delegate = self
         
-        self.lessonTitle.addTarget(self, action: #selector(AddLessonTableVC.updateButtonStatus), forControlEvents: UIControlEvents.EditingChanged)
+        self.lessonTitle.addTarget(self, action: #selector(AddLessonTableVC.updateButtonStatus), for: UIControlEvents.editingChanged)
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         self.lessonTitle.text = self.currentLesson?.title
         self.lessonDescription.text = self.currentLesson?.lessonDescription
@@ -41,11 +41,11 @@ class AddLessonTableVC: UITableViewController, UITextFieldDelegate {
         self.updateButtonStatus()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if(segue.identifier == "addVocabulary"){
             
-            let destination = segue.destinationViewController as! UINavigationController
+            let destination = segue.destination as! UINavigationController
             let destinationVC = destination.topViewController as! AddVocabularyVC
             destinationVC.relatedLesson = self.currentLesson
         }
@@ -53,7 +53,7 @@ class AddLessonTableVC: UITableViewController, UITextFieldDelegate {
     
     func updateButtonStatus(){
         
-        self.editVocButton.enabled = self.lessonTitle.text?.characters.count > 0
+        self.editVocButton.isEnabled = self.lessonTitle.text?.characters.count ?? 0 > 0
         
     }
     
@@ -71,21 +71,21 @@ class AddLessonTableVC: UITableViewController, UITextFieldDelegate {
         self.currentLesson?.lessonToLanguage = self.assignedLanguagePair!
     }
     
-    @IBAction func cancel(sender: AnyObject) {
+    @IBAction func cancel(_ sender: AnyObject) {
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func editVocabulary(sender: AnyObject) {
+    @IBAction func editVocabulary(_ sender: AnyObject) {
         
         self.saveLesson()
-        self.performSegueWithIdentifier("addVocabulary", sender: self)
+        self.performSegue(withIdentifier: "addVocabulary", sender: self)
     }
     
-    @IBAction func saveLesson(sender: AnyObject) {
+    @IBAction func saveLesson(_ sender: AnyObject) {
         
         self.saveLesson()
-        self.dismissViewControllerAnimated(true, completion: {
+        self.dismiss(animated: true, completion: {
             
             CoreDataStack.sharedObject().saveContext()
         
@@ -94,18 +94,18 @@ class AddLessonTableVC: UITableViewController, UITextFieldDelegate {
     
     //MARK:- Text field delegate methods
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         self.updateButtonStatus()
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         self.updateButtonStatus()
         textField.resignFirstResponder()
     }
     
     // MARK:- TextField Delegate Methods
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
     }

@@ -15,12 +15,12 @@ class AboutPageVC: UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = NSBundle.mainBundle().URLForResource("about-page", withExtension: "html")
-        self.webView.loadRequest(NSURLRequest(URL: url!))
+        let url = Bundle.main.url(forResource: "about-page", withExtension: "html")
+        self.webView.loadRequest(URLRequest(url: url!))
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.webView.delegate = self
         
@@ -33,10 +33,10 @@ class AboutPageVC: UIViewController, UIWebViewDelegate {
     
 //MARK:- WebView Delegate Methods
     
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if( navigationType == UIWebViewNavigationType.LinkClicked){
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if( navigationType == UIWebViewNavigationType.linkClicked){
             
-            UIApplication.sharedApplication().openURL(request.URL!)
+            UIApplication.shared.openURL(request.url!)
             return false
         
         }

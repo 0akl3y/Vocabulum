@@ -19,28 +19,27 @@ class ErrorHandler: NSObject {
     
     }
     
-    func displayErrorMessage(error:NSError, onClose:(() -> Void)?){
-        let errorMessage = error.userInfo[NSLocalizedDescriptionKey] as! String
-        self.displayErrorString(errorMessage) { () -> Void in
+    func displayErrorMessage(_ error:Error, onClose:(() -> Void)?){
+        self.displayErrorString( "\(error)" ) { () -> Void in
             onClose?()
         }
     }
 
     
-    func displayErrorString(message:String, onClose:(() -> Void)?){
+    func displayErrorString(_ message:String, onClose:(() -> Void)?){
         
-        let alertView = UIAlertController(title: NSLocalizedString("Ooops!", comment: ""), message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        let action = UIAlertAction(title: NSLocalizedString("Close", comment: ""), style: UIAlertActionStyle.Cancel, handler:{(action:UIAlertAction)-> Void in
+        let alertView = UIAlertController(title: NSLocalizedString("Ooops!", comment: ""), message: message, preferredStyle: UIAlertControllerStyle.alert)
+        let action = UIAlertAction(title: NSLocalizedString("Close", comment: ""), style: UIAlertActionStyle.cancel, handler:{(action:UIAlertAction)-> Void in
             
-            alertView.dismissViewControllerAnimated(true, completion: nil)
+            alertView.dismiss(animated: true, completion: nil)
             onClose?()
         
         })
         
         alertView.addAction(action)
         
-        dispatch_async(dispatch_get_main_queue()) { 
-            self.targetViewController.presentViewController(alertView, animated: true, completion: nil)
+        DispatchQueue.main.async { 
+            self.targetViewController.present(alertView, animated: true, completion: nil)
         }
 
     }

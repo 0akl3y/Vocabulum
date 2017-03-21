@@ -19,13 +19,13 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     
     var relatedLesson:Lesson?
     @IBOutlet var vocabularyTableView: UITableView!
-    var vocabularyController: NSFetchedResultsController {
+    var vocabularyController: NSFetchedResultsController<NSFetchRequestResult> {
         
         if _vocabularyController != nil {
             return _vocabularyController!
         }
         
-        let request = NSFetchRequest()
+        let request:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest()
         let sortDescriptorWord = NSSortDescriptor(key: "word", ascending: false)
         let sortDescriptorDifficulty = NSSortDescriptor(key: "difficulty", ascending: false)
         
@@ -34,16 +34,14 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         //Show only the words related to the current lesson
         
         if(!isSearchMode){
-            
-            standardPredicate = NSPredicate(format: ("(wordToLesson.title like %@) AND (wordToLesson.dateAdded == %@)"), self.relatedLesson!.title, self.relatedLesson!.dateAdded )
+            standardPredicate = NSPredicate(format:"(wordToLesson.title like %@) AND (wordToLesson.dateAdded == %@)", self.relatedLesson!.title, self.relatedLesson!.dateAdded as CVarArg)
         }
         
         else{
-            
-            standardPredicate = NSPredicate(format: "(wordToLesson.title like %@) AND (wordToLesson.dateAdded == %@) AND ((word contains %@) OR (translation contains %@))", self.relatedLesson!.title, self.relatedLesson!.dateAdded, self.searchBar.text!, self.searchBar.text!)
+            standardPredicate = NSPredicate(format: "(wordToLesson.title like %@ AND (wordToLesson.dateAdded == %@) AND ((word contains %@) OR (translation contains %@))", self.relatedLesson!.title, self.relatedLesson!.dateAdded as CVarArg, self.searchBar.text!, self.searchBar.text! )
         }
         
-        let entity = NSEntityDescription.entityForName("Word", inManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
+        let entity = NSEntityDescription.entity(forEntityName: "Word", in: CoreDataStack.sharedObject().managedObjectContext!)
         
         request.sortDescriptors = sortDescriptors
         request.entity = entity
@@ -61,18 +59,10 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         } catch let error1 as NSError {
             error = error1
         }
-        
-        if(error != nil){
-            
-            print(error)
-            abort()
-        }
-        
         return _vocabularyController!
-    
     }
     
-    var _vocabularyController:NSFetchedResultsController? = nil
+    var _vocabularyController:NSFetchedResultsController<NSFetchRequestResult>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,37 +71,37 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
 
         // Do any additional setup after loading the view.
         
-        let addVocButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: #selector(AddVocabularyVC.insertNewWord(_:)))
-        let cancelButton = UIBarButtonItem(title: NSLocalizedString("Close", comment: ""), style: UIBarButtonItemStyle.Done, target: self, action: #selector(AddVocabularyVC.cancel(_:)))
+        let addVocButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(AddVocabularyVC.insertNewWord(_:)))
+        let cancelButton = UIBarButtonItem(title: NSLocalizedString("Close", comment: ""), style: UIBarButtonItemStyle.done, target: self, action: #selector(AddVocabularyVC.cancel(_:)))
         
-        let editButton = self.editButtonItem()
+        let editButton = self.editButtonItem
         
         self.navigationItem.rightBarButtonItem = addVocButton
         self.navigationItem.leftBarButtonItem = cancelButton
         
         self.navigationItem.leftBarButtonItems = [editButton, cancelButton]
         
-        self.searchBar = UISearchBar(frame: CGRectMake(0,0,self.vocabularyTableView.frame.size.width,0))
+        self.searchBar = UISearchBar(frame: CGRect(x: 0,y: 0,width: self.vocabularyTableView.frame.size.width,height: 0))
         self.searchBar.sizeToFit()
         
         self.searchBar.showsCancelButton = true
         
         self.vocabularyTableView.tableHeaderView = searchBar
-        self.vocabularyTableView.tableHeaderView?.hidden = false
+        self.vocabularyTableView.tableHeaderView?.isHidden = false
         
         self.searchBar.delegate = self
         self.vocabularyController.delegate = self
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         self.navigationItem.title = self.relatedLesson?.title
     
     }
     
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         var error: NSError? = nil
@@ -120,31 +110,26 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         } catch let error1 as NSError {
             error = error1
         }
-
-        if(error != nil){
-            
-            print(error)
         
-        }        
     }
     
     //MARK:- Actions
     
-    func insertNewWord(sender:UIBarButtonItem){
+    func insertNewWord(_ sender:UIBarButtonItem){
         
-        performSegueWithIdentifier("enterVocabulary", sender: self)
+        performSegue(withIdentifier: "enterVocabulary", sender: self)
     
     }
     
-    func cancel(sender:UIBarButtonItem){
+    func cancel(_ sender:UIBarButtonItem){
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        let targetVC = segue.destinationViewController as! EnterVocabularyTableViewController
+        let targetVC = segue.destination as! EnterVocabularyTableViewController
         targetVC.lesson = self.relatedLesson
         targetVC.existingWord = self.selectedWord
         self.selectedWord = nil
@@ -153,29 +138,29 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     
     //MARK:- TableView Delegate and Data Source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return self.vocabularyController.sections?.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.vocabularyController.sections![section].numberOfObjects
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("VocabularyCell") as! VocabularyOverviewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "VocabularyCell") as! VocabularyOverviewCell
         
         configureCell(cell, atIndexPath: indexPath)
         return cell
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             let context = self.vocabularyController.managedObjectContext
             
-            let wordToDelete = self.vocabularyController.objectAtIndexPath(indexPath) as! Word
+            let wordToDelete = self.vocabularyController.object(at: indexPath) as! Word
             
-            context.deleteObject(wordToDelete)
+            context.delete(wordToDelete)
             
             var error: NSError? = nil
             do {
@@ -189,39 +174,39 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let word = self.vocabularyController.objectAtIndexPath(indexPath) as! Word
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let word = self.vocabularyController.object(at: indexPath) as! Word
         self.selectedWord = word
-        self.performSegueWithIdentifier("enterVocabulary", sender: self)
+        self.performSegue(withIdentifier: "enterVocabulary", sender: self)
     }
     
     
-    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+    func configureCell(_ cell: UITableViewCell, atIndexPath indexPath: IndexPath) {
         
-        let currentObject = self.vocabularyController.objectAtIndexPath(indexPath) as! NSManagedObject
+        let currentObject = self.vocabularyController.object(at: indexPath) as! Word
         
         let vocabularyCell = cell as! VocabularyOverviewCell
         
-        vocabularyCell.nativeWord!.text = (currentObject.valueForKey("word")!.description)
-        vocabularyCell.translation!.text = (currentObject.valueForKey("translation")!.description)
+        vocabularyCell.nativeWord!.text = currentObject.value(forKey: "word") as? String ?? ""
+        vocabularyCell.translation!.text = currentObject.value(forKey: "translation") as? String ?? ""
         
     }
     
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44.0
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-        let label = UILabel(frame: CGRectMake(0.0, 0.0, tableView.frame.size.width, 44.0))
-        label.backgroundColor = UIColor.darkGrayColor()
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
+        let label = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: tableView.frame.size.width, height: 44.0))
+        label.backgroundColor = UIColor.darkGray
         
-        let indexPath = NSIndexPath(forRow: 0, inSection: section)
-        let word = self.vocabularyController.objectAtIndexPath(indexPath) as! Word
+        let indexPath = IndexPath(row: 0, section: section)
+        let word = self.vocabularyController.object(at: indexPath) as! Word
 
         label.text = word.sectionNameForWord()
-        label.textAlignment = NSTextAlignment.Center
-        label.textColor = UIColor.whiteColor()
+        label.textAlignment = NSTextAlignment.center
+        label.textColor = UIColor.white
         
         return label
     }
@@ -229,40 +214,40 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     //MARK:- Controller Delegate Methoden
     //test
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.vocabularyTableView.beginUpdates()
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         switch type {
-        case .Insert:
-            self.vocabularyTableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-        case .Delete:
-            self.vocabularyTableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        case .insert:
+            self.vocabularyTableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        case .delete:
+            self.vocabularyTableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
         default:
             return
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         self.vocabularyTableView.setNeedsDisplay()
         switch type {
-        case .Insert:
-            self.vocabularyTableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
-        case .Delete:
-            self.vocabularyTableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+        case .insert:
+            self.vocabularyTableView.insertRows(at: [newIndexPath!], with: .fade)
+        case .delete:
+            self.vocabularyTableView.deleteRows(at: [indexPath!], with: .fade)
 
             
-        case .Update:
-            self.configureCell(self.vocabularyTableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
-        case .Move:
-            self.vocabularyTableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
-            self.vocabularyTableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
+        case .update:
+            self.configureCell(self.vocabularyTableView.cellForRow(at: indexPath!)!, atIndexPath: indexPath!)
+        case .move:
+            self.vocabularyTableView.deleteRows(at: [indexPath!], with: .fade)
+            self.vocabularyTableView.insertRows(at: [newIndexPath!], with: .fade)
         }
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.vocabularyTableView.endUpdates()
     }
     
@@ -278,9 +263,9 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
     }
     
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        if(searchBar.text?.characters.count >= 1){
+        if(searchBar.text?.characters.count ?? 0 >= 1){
             
             self.isSearchMode = true
         }
@@ -295,13 +280,13 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.searchBar.endEditing(true)
         self.searchBar.text = nil
         
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         
         self.isSearchMode = false
         self.cleanAndRefetchResults()

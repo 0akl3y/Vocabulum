@@ -27,7 +27,7 @@ class TrainingOverViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -37,17 +37,17 @@ class TrainingOverViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.statisticLabel.text = NSLocalizedString("Correct Answers:", comment: "")  + "\(self.correctAnswers!)/\(self.numberOfWords!)"
     }
     
-    @IBAction func playAgain(sender: AnyObject) {
+    @IBAction func playAgain(_ sender: AnyObject) {
         
         self.delegate?.didTapAgain()
     }
 
-    @IBAction func cancel(sender: AnyObject) {
-        self.parentViewController?.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func cancel(_ sender: AnyObject) {
+        self.parent?.dismiss(animated: true, completion: nil)
     }
 }

@@ -10,8 +10,8 @@ import UIKit
 
 @objc protocol StartBoxDelegate {
     
-    func didStartLesson(numberOfWords:Int)
-    optional func didCancelLesson()
+    func didStartLesson(_ numberOfWords:Int)
+    @objc optional func didCancelLesson()
 
 }
 
@@ -21,7 +21,7 @@ class StartBoxViewController: UIViewController, UITextFieldDelegate {
     var delegate:StartBoxDelegate?
     @IBOutlet var startButton: UIButton!
     
-    var defaults = NSUserDefaults.standardUserDefaults()
+    var defaults = UserDefaults.standard
     
     
     //Persist the last setting, as the user might want to keep the preferred value set
@@ -30,9 +30,9 @@ class StartBoxViewController: UIViewController, UITextFieldDelegate {
         
         get{
             //This check seems to be necessary on older iPads
-            if(defaults.objectForKey("numberOfVocabulary") != nil){
+            if(defaults.object(forKey: "numberOfVocabulary") != nil){
                 
-                return (defaults.valueForKeyPath("numberOfVocabulary") as? Int)!
+                return (defaults.value(forKeyPath: "numberOfVocabulary") as? Int)!
             
             }
             
@@ -50,7 +50,7 @@ class StartBoxViewController: UIViewController, UITextFieldDelegate {
         super.init(coder: aDecoder)
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName:nibNameOrNil, bundle:nibBundleOrNil)
     }
     
@@ -61,13 +61,13 @@ class StartBoxViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
         self.numberOfWords.text = self.numberSetting != nil ? "\(self.numberSetting!)" : "10"
 
     }
     
-    @IBAction func startTraining(sender: AnyObject) {
+    @IBAction func startTraining(_ sender: AnyObject) {
         
         let numberOfWords = Int(self.numberOfWords.text!)
         self.numberSetting = numberOfWords!
@@ -78,16 +78,16 @@ class StartBoxViewController: UIViewController, UITextFieldDelegate {
     //MARK:- Text field delegate methoden
     
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
         return true
     }
     
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         
-        self.startButton.enabled = textField.text != nil
+        self.startButton.isEnabled = textField.text != nil
         textField.resignFirstResponder()
         
     }

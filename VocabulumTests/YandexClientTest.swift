@@ -12,6 +12,30 @@ import CoreData
 import Foundation
 
 @testable import Vocabulum
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class YandexClientTest: XCTestCase, TestStorageAvailability  {
     
@@ -25,7 +49,7 @@ class YandexClientTest: XCTestCase, TestStorageAvailability  {
     }
     
     func testFetchVocabulary() {
-        let expectation = expectationWithDescription("fetchVocabularyExpectation")
+        let expectation = self.expectation(description: "fetchVocabularyExpectation")
         yandexClient.fetchAvailableLanguages {
             
             self.yandexClient.getVocabularyForWord("Pferd", languageCombination: "de-en", completion: { (translation, error) in
@@ -36,7 +60,7 @@ class YandexClientTest: XCTestCase, TestStorageAvailability  {
             })
         }
         
-        waitForExpectationsWithTimeout(10.0) { (error) in
+        waitForExpectations(timeout: 10.0) { (error) in
             if let err = error {
                 print(err)
             }
@@ -48,18 +72,18 @@ class YandexClientTest: XCTestCase, TestStorageAvailability  {
         
         let localYandexClient = self.yandexClient
         
-        let expectation = expectationWithDescription("fetchLangPairsExpecation")
+        let expectation = self.expectation(description: "fetchLangPairsExpecation")
         localYandexClient.fetchAvailableLanguages {
             
             let languageList:[Language]? = localYandexClient.fetchedLanguages
             XCTAssert(languageList?.count > 0, "Could not fetch available languages")
-            XCTAssert(localYandexClient.langCodeLanguageMapping["de"] == "German", "Languages were not mapped correctly")
+            XCTAssert(localYandexClient.langCodeLanguageMapping["de"]?.languageName ?? "" == "German", "Languages were not mapped correctly")
             
             expectation.fulfill()
             
         }
         
-        waitForExpectationsWithTimeout(30.0) { (error) in
+        waitForExpectations(timeout: 30.0) { (error) in
             if let err = error {
                 print(err)
             }
@@ -69,7 +93,7 @@ class YandexClientTest: XCTestCase, TestStorageAvailability  {
     
     func testPerformanceExample() {
         // This is an example of a performance test case.
-        self.measureBlock() {
+        self.measure() {
             // Put the code you want to measure the time of here.
         }
     }

@@ -37,12 +37,12 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.titleField.delegate = self
-        self.titleField.addTarget(self, action: #selector(AddSetViewController.updateButtonStatus), forControlEvents: UIControlEvents.EditingChanged)
-        self.titleField.addTarget(self, action: #selector(AddSetViewController.updateButtonStatus), forControlEvents: UIControlEvents.EditingDidEndOnExit)
+        self.titleField.addTarget(self, action: #selector(AddSetViewController.updateButtonStatus), for: UIControlEvents.editingChanged)
+        self.titleField.addTarget(self, action: #selector(AddSetViewController.updateButtonStatus), for: UIControlEvents.editingDidEndOnExit)
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
  
         self.updateButtonStatus()
@@ -78,7 +78,7 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
         
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //exclude the title section at the beginning     
         self.titleField.endEditing(true)
@@ -118,12 +118,12 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
             
             }
             
-            performSegueWithIdentifier("selectLang", sender: self)
+            performSegue(withIdentifier: "selectLang", sender: self)
         }        
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let targetVC = segue.destinationViewController as! SelectLangTableViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let targetVC = segue.destination as! SelectLangTableViewController
         
 
         
@@ -143,24 +143,24 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
     
     func updateButtonStatus(){
         
-        let textLabelAFilled = languageA.textLabel?.text != nil && languageA.textLabel?.text!.characters.count > 0
+        let textLabelAFilled = languageA.textLabel?.text != nil && languageA.textLabel?.text!.characters.count ?? 0 > 0
         
-        let textLabelBFilled = languageB.textLabel?.text != nil && languageB.textLabel?.text!.characters.count > 0
+        let textLabelBFilled = languageB.textLabel?.text != nil && languageB.textLabel?.text!.characters.count ?? 0 > 0
         
         let textLabelsAreSet = textLabelAFilled && textLabelBFilled
         
-        self.saveButton.enabled = (self.titleField != nil && self.titleField.text?.characters.count > 1) && textLabelsAreSet    
+        self.saveButton.isEnabled = (self.titleField != nil && self.titleField.text?.characters.count ?? 0 > 1) && textLabelsAreSet
     }
     
 // MARK:- Actions    
 
-    @IBAction func close(sender: AnyObject) {
-        CoreDataStack.sharedObject().managedObjectContext?.deleteObject(self.currentLanguagePairSetting!)
+    @IBAction func close(_ sender: AnyObject) {
+        CoreDataStack.sharedObject().managedObjectContext?.delete(self.currentLanguagePairSetting!)
         self.currentLanguagePairSetting = nil
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func save(sender: AnyObject) {
+    @IBAction func save(_ sender: AnyObject) {
         
         self.currentLanguagePairSetting?.title = self.titleField.text!
         // There should be at least one lesson for each language pair section
@@ -170,19 +170,19 @@ class AddSetViewController: UITableViewController, UITextFieldDelegate {
         
         CoreDataStack.sharedObject().saveContext()
 
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 
 // MARK:- TextField Delegate Methods
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.updateButtonStatus()
         textField.resignFirstResponder()
         return true
     }
     
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    func textFieldDidEndEditing(_ textField: UITextField) {
         self.updateButtonStatus()
         textField.resignFirstResponder()
     }

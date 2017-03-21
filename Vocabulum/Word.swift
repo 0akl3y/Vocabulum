@@ -23,15 +23,15 @@ class Word: NSManagedObject {
     @NSManaged var wordToLesson: Lesson
     
     
-    override init(entity: NSEntityDescription, insertIntoManagedObjectContext context: NSManagedObjectContext?) {
-        super.init(entity: entity, insertIntoManagedObjectContext: context)
+    override init(entity: NSEntityDescription, insertInto context: NSManagedObjectContext?) {
+        super.init(entity: entity, insertInto: context)
     }
     
     init(word: String, translation: String, difficulty: WordDifficulty){
         
-        let entityDescription = NSEntityDescription.entityForName("Word", inManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Word", in: CoreDataStack.sharedObject().managedObjectContext!)
         
-        super.init(entity: entityDescription!, insertIntoManagedObjectContext: CoreDataStack.sharedObject().managedObjectContext!)
+        super.init(entity: entityDescription!, insertInto: CoreDataStack.sharedObject().managedObjectContext!)
         
         self.word = word
         self.translation = translation

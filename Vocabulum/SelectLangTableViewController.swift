@@ -8,6 +8,30 @@
 
 import UIKit
 import CoreData
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l >= r
+  default:
+    return !(lhs < rhs)
+  }
+}
+
 
 class SelectLangTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, YandexClientDelegate, UISearchBarDelegate {
     
@@ -28,7 +52,7 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
     }
     
     var searchMode: Bool = false
-    var languageFetchRequest = NSFetchRequest(entityName: "Language")
+    var languageFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Language")
     
     var allLanguages:[Language]?
     var searchFilteredLanguages: [Language]?
@@ -53,7 +77,7 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         
         if(setLanguages.count == 1){
                 
-            self.allLanguages = self.allLanguages?.filter {($0.availableTranslations?.contains({ (element) -> Bool in
+            self.allLanguages = self.allLanguages?.filter {($0.availableTranslations?.contains(where: { (element) -> Bool in
                 let lang = element as! Language
                 return lang.langCode == setLanguages[0]})
             )!}
@@ -61,9 +85,9 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
     }
     
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         
-        self.noLangAvailable.hidden = true
+        self.noLangAvailable.isHidden = true
         self.selectLangTableView.alpha = 1
         
         self.fetchLanguages()
@@ -73,7 +97,7 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
     
     func fetchLanguages(){
         
-        let entityDescription = NSEntityDescription.entityForName("Language", inManagedObjectContext: self.context)
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Language", in: self.context)
         let sortDescriptior = NSSortDescriptor(key: "languageName", ascending: true)
         
         self.languageFetchRequest.entity = entityDescription
@@ -82,10 +106,10 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         //check, if there are already entries in store
         
         
-        if(self.context.countForFetchRequest(self.languageFetchRequest, error: nil) == 0){
+        if try! context.count(for: self.languageFetchRequest) == 0 {
             //No data available yet wait for the YandexClient delegate
             
-            self.activityIndicator.hidden = false
+            self.activityIndicator.isHidden = false
             self.activityIndicator.startAnimating()
         }
         
@@ -93,7 +117,7 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
             
             do {
                 
-                if let languages = try self.context.executeFetchRequest(self.languageFetchRequest) as? [Language]{
+                if let languages = try self.context.fetch(self.languageFetchRequest) as? [Language]{
                     self.allLanguages = languages
                     self.filterNonSupportedLangCombinations()
                 }
@@ -107,10 +131,10 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         if(self.allLanguages?.count == 0 && !yandexClient.isFetching){
             
-            self.noLangAvailable.hidden = false
+            self.noLangAvailable.isHidden = false
             AnimationKit.fadeInView(self.noLangAvailable)
             AnimationKit.fadeOutView(self.selectLangTableView)
             
@@ -127,15 +151,15 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
 
     // MARK: - Table view data source
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return self.languagesDataSource.count
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("LanguageCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LanguageCell", for: indexPath)
         
         let currentLanguage = self.languagesDataSource[indexPath.row]
         let currentLanguageTitle = currentLanguage.languageName
@@ -146,7 +170,7 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let selectedLanguage = self.languagesDataSource[indexPath.row]
         
@@ -163,7 +187,7 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
             self.currentLanguagePairSetting?.trainingLanguageCode = selectedLanguage.langCode
         }
         
-        self.navigationController!.popToRootViewControllerAnimated(true)
+        self.navigationController!.popToRootViewController(animated: true)
         
     }
     
@@ -180,12 +204,12 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
     
     //MARK: - SearchBarDelegateMethods
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if(searchBar.text?.characters.count >= 1){
         
             self.searchFilteredLanguages = self.allLanguages!.filter({ (element:Language) -> Bool in
-                element.languageName.containsString(searchText)
+                element.languageName.contains(searchText)
             })
 
             self.searchMode = true
@@ -201,13 +225,13 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.searchBar.endEditing(true)
         self.searchBar.text = ""
         
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         
         self.searchMode = false
         self.selectLangTableView.reloadData()
@@ -215,16 +239,16 @@ class SelectLangTableViewController: UIViewController, UITableViewDataSource, UI
         
     }
     
-    @IBAction func selectOtherLanguage(sender: AnyObject) {
+    @IBAction func selectOtherLanguage(_ sender: AnyObject) {
         
-        self.performSegueWithIdentifier("CustomLanguageInput", sender: self)
+        self.performSegue(withIdentifier: "CustomLanguageInput", sender: self)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if(segue.identifier == "CustomLanguageInput"){
             
-            let destinationVC = segue.destinationViewController as! CustomLanguageViewController
+            let destinationVC = segue.destination as! CustomLanguageViewController
             destinationVC.currentLanguagePair = self.currentLanguagePairSetting
             destinationVC.selectedIndx = self.selectedIndx
         

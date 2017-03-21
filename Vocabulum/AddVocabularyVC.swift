@@ -38,7 +38,7 @@ class AddVocabularyVC: UITableViewController, NSFetchedResultsControllerDelegate
         }
         
         else{
-            standardPredicate = NSPredicate(format: "(wordToLesson.title like %@ AND (wordToLesson.dateAdded == %@) AND ((word contains %@) OR (translation contains %@))", self.relatedLesson!.title, self.relatedLesson!.dateAdded as CVarArg, self.searchBar.text!, self.searchBar.text! )
+            standardPredicate = NSPredicate(format: "(wordToLesson.title like %@) AND (wordToLesson.dateAdded == %@) AND ((word CONTAINS[c] %@) OR (translation CONTAINS[c] %@))", self.relatedLesson!.title, self.relatedLesson!.dateAdded as CVarArg, self.searchBar.text!, self.searchBar.text! )
         }
         
         let entity = NSEntityDescription.entity(forEntityName: "Word", in: CoreDataStack.sharedObject().managedObjectContext!)
